@@ -11,4 +11,9 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Casha.Core\Casha.Core.csproj" />
+    <ProjectReference Include="..\Casha.DAL\Casha.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
