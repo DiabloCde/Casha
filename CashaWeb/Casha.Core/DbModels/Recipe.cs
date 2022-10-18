@@ -19,5 +19,7 @@ namespace Casha.Core.DbModels
         public User User { get; set; }
 
         public List<RecipeProduct> RecipeProducts { get; set; }
+
+        public List<RecipeCategory> RecipeCategories { get; set; }
     }
 }

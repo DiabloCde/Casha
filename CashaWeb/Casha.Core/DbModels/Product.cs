@@ -15,5 +15,9 @@ namespace Casha.Core.DbModels
         public int ProductTypeId { get; set; }
 
         public ProductType ProductType { get; set; }
+
+        public List<RecipeProduct> RecipeProducts { get; set; }
+        
+        public List<UserProduct> UserProducts { get; set; }
     }
 }
