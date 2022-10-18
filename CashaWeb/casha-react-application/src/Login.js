@@ -1,6 +1,18 @@
 import React from 'react'
 
 function Login() {
+    const userRef = useRef();
+    const errRef = useRef();
+
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd])
+
     return (
         <div class="wrapper">
             <section>
