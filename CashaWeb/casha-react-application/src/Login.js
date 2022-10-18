@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRef, useState, useEffect } from 'react';
 
 function Login() {
     const userRef = useRef();
@@ -14,7 +15,7 @@ function Login() {
     }, [user, pwd])
 
     return (
-        <div class="wrapper">
+        <div class="Login_Wrapper">
             <section>
                 <div class="Login_Image_Container">
                     <img src='./Img/Logo.png'></img>
