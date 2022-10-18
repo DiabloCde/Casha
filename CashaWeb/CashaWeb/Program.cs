@@ -1,5 +1,7 @@
 using Casha.Core.DbModels;
 using Casha.DAL;
+using Casha.DAL.Interfaces;
+using Casha.DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,9 @@ IConfiguration appConfig = new ConfigurationBuilder()
 builder.Services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(
                     appConfig.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders()
