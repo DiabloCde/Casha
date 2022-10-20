@@ -60,9 +60,8 @@ function Login() {
                         </div>
                     </div>
                     <div class="Button_Wrapper">
-                        <div class="Button_Block">
                             <button>Log In</button>
-                        </div>
+
                     </div>
 
                 </form>
