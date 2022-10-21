@@ -1,8 +1,12 @@
+import styles from './Login.css';
+
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from './context/AuthProvider';
-import axios from './api/axios';
+import AuthContext from '../../context/AuthProvider';
+import axios from '../../api/axios';
 const LOGIN_URL = '/address from back for this page';
+
+
 
 function Login() {
     const { setAuth } = useContext(AuthContext);
@@ -58,14 +62,14 @@ function Login() {
         <div class="Login_Wrapper">
             <section>
                 <div class="Login_Image_Container">
-                    <img src='./Img/Logo.png'></img>
+                    <img src='./img/Logo.png'></img>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="Form_Input_Area_Wrapper">
                         <div class="Login_Input_Wrap">
                             <div class="Input_Blocks First_Input_Block">
                                 <div class="Input_Icon">
-                                    <img src='./Img/Login.png'></img>
+                                    <img src='./img/Login.png'></img>
                                 </div>
                                 <div class="Input_Label">
                                     <label htmlFor='username'>Username:</label>
@@ -118,4 +122,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;
