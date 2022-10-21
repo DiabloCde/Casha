@@ -1,5 +1,29 @@
 header{
-    height: 100px;
-    width: 100%;
     background-color: green;
+    min-height: 100px;
+}
+
+.wrapper{
+display: flex;
+justify-content: space-around;
+padding-top: 4%;
+padding-bottom: 3%;
+}
+
+.logo{
+height: 100px;
+}
+
+.logo__image{
+    height: 100%;
+    width: 100%;
+    background-image: url(./img/HeaderLogo.png);
+}
+
+.search{
+
+}
+
+.avatar{
+
 }
