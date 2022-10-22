@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Casha.Core.DbModels
 {
@@ -24,5 +19,7 @@ namespace Casha.Core.DbModels
         public List<Comment> Comments { get; set; }
 
         public List<UserProduct> UserProducts { get; set; }
+
+        public List<IdentityRole> Roles { get; set; }
     }
 }

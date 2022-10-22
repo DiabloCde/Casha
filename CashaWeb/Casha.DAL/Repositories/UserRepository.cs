@@ -47,6 +47,7 @@ namespace Casha.DAL.Repositories
                 .Include(x => x.Recipes)
                 .Include(x => x.Comments)
                 .Include(x => x.UserProducts)
+                .Include(x => x.Roles)
                 .Where(filter)
                 .ToList();
         }
@@ -54,7 +55,7 @@ namespace Casha.DAL.Repositories
         public void UpdateUser(User user)
         {
             User? dbUser = this._context.Users.Find(user.Id);
-
+            
             if (dbUser is not null)
             {
                 dbUser.FirstName = user.FirstName;
