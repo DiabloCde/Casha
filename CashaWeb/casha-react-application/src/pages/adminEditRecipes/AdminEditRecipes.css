@@ -1,23 +1,124 @@
-.main{
-    padding-left: 250px;
-    /*display:flex;*/
+.main {
+    padding-top: 220px;
+    padding-left: 27%;
+    padding-right: 20px;
+    padding-bottom: 40px;
+    width: 100%;
 }
 
-.div{
-    height: 900px;
+.form_block {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 2% 10%;
 }
 
-.divblue{
-    background-color: blue;
-    height: 900px;
+.form_block input,
+label {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
 }
 
-.form_block{
-    padding-top: 200px;
-   /* margin-left: 200px;*/
+.form_block h1 {
+    text-align: center;
+    padding-bottom: 25px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 90px;
+    line-height: 107px;
+}
+.input_block {
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.input_block label {
+    padding-right: 20px;
 }
 
-.scrolling{
-height: 900px;
-background-color: red;
+.recipe_filtres {
+    padding-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+
+.input_block input {
+    width: 65%;
+}
+
+.userInformation h3 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    color: #000000;
+}
+
+.ingredientsInformation h3 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    color: #000000;
+}
+
+.userInformation {
+    margin-top: 15px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.userInformation input {
+    width: 27%;
+    min-width: 50px;
+    max-width: 150px;
+}
+
+.userInformation label {
+    padding-left: 10px;
+}
+
+.ingredientsInformation {
+    margin-top: 15px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.ingredientsInformation input {
+    width: 27%;
+    min-width: 50px;
+    max-width: 150px;
+}
+
+.ingredientsInformation label {
+    padding-left: 10px;
+}
+
+.filter_button {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+    background: #ffb62a;
+    border-radius: 15px;
+    margin-left: 75%;
+    width:25%;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
