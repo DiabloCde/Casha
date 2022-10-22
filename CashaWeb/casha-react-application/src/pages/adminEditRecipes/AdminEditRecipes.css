@@ -1,0 +1,23 @@
+.main{
+    padding-left: 250px;
+    /*display:flex;*/
+}
+
+.div{
+    height: 900px;
+}
+
+.divblue{
+    background-color: blue;
+    height: 900px;
+}
+
+.form_block{
+    padding-top: 200px;
+   /* margin-left: 200px;*/
+}
+
+.scrolling{
+height: 900px;
+background-color: red;
+}
