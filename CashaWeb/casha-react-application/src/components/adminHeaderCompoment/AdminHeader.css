@@ -1,6 +1,10 @@
 header {
     background-color: #65B016;
     min-height: 100px;
+    position: fixed;
+    top:0;
+    z-index: 1000;
+    width:100%
 }
 
 .wrapper {
