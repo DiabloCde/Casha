@@ -17,5 +17,6 @@ namespace Casha.DAL.Interfaces
         void DeleteUser(string userId);
 
         void UpdateUser(User user);
+        void AddUser(User user, String roleId);
     }
 }
