@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CashaWeb.ApiModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -17,8 +18,8 @@ namespace CashaWeb.Controllers
             _config = config;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> VerifyEmploee(Dictionary<string, string> credentials)
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUser(LoginUser user)
         {
             string issuer = _config["Jwt:Issuer"];
             string audience = _config["Jwt:Audience"];
@@ -30,7 +31,7 @@ namespace CashaWeb.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim("Id", Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Sub, credentials["Login"]),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Login),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Role, "Admin")
                 };
@@ -57,6 +58,7 @@ namespace CashaWeb.Controllers
             var stringToken = tokenHandler.WriteToken(token);
 
             return Ok(stringToken);
+
         }
     }
 }
