@@ -28,8 +28,12 @@ namespace Casha.BLL.Services
                     new Claim("Id", user.Id),
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(ClaimTypes.Role, "Admin")
                 };
+
+            foreach(var role in user.Roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.Name));
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
