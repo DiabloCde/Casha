@@ -20,9 +20,7 @@ namespace CashaWeb.Controllers
         {
             try
             {
-                var token = _loginServcie.Login(user.Login, user.Password);
-
-                return Ok(token);
+                return Ok(_loginServcie.Login(user.Login, user.Password));
             }
             catch(InvalidOperationException ex)
             {
