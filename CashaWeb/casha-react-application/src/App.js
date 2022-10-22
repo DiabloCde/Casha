@@ -3,9 +3,9 @@ import AdminEditRecipes from "./pages/adminEditRecipes/AdminEditRecipes.jsx";
 
 function App() {
   return (
-    <main>
+    <div className="page_wrapper">
       <AdminEditRecipes/>
-    </main>
+    </div>
   );
 }
 
