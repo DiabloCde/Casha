@@ -1,3 +1,5 @@
+using Casha.BLL.Interfaces;
+using Casha.BLL.Services;
 using Casha.Core.DbModels;
 using Casha.DAL;
 using Casha.DAL.Interfaces;
@@ -20,6 +22,9 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders()
