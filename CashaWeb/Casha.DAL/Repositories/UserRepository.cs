@@ -60,6 +60,8 @@ namespace Casha.DAL.Repositories
                 dbUser.FirstName = user.FirstName;
                 dbUser.LastName = user.LastName;
                 dbUser.DisplayName = user.DisplayName;
+                dbUser.Bio = user.Bio;
+                dbUser.ProfilePictureUrl = user.ProfilePictureUrl;
                 dbUser.IsCertified = dbUser.IsCertified;
 
                 this._context.SaveChanges();

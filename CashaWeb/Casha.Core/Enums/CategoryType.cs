@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Casha.Core.Enums
 {
-    public enum Unit
+    public enum CategoryType
     {
-        tsp,
-        tspb,
-        g,
-        ml,
-        piece
+        Occasion,
+        Cuisine
     }
 }

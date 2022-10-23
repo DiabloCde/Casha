@@ -62,6 +62,7 @@ namespace Casha.DAL.Repositories
             {
                 dbRecipe.Name = recipe.Name;
                 dbRecipe.Instruction = recipe.Instruction;
+                dbRecipe.Difficulty = recipe.Difficulty;
                 dbRecipe.UserId = recipe.UserId;
 
                 this._context.SaveChanges();
