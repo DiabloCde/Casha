@@ -21,7 +21,7 @@ namespace CashaWeb.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<User>>> GetUser(int id)
         {
-            User? user = _userRepository.GetUserByID(id.ToString());
+            var user = _userRepository.GetUserByID(id.ToString());
 
             if(user != null)
             {
@@ -29,6 +29,13 @@ namespace CashaWeb.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutUser(User user)
+        {
+            _userRepository.UpdateUser(user);
+            return Ok();
         }
     }
 }
