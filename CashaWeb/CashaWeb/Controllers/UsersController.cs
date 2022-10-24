@@ -37,5 +37,12 @@ namespace CashaWeb.Controllers
             _userRepository.UpdateUser(user);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            _userRepository.DeleteUser(id.ToString());
+            return Ok();
+        }
     }
 }
