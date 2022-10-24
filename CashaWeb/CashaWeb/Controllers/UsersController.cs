@@ -19,9 +19,9 @@ namespace CashaWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers(Expression<Func<User, bool>> filter)
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var users = _userRepository.GetUsers(filter);
+            var users = _userRepository.GetUsers(user => (int.Parse(user.Id) > 1));
             if(users.Any())
             {
                 return Ok(users);
