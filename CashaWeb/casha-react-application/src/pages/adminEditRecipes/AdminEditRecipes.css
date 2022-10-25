@@ -108,7 +108,7 @@ label {
 }
 
 .filter_button {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -118,7 +118,100 @@ label {
     background: #ffb62a;
     border-radius: 15px;
     margin-left: 75%;
-    width:25%;
+    width: 25%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border: none;
+}
+.filter_button:hover {
+    cursor: pointer;
+}
+
+.add_button {
+    border: none;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    color: #000000;
+    background: #ffb62a;
+    border-radius: 15px;
+    width: 30%;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding-top: 7px;
     padding-bottom: 7px;
 }
+
+.add_button:hover {
+    cursor: pointer;
+}
+
+.table {
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.table_row {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.table_cell {
+    height: 50px;
+    padding:10px ;
+}
+.view_button, .edit_button, .delete_button{
+    color: #FFFFFF;
+    border-radius: 15px;
+    padding: 5px 10px;
+    width:25%;
+    min-width: 80px;
+    margin: 7px;
+}
+
+.view_button {
+    background: #92FF81;
+}
+
+.edit_button {
+    background: #409DBA;
+}
+
+.delete_button {
+    background: #F06F6F;
+}
+
+.edit_button, .view_button,.delete_button, .loadMore_button:hover {
+    cursor: pointer;
+}
+
+.loadMore_button{
+    border: none;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 38px;
+    text-align: center;
+    color: #000000;
+
+    background-color: #ffb62a;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 40%;
+    padding: 14px 14px;
+    border: none;
+    border-radius: 15px;
+
+}
+
