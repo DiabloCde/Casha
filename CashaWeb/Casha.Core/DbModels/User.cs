@@ -15,6 +15,10 @@ namespace Casha.Core.DbModels
 
         public string DisplayName { get; set; }
 
+        public string Bio { get; set; }
+
+        public string ProfilePictureUrl { get; set; }
+
         public bool IsCertified { get; set; }
 
         public List<Post> Posts { get; set; }
