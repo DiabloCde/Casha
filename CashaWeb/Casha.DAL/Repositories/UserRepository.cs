@@ -47,7 +47,6 @@ namespace Casha.DAL.Repositories
                 .Include(x => x.Recipes)
                 .Include(x => x.Comments)
                 .Include(x => x.UserProducts)
-                .Include(x => x.Roles)
                 .Where(filter)
                 .ToList();
         }

@@ -1,30 +1,44 @@
 ﻿using Casha.BLL.Interfaces;
+using Casha.Core.DbModels;
 using Casha.DAL.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Casha.BLL.Services
 {
     public class LoginService : ILoginService
     {
-        private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
+        private readonly IUserRepository _userReposity;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public LoginService(IUserRepository userRepository, ITokenService tokenService)
+        public LoginService(ITokenService tokenService, IUserRepository userReposity, UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _userRepository = userRepository;
             _tokenService = tokenService;
+            _userReposity = userReposity;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public string Login(string username, string password)
+        public async Task<string> Login(string username, string password)
         {
-            // TODO: decifer password before comparison
-            var logged = _userRepository.GetUsers(u => u.UserName == username && u.PasswordHash == password).First();
+            var logged = _userReposity.GetUsers(x => x.UserName.Equals(username)).First();
 
             if (logged == null)
             {
                 throw new InvalidOperationException("User not found");
             }
 
-            return _tokenService.GenerateToken(logged);
+            var result = await _signInManager.CheckPasswordSignInAsync(logged, password, false);
+
+            var roles = await _userManager.GetRolesAsync(logged);
+
+            if (result.Succeeded)
+            {
+                return _tokenService.GenerateToken(logged, roles);
+            }
+
+            throw new InvalidOperationException("Incorrect password");
         }
     }
 }

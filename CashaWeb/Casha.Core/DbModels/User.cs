@@ -19,7 +19,5 @@ namespace Casha.Core.DbModels
         public List<Comment> Comments { get; set; }
 
         public List<UserProduct> UserProducts { get; set; }
-
-        public List<IdentityRole> Roles { get; set; }
     }
 }

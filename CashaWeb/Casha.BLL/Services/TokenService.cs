@@ -17,7 +17,7 @@ namespace Casha.BLL.Services
             _config = config;
         }
 
-        public string GenerateToken(User user)
+        public string GenerateToken(User user, IList<string> roles)
         {
             string issuer = _config["Jwt:Issuer"];
             string audience = _config["Jwt:Audience"];
@@ -30,9 +30,9 @@ namespace Casha.BLL.Services
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-            foreach(var role in user.Roles)
+            foreach(var role in roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role.Name));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             var tokenDescriptor = new SecurityTokenDescriptor
