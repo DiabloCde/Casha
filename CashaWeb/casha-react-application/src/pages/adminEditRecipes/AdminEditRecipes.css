@@ -175,6 +175,7 @@ label {
     width:25%;
     min-width: 80px;
     margin: 7px;
+    border: none;
 }
 
 .view_button {
