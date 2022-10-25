@@ -2,6 +2,7 @@ import React from 'react';
 
 import AdminHeader from '../../components/adminHeaderCompoment/AdminHeader';
 import AdminNavbar from '../../components/adminNavbarComponent/AdminNavbar';
+import EditRecipesBlock from '../../components/editRecipesBlockComponent/EditRecipesBlock';
 
 import styles from './AdminEditRecipes.css'
 
@@ -12,7 +13,7 @@ function AdminEditRecipes() {
     }
 
     const addRecipe = (e) => {
-        alert('new Recipe');
+        document.getElementById('editRecipes_block').style.visibility = 'visible';
     }
 
     return (
@@ -20,6 +21,7 @@ function AdminEditRecipes() {
             <AdminHeader />
             <AdminNavbar />
             <main class='main'>
+                <EditRecipesBlock/>
                 <div className="form_block">
                     <h1>Recipes</h1>
                     <form action="POST" className="form">
@@ -59,7 +61,7 @@ function AdminEditRecipes() {
                         </div>
                         <button className="filter_button" type="button" onClick={filterRecipes} >Filter</button>
                     </form>
-                    <button className='add_button'>Add</button>
+                    <button className='add_button' id= 'add_button' onClick={addRecipe}>Add</button>
 
                     <table className='table'>
                         <tr className='table_row'>
