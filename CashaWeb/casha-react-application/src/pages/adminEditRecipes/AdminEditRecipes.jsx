@@ -57,12 +57,49 @@ function AdminEditRecipes() {
                             <label htmlFor="ingredientSelect">Select:</label>
                             <input type="text" id="ingredientSelect" />
                         </div>
-
                         <button className="filter_button" type="button" onClick={filterRecipes} >Filter</button>
                     </form>
-                </div>
-                <div className="scrolling">
+                    <button className='add_button'>Add</button>
 
+                    <table className='table'>
+                        <tr className='table_row'>
+                            <th className='table_cell'>Name</th>
+                            <th className='table_cell'>Cuisine</th>
+                            <th className='table_cell'>Complexity</th>
+                            <th className='table_cell'>Actions</th>
+                        </tr>
+                        <tr className='table_row'>
+                            <td className='table_cell'>PLOV</td>
+                            <td className="table_cell">NOTHING</td>
+                            <td className="table_cell complexity_cell">3</td>
+                            <td className="tablecell">
+                                <button className='view_button'>View</button>
+                                <button className='edit_button'>Edit</button>
+                                <button className='delete_button'>Delete</button>
+                            </td>
+                        </tr>
+                        <tr className='table_row'>
+                            <td className='table_cell'>PLOV</td>
+                            <td className="table_cell">NOTHING</td>
+                            <td className="table_cell complexity_cell">3</td>
+                            <td className="tablecell">
+                                <button className='view_button'>View</button>
+                                <button className='edit_button'>Edit</button>
+                                <button className='delete_button'>Delete</button>
+                            </td>
+                        </tr>
+                        <tr className='table_row'>
+                            <td className='table_cell'>PLOV</td>
+                            <td className="table_cell">NOTHING</td>
+                            <td className="table_cell complexity_cell">3</td>
+                            <td className="tablecell">
+                                <button className='view_button'>View</button>
+                                <button className='edit_button'>Edit</button>
+                                <button className='delete_button'>Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <button className='loadMore_button'>Load More</button>
                 </div>
             </main>
 
