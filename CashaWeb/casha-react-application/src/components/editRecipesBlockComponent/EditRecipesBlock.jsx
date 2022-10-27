@@ -11,7 +11,7 @@ function EditRecipesBlock() {
     return (
         <div className='editRecipes_block' id='editRecipes_block' >
             <h1>Add/Edit recipe</h1>
-            <form action="POST">
+            <form className='editRecipe_form' action="POST">
                 <div className="input_block">
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" />
@@ -25,34 +25,34 @@ function EditRecipesBlock() {
                     <input type="text" id="holidays" />
                 </div>
                 <div className="input_block">
-                    <label htmlFor="complexity">Complexity:</label>
-                    <input type="radio" name="complexity" id="complexityEasy" value={"Easy"} />
+                    <label>Complexity:</label>
+                    <div className="radio_buttons">
+                        <input className='radioButton' type="radio" name="complexity" id="complexityEasy" value={"Easy"} />
+                        <label className='radioLabel' htmlFor="complexityEasy">Easy</label>
+                        <input className='radioButton' type="radio" name="complexity" id="complexityMedium" value={"Medium"} />
+                        <label className='radioLabel' htmlFor="complexityMedium">Medium</label>
+                        <input className='radioButton' type="radio" name="complexity" id="complexityHard" value={"Hard"} />
+                        <label className='radioLabel' htmlFor="complexityHard">Hard</label>
+                    </div>
                 </div>
                 <div className="input_block">
-                <label htmlFor="complexityEasy">Easy</label>
-                <input type="radio" name="complexity" id="complexityMedium" value={"Medium"} />
+                    <label htmlFor="ingredients">Ingredients</label>
+                    <select id="ingredients">
+                        <option value="Carrot">Carrot</option>
+                        <option value="Cuccumber">Cucumber</option>
+                        <option value="Potato">Potato</option>
+                        <option value="Grass">Grass</option>
+                    </select>
                 </div>
                 <div className="input_block">
-                <label htmlFor="complexityMedium">Medium</label>
-                <input type="radio" name="complexity" id="complexityHard" value={"Hard"} />
+                    <label htmlFor="image">Image:</label>
+                    <input type="file" name="imageFile" id="image" />
                 </div>
                 <div className="input_block">
-                <label htmlFor="complexityHard">Hard</label>
-                <label htmlFor="ingredients">Ingredients</label>
+                    <label htmlFor="instructions">Instructions</label>
+                    <textarea name="" id="instructions" rows="5" placeholder='Write your instructions here'></textarea>
                 </div>
-                <div className="input_block">
-                <input type="text" id="ingredients" />
-                </div>
-                <div className="input_block">
-                <label htmlFor="image">Image:</label>
-                <input type="image" id="image" src="" alt="" />
-                </div>
-                <div className="input_block">
-                <label htmlFor="instructions">Instructions</label>
-                <input type="text" id='instructions' />
-                </div>
-                <button className='submit_button_addrecipe' type="submit" onClick={sendRecipe}>Submit</button>
-
+                <button className='submit_button_addrecipe' type="submit" onClick={sendRecipe}>Save</button>
             </form>
         </div>
     )
