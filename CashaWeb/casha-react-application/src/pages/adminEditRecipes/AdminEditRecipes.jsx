@@ -13,7 +13,9 @@ function AdminEditRecipes() {
     }
 
     const addRecipe = (e) => {
-        document.getElementById('editRecipes_block').style.visibility = 'visible';
+        document.getElementById('editRecipes_block').style.display = 'block';
+        console.log(document.getElementById('form_block'));
+        document.getElementById('form_block').style.display = 'none';
     }
 
     return (
@@ -22,7 +24,7 @@ function AdminEditRecipes() {
             <AdminNavbar />
             <main class='main'>
                 <EditRecipesBlock/>
-                <div className="form_block">
+                <div className="form_block" id='form_block'>
                     <h1>Recipes</h1>
                     <form action="POST" className="form">
                         <div className="recipe_filtres">
