@@ -1,15 +1,19 @@
 .editRecipes_block
 {
-    position: fixed;
-    height: 100%;
-
-    margin-right: 400px;
-    padding-right: 50px;
+    position: relative;
+    width: 100%;
     background-color: violet;
     z-index: 9999;
-    visibility: hidden;
+    /*visibility: hidden;*/
+    display: none;
 }
 
 .visible_block{
     visibility: visible;
+}
+
+.submit_button_addrecipe{
+    background-color: aquamarine;
+    height: 100px;
+    width: 100px;
 }
