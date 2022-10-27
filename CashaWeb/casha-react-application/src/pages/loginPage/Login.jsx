@@ -4,6 +4,8 @@ import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
+import { Link } from "react-router-dom";
+
 const LOGIN_URL = '/address from back for this page';
 
 
@@ -114,7 +116,9 @@ function Login() {
                 <div class="Registration_Link">
                     <p>
                         No account yet?&nbsp;&nbsp;
-                        <span className="line"> {/*router link here*/}<a href="#">Register</a></span>
+                        <Link to="/Register">
+                            <span className="line"> {/*router link here*/}Register</span>
+                        </Link>
                     </p>
                 </div>
             </section>
