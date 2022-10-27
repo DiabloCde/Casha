@@ -1,19 +1,72 @@
-.editRecipes_block
-{
+.editRecipes_block {
     position: relative;
     width: 100%;
-    background-color: violet;
-    z-index: 9999;
-    /*visibility: hidden;*/
+    border: solid 1px black;
+    z-index: 10;
     display: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
-.visible_block{
-    visibility: visible;
+.editRecipe_form {
+    padding-top: 20px;
 }
 
-.submit_button_addrecipe{
-    background-color: aquamarine;
-    height: 100px;
-    width: 100px;
+.radioButton {
+    margin: 0;
+    padding: 0;
+}
+
+.radioLabel {
+    margin: 0;
+    padding: 0;
+    font-size: 27px;
+    line-height: 34px;
+}
+
+.radio_buttons {
+    display: flex;
+    width: 65%;
+    justify-content: space-around;
+}
+
+.input_block {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+}
+
+.input_block input {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+}
+
+.input_block select {
+    width: 65%;
+}
+
+.input_block textarea {
+    width: 65%;
+}
+
+.submit_button_addrecipe {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+
+    min-width: 26%;
+    padding: 10px 30px;
+    margin-left: 73%;
+    background: #ffb62a;
+    border-radius: 15px;
 }
