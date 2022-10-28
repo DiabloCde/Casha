@@ -1,4 +1,4 @@
-import styles from './Login.css';
+import styles from '../../common/styles/Auth.css';
 
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
@@ -61,14 +61,14 @@ function Login() {
     }
 
     return (
-        <div class="Login_Wrapper">
+        <div class="Auth_Wrapper">
             <section>
-                <div class="Login_Image_Container">
+                <div class="Auth_Image_Container">
                     <img src='./img/Logo.png'></img>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="Form_Input_Area_Wrapper">
-                        <div class="Login_Input_Wrap">
+                        <div class="Auth_Input_Wrap">
                             <div class="Input_Blocks First_Input_Block">
                                 <div class="Input_Icon">
                                     <img src='./img/Login.png'></img>
@@ -117,7 +117,7 @@ function Login() {
                     <p>
                         No account yet?&nbsp;&nbsp;
                         <Link to="/Register">
-                            <span className="line"> {/*router link here*/}Register</span>
+                            <span className="line">Register</span>
                         </Link>
                     </p>
                 </div>

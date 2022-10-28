@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
 			<Routes>
           <Route path="/Login" element= {<Login /> } />
-          <Route path="/Registration" element={<Register /> } />
+          <Route path="/Register" element={<Register /> } />
 				  {/* Default Router */}
           <Route path="/" element= { <Navigate to="/Login"/> }/>
 			</Routes>
