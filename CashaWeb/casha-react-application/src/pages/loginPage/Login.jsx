@@ -1,9 +1,11 @@
-import styles from './Login.css';
+import styles from '../../common/styles/Auth.css';
 
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
+import { Link } from "react-router-dom";
+
 const LOGIN_URL = '/address from back for this page';
 
 
@@ -59,14 +61,14 @@ function Login() {
     }
 
     return (
-        <div class="Login_Wrapper">
+        <div class="Auth_Wrapper">
             <section>
-                <div class="Login_Image_Container">
+                <div class="Auth_Image_Container">
                     <img src='./img/Logo.png'></img>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="Form_Input_Area_Wrapper">
-                        <div class="Login_Input_Wrap">
+                        <div class="Auth_Input_Wrap">
                             <div class="Input_Blocks First_Input_Block">
                                 <div class="Input_Icon">
                                     <img src='./img/Login.png'></img>
@@ -113,7 +115,9 @@ function Login() {
                 <div class="Registration_Link">
                     <p>
                         No account yet?&nbsp;&nbsp;
-                        <span className="line"> {/*router link here*/}<a href="#">Register</a></span>
+                        <Link to="/Register">
+                            <span className="line">Register</span>
+                        </Link>
                     </p>
                 </div>
             </section>
