@@ -1,3 +1,5 @@
+using Casha.BLL.Interfaces;
+using Casha.BLL.Services;
 using Casha.Core.DbModels;
 using Casha.DAL;
 using Casha.DAL.Interfaces;
@@ -13,12 +15,16 @@ IConfiguration appConfig = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
 
+builder.Services.AddLogging();
+
 builder.Services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(
                     appConfig.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders()
