@@ -6,9 +6,9 @@ import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
-const LOGIN_URL = '/address from back for this page';
+const API_URL = '/address from back for this page';
 
 function Register() {
     const { setAuth } = useContext(AuthContext);
@@ -38,23 +38,21 @@ function Register() {
         }
 
         try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ userName: login, password: pwd }),
+            const response = await axios.post(API_URL,
+                JSON.stringify({
+                    "Login":login,
+                    "Password":pwd,
+                    "PasswordConfirm":pwdRep,
+                }),
                 {
                     headers: { 'Content-type': 'application/json' },
                     withCredentials: true
                 }
             );
-            //Names same as back expectes
-            console.log(JSON.stringify(response?.data)); //temp
-            const accessToken = response?.data?.accessToken;  //what back returns
-            const roles = response?.data?.roles; //what back returns
-            setAuth({login,pwd,roles,accessToken}); //storing information in this object and store it in global context
-            setlogin('');
-            setPwd('');
-            setSuccess(true);
+            alert("Account created!");
+            redirect("/Login");
 
-        } catch (err) {                 //errors that expected from back
+        } catch (err) {  //errors that expected from back
             if(!err?.response){
                 alert("No Server Response");
             } else if(err.response?.status === 400){
@@ -62,7 +60,7 @@ function Register() {
             } else if(err.response?.status === 401){
                 alert("Unathorized")
             }else{
-                alert("Login failed");
+                alert("Registration failed");
             }
 
         }
