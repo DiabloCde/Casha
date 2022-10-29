@@ -1,5 +1,6 @@
 import commonStyles from '../../common/styles/Auth.css';
-import styles from './Register.css'
+import styles from './Register.css';
+import  { messages } from '../../common/ErrorMessages';
 
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
@@ -13,23 +14,32 @@ function Register() {
     const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
-    const errRef = useRef();
 
-    const [user, setUser] = useState('');
+    const [login, setlogin] = useState('');
     const [pwd, setPwd] = useState('');
     const [pwdRep, setPwdRep] = useState('');
-    const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    // Object => { property : message }
+    //const [validity, setValidity] = useState({});
 
     useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
+        
+    }, [login, pwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let validity = getUpdatedValidity();
+        setSuccess(validate(validity));
+
+        if (success === false) {
+            showErrors(validity);
+            return;
+        }
+
         try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ userName: user, password: pwd }),
+                JSON.stringify({ userName: login, password: pwd }),
                 {
                     headers: { 'Content-type': 'application/json' },
                     withCredentials: true
@@ -39,8 +49,8 @@ function Register() {
             console.log(JSON.stringify(response?.data)); //temp
             const accessToken = response?.data?.accessToken;  //what back returns
             const roles = response?.data?.roles; //what back returns
-            setAuth({user,pwd,roles,accessToken}); //storing information in this object and store it in global context
-            setUser('');
+            setAuth({login,pwd,roles,accessToken}); //storing information in this object and store it in global context
+            setlogin('');
             setPwd('');
             setSuccess(true);
 
@@ -57,7 +67,54 @@ function Register() {
 
         }
 
-        //console.log(JSON.stringify({user, pwd}));
+        //console.log(JSON.stringify({login, pwd}));
+    }
+
+    const getUpdatedValidity = () => {
+        var newValidity = {};
+        var nonLatinRE = /[^\u0000-\u007f]/;
+        var validPasswordRE = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$/;
+
+        if (login.length < 2 || nonLatinRE.test(login)) {
+            newValidity["login"] = "InvalidLogin";
+        }
+        else {
+            newValidity["login"] = "Valid";
+        }
+
+        if (pwd.length < 8 || nonLatinRE.test(pwd)
+            || !validPasswordRE.test(pwd)) {
+            newValidity["password"] = "InvalidPassword";
+        }
+        else {
+            newValidity["password"] = "Valid";
+        }
+
+        if (pwdRep !== pwd) {
+            newValidity["confirmation"] = "PasswordNotConfirmed";
+        }
+        else {
+            newValidity["confirmation"] = "Valid";
+        }
+        
+        return newValidity;
+    }
+
+    const validate = (validity) => {
+        return validity["login"] === "Valid" 
+            && validity["password"] === "Valid"
+            && validity["confirmation"] === "Valid";
+    }
+
+    const showErrors = (validity) => {
+        for (let prop in validity) {
+            let msg = validity[prop];
+            if (msg !== "Valid") {
+                alert(messages[msg]);
+            }
+        }
+
+        return;
     }
 
     return (
@@ -82,7 +139,7 @@ function Register() {
                                         id="username"
                                         ref={userRef}
                                         autoComplete="off"
-                                        onChange={(e) => setUser(e.target.value)}
+                                        onChange={(e) => setlogin(e.target.value)}
                                         required
                                     />
                                 </div>
@@ -125,9 +182,8 @@ function Register() {
                             </div>
                         </div>
                     </div>
-                    <div class="Button_Wrapper">
-                        <button>Log In</button>
-
+                    <div class="Button_Wrapper" type>
+                        <button type='submit'>Register</button>
                     </div>
 
                 </form>
@@ -144,5 +200,7 @@ function Register() {
         </div >
     )
 }
+
+
 
 export default Register;
