@@ -26,7 +26,7 @@ namespace Casha.BLL.Services.UserServices
         {
             User user = new User { UserName = login };
             if (isThereSuchLoginAsync(login).Result)
-            {
+        {
                 Console.WriteLine("Validation exception user with such login already exists");
                 return false;
             }
@@ -39,8 +39,8 @@ namespace Casha.BLL.Services.UserServices
             catch
             {
                 Console.WriteLine("Validation exception problems when creating a user");
-                return false;
-            }
+            return false;
+        }
 
             if (result.Succeeded)
             {
