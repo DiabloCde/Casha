@@ -68,15 +68,5 @@ namespace Casha.DAL.Repositories
                 this._context.SaveChanges();
             }
         }
-        public void AddUser(User user, String roleId)
-        {
-            this._context.Users.Add(user);
-            IdentityUserRole<string> userRole = new Microsoft.AspNetCore.Identity.IdentityUserRole<string>();
-            userRole.UserId = user.Id;
-            userRole.RoleId = roleId;
-            this._context.UserRoles.Add(userRole);
-
-            this._context.SaveChanges();
-        }
     }
 }

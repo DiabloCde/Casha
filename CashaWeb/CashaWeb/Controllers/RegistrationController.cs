@@ -14,13 +14,13 @@ namespace CashaWeb.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RegisterController : ControllerBase
+    public class RegistrationController : ControllerBase
 
     {
         private IRegistrationService registrationService;
         
         
-        public RegisterController(IRegistrationService registrationService)
+        public RegistrationController(IRegistrationService registrationService)
         {
             this.registrationService = registrationService; 
         }

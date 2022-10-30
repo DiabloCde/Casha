@@ -4,6 +4,7 @@ using Casha.DAL.Interfaces;
 using Casha.DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +17,20 @@ namespace Casha.BLL.Services.UserServices
     {
         private UserManager<User> userManager;
         private RoleManager<IdentityRole> roleManager;
+        private ILogger<RegistrationService> logger;
 
-        public RegistrationService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public RegistrationService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ILogger<RegistrationService> logger)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.logger = logger;
         }
         public async Task<bool> registrateAsync(String login, String password)
         {
             User user = new User { UserName = login };
-            if (isThereSuchLoginAsync(login).Result)
-        {
-                Console.WriteLine("Validation exception user with such login already exists");
+            if (await isThereSuchLoginAsync(login))
+            {
+                logger.LogError("Validation exception user with such login already exists");
                 return false;
             }
                 
@@ -38,9 +41,9 @@ namespace Casha.BLL.Services.UserServices
             }
             catch
             {
-                Console.WriteLine("Validation exception problems when creating a user");
-            return false;
-        }
+                logger.LogError("Validation exception problems when creating a user");
+                return false;
+            }
 
             if (result.Succeeded)
             {
