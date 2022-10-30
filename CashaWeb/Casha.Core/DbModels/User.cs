@@ -20,6 +20,9 @@ namespace Casha.Core.DbModels
         public string ProfilePictureUrl { get; set; }
 
         public bool IsCertified { get; set; }
+        
+        public string Bio { get; set; }
+        public string ProfilePictureUrl { get; set; }
 
         public List<Post> Posts { get; set; }
 
@@ -29,9 +32,6 @@ namespace Casha.Core.DbModels
 
         public List<UserProduct> UserProducts { get; set; }
 
-        public User(String userName, String passwordHash) : base(userName)
-        {
-            this.PasswordHash = passwordHash;
-        }
+       
     }
 }

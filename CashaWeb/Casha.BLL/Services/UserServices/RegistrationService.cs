@@ -19,13 +19,13 @@ namespace Casha.BLL.Services.UserServices
         }
         public bool registrate(String login, String password)
         {
-            if (isLoginUnique(login))
-            {
-                String hashedPassword = SecurePasswordHasher.Hash(password);
-                User user = new User(login, hashedPassword);
-                _userRepository.AddUser(user, "0");
-                return true;
-            }
+            //if (isLoginUnique(login))
+            //{
+            //    String hashedPassword = SecurePasswordHasher.Hash(password);
+            //    User user = new User(login, hashedPassword);
+            //    _userRepository.AddUser(user, "0");
+            //    return true;
+            //}
             return false;
         }
         private bool isLoginUnique(String login)
