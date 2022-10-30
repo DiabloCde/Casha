@@ -5,6 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Casha.Core\Casha.Core.csproj" />

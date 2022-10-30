@@ -1,7 +1,9 @@
-﻿using Casha.Core.DbModels;
+﻿using Casha.BLL.Interfaces;
+using Casha.Core.DbModels;
 using Casha.DAL.Interfaces;
 using Casha.DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,28 +12,49 @@ using System.Threading.Tasks;
 
 namespace Casha.BLL.Services.UserServices
 {
-    internal class RegistrationService
+    public class RegistrationService : IRegistrationService
     {
-        private readonly IUserRepository _userRepository;
-        public RegistrationService(IUserRepository userRepository)
+        private UserManager<User> userManager;
+        private RoleManager<IdentityRole> roleManager;
+
+        public RegistrationService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this._userRepository = userRepository;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
-        public bool registrate(String login, String password)
+        public async Task<bool> registrateAsync(String login, String password)
         {
-            //if (isLoginUnique(login))
-            //{
-            //    String hashedPassword = SecurePasswordHasher.Hash(password);
-            //    User user = new User(login, hashedPassword);
-            //    _userRepository.AddUser(user, "0");
-            //    return true;
-            //}
-            return false;
+            User user = new User { UserName = login };
+            if (isThereSuchLoginAsync(login).Result)
+            {
+                Console.WriteLine("Validation exception user with such login already exists");
+                return false;
+            }
+                
+            IdentityResult result;
+            try
+            {
+                result = await userManager.CreateAsync(user, password);
+            }
+            catch
+            {
+                Console.WriteLine("Validation exception problems when creating a user");
+                return false;
+            }
+
+            if (result.Succeeded)
+            {
+                var defaultRole = await roleManager.FindByNameAsync("default");
+                if (defaultRole != null)
+                {
+                    var roleResult = await userManager.AddToRoleAsync(user, defaultRole.Name);
+                }
+            }
+            return true;
         }
-        private bool isLoginUnique(String login)
+        public async Task<bool> isThereSuchLoginAsync(String login)
         {
-            List<User> users = _userRepository.GetUsers(x => x.UserName==login);
-            return users.Count == 0;
+            return await userManager.Users.AnyAsync(x => x.UserName == login);
         }
          
     }
