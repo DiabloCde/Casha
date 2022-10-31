@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Casha.BLL.Interfaces
 {
-    internal interface IPostService
+    public interface IPostService
     {
         Post? GetPostById(int postId);
 
