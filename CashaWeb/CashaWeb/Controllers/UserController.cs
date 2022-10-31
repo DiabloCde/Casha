@@ -2,6 +2,7 @@
 using Casha.BLL.Services;
 using Casha.Core.DbModels;
 using CashaWeb.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

@@ -3,7 +3,7 @@ using Casha.Core.DbModels;
 using Casha.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
-namespace Casha.BLL.Services
+namespace Casha.BLL.Services.UserServices
 {
     public class LoginService : ILoginService
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Casha.BLL.Services
+namespace Casha.BLL.Services.UserServices
 {
     public class UserService : IUserService
     {
@@ -31,11 +31,11 @@ namespace Casha.BLL.Services
 
             try
             {
-                this._userRepository.DeleteUser(userId);
+                _userRepository.DeleteUser(userId);
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
             }
         }
 
@@ -48,14 +48,14 @@ namespace Casha.BLL.Services
 
             try
             {
-                User? user = this._userRepository.GetUserByID(userId);
+                User? user = _userRepository.GetUserByID(userId);
 
                 return user;
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex.Message);
-                
+                _logger.LogError(ex.Message);
+
             }
 
             return null;
@@ -65,9 +65,9 @@ namespace Casha.BLL.Services
         {
             try
             {
-                List<User> users = this._userRepository.GetUsers(u =>
-                    (u.FirstName.Contains(search) 
-                        || u.LastName.Contains(search)) 
+                List<User> users = _userRepository.GetUsers(u =>
+                    (u.FirstName.Contains(search)
+                        || u.LastName.Contains(search))
                     && (u.IsCertified == isCertifiedUsers
                         || isAllUsers));
 
@@ -75,7 +75,7 @@ namespace Casha.BLL.Services
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
             }
 
             return new List<User>();
@@ -85,11 +85,11 @@ namespace Casha.BLL.Services
         {
             try
             {
-                this._userRepository.UpdateUser(user);
+                _userRepository.UpdateUser(user);
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex.Message);
+                _logger.LogError(ex.Message);
             }
         }
     }

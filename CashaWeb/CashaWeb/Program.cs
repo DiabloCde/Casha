@@ -1,9 +1,6 @@
 using Casha.BLL.Interfaces;
 using Casha.BLL.Services;
-<<<<<<< HEAD
-=======
 using Casha.BLL.Services.UserServices;
->>>>>>> dev
 using Casha.Core.DbModels;
 using Casha.DAL;
 using Casha.DAL.Interfaces;
