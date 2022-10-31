@@ -1,5 +1,6 @@
 ﻿using Casha.Core.DbModels;
 using Casha.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,10 @@ namespace Casha.DAL.Repositories
 
         public Post? GetPostByID(int postId)
         {
-            throw new NotImplementedException();
+            return _context.Posts
+                .Include(p=>p.User)
+                .Include(p=>p.Comments)
+                .FirstOrDefault(p => p.PostId == postId);
         }
 
         public List<Post> GetPosts(Expression<Func<Post, bool>> filter)
