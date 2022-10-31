@@ -54,7 +54,17 @@ namespace Casha.DAL.Repositories
 
         public void UpdatePost(Post post)
         {
-            throw new NotImplementedException();
+            Post? oldPost = _context.Posts.FirstOrDefault(p => p.PostId == post.PostId);
+
+            if(oldPost is not null)
+            {
+                oldPost.Description = post.Description;
+                oldPost.PostedDate = post.PostedDate;
+                oldPost.Title = post.Title;
+                oldPost.UserId = post.UserId;
+
+                _context.SaveChanges();
+            }
         }
     }
 }
