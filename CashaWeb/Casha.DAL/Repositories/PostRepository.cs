@@ -11,6 +11,13 @@ namespace Casha.DAL.Repositories
 {
     internal class PostRepository : IPostRepository
     {
+        private readonly ApplicationContext _context;
+
+        public PostRepository(ApplicationContext context)
+        {
+            _context = context;
+        }
+
         public void CreatePost(Post post)
         {
             throw new NotImplementedException();
