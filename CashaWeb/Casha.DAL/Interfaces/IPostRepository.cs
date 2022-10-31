@@ -19,6 +19,5 @@ namespace Casha.DAL.Interfaces
         void DeletePost(string postId);
 
         void UpdatePost(Post post);
-
     }
 }
