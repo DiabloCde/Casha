@@ -10,7 +10,9 @@ namespace Casha.DAL.Interfaces
 {
     internal interface IPostRepository
     {
-        List<Post> GetPosts(Expression<Func<Post, bool>> filter);
+        List<Post> GetAllPosts();
+
+        List<Post> GetPostsFiltered(Expression<Func<Post, bool>> filter);
 
         Post? GetPostByID(int postId);
 

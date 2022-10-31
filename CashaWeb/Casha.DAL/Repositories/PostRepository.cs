@@ -44,7 +44,15 @@ namespace Casha.DAL.Repositories
                 .FirstOrDefault(p => p.PostId == postId);
         }
 
-        public List<Post> GetPosts(Expression<Func<Post, bool>> filter)
+        public List<Post> GetAllPosts()
+        {
+            return _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .ToList();
+        }
+
+        public List<Post> GetPostsFiltered(Expression<Func<Post, bool>> filter)
         {
             return _context.Posts
                 .Include(p => p.User)
