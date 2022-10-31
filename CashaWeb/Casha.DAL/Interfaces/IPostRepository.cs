@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Casha.DAL.Interfaces
 {
-    internal interface IPostRepository
+    public interface IPostRepository
     {
         List<Post> GetAllPosts();
 
