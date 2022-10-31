@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Casha.Core.Enums
 {
-    public enum Unit
+    public enum Difficulty
     {
-        tsp,
-        tspb,
-        g,
-        ml,
-        piece
+        Easy,
+        Medium,
+        Hard
     }
 }

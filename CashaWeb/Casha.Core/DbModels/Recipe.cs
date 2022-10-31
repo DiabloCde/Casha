@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Casha.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Casha.Core.DbModels
         public int RecipeId { get; set; }
 
         public string Name { get; set; }
+
+        public Difficulty Difficulty { get; set; }
 
         public string Instruction { get; set; }
 
