@@ -26,7 +26,13 @@ namespace Casha.DAL.Repositories
 
         public void DeletePost(int postId)
         {
-            
+            var post = _context.Posts.FirstOrDefault(p => p.PostId == postId);
+
+            if(post is not null)
+            {
+                _context.Posts.Remove(post);
+                _context.SaveChanges();
+            }
         }
 
         public Post? GetPostByID(int postId)
