@@ -13,5 +13,7 @@ namespace CashaWeb.ViewModels
         public string Description { get; set; }
 
         public string UserId { get; set; }
+
+        public UserViewModel UserViewModel { get; set; }
     }
 }
