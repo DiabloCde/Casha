@@ -24,12 +24,12 @@ namespace Casha.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public void DeletePost(string postId)
+        public void DeletePost(int postId)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Post? GetPostByID(string postId)
+        public Post? GetPostByID(int postId)
         {
             throw new NotImplementedException();
         }

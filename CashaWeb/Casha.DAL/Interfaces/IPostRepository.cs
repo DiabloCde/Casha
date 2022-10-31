@@ -12,11 +12,11 @@ namespace Casha.DAL.Interfaces
     {
         List<Post> GetPosts(Expression<Func<Post, bool>> filter);
 
-        Post? GetPostByID(string postId);
+        Post? GetPostByID(int postId);
 
         void CreatePost(Post post);
 
-        void DeletePost(string postId);
+        void DeletePost(int postId);
 
         void UpdatePost(Post post);
     }
