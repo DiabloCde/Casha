@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Casha.DAL.Repositories
 {
-    internal class PostRepository : IPostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly ApplicationContext _context;
 
@@ -20,7 +20,8 @@ namespace Casha.DAL.Repositories
 
         public void CreatePost(Post post)
         {
-            throw new NotImplementedException();
+            _context.Posts.Add(post);
+            _context.SaveChanges();
         }
 
         public void DeletePost(string postId)
