@@ -9,7 +9,7 @@ namespace Casha.BLL.Interfaces
 {
     internal interface IPostService
     {
-        Post? GEtPostById(int postId);
+        Post? GetPostById(int postId);
 
         List<Post> GetAllPosts();
 

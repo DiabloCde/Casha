@@ -23,32 +23,94 @@ namespace Casha.BLL.Services
 
         public void CreatePost(Post post)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _postRepository.CreatePost(post);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
         }
 
-        public void DeltePost(int psotId)
+        public void DeltePost(int postId)
         {
-            throw new NotImplementedException();
+            if(postId < 0)
+            {
+                throw new ArgumentNullException("Post id must be greater than 0");
+            }
+
+            try
+            {
+                _postRepository.DeletePost(postId);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
         }
 
         public List<Post> GetAllPosts()
         {
-            throw new NotImplementedException();
+            List<Post> posts = new List<Post>();  
+            try
+            {
+                posts = _postRepository.GetAllPosts();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return posts;
         }
 
-        public Post? GEtPostById(int postId)
+        public Post? GetPostById(int postId)
         {
-            throw new NotImplementedException();
+            if (postId < 0)
+            {
+                throw new ArgumentNullException("Post id must be greater than 0");
+            }
+
+            try
+            {
+               Post? post = _postRepository.GetPostByID(postId);
+                return post;
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return null;
         }
 
         public List<Post> GetPostsFiltered(string userId = "")
         {
-            throw new NotImplementedException();
+            List<Post> posts = new List<Post>();
+            try
+            {
+                posts = _postRepository.GetPostsFiltered(p=>p.UserId == userId);
+                return posts;
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return posts;
         }
 
         public void UpdatePost(Post post)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _postRepository.UpdatePost(post);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
         }
     }
 }
