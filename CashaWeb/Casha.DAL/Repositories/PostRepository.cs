@@ -46,7 +46,10 @@ namespace Casha.DAL.Repositories
 
         public List<Post> GetPosts(Expression<Func<Post, bool>> filter)
         {
-            throw new NotImplementedException();
+            return _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .Where(filter).ToList();
         }
 
         public void UpdatePost(Post post)
