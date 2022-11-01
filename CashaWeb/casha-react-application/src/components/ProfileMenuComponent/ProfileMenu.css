@@ -1,0 +1,6 @@
+.activeMenuItem {
+	background-color: rgb(111, 238, 12, 0.33);
+}
+.maxWidthForIng {
+	width: 50% !important;
+}
