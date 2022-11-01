@@ -170,7 +170,35 @@ namespace CashaWeb.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("UserPosts/{userId=string}")]
 
+        public IActionResult GetPostsByUserId([FromRoute] string userId)
+        {
+            try
+            {
+                var posts = _postService.GetPostsFiltered(userId);
+                List<PostViewModel> postViewModels = new List<PostViewModel>();
+                foreach (var post in posts)
+                {
+                    var postView = getPostViewModel(post);
+
+                    if(postView == null)
+                    {
+                        continue;
+                    }
+
+                    postViewModels.Add(postView);
+                }
+                return Ok(postViewModels);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest(e.Message);
+
+            }
+        }
 
     }
 }
