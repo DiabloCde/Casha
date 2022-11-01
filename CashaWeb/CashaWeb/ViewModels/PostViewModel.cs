@@ -14,6 +14,8 @@ namespace CashaWeb.ViewModels
 
         public string UserId { get; set; }
 
-        public UserViewModel UserViewModel { get; set; }
+        public string DisplayName { get; set; }
+
+        public string ProfilePictureUrl { get; set; }
     }
 }
