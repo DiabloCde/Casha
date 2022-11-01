@@ -55,7 +55,7 @@ namespace Casha.DAL.Repositories
         public void UpdateUser(User user)
         {
             User? dbUser = this._context.Users.Find(user.Id);
-
+            
             if (dbUser is not null)
             {
                 dbUser.FirstName = user.FirstName;
