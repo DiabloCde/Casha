@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Casha.BLL.Interfaces;
 using Casha.BLL.Services;
+using Casha.Core.DbModels;
+using CashaWeb.ViewModels;
+using System.Linq.Expressions;
 
 namespace CashaWeb.Controllers
 {
@@ -17,6 +20,32 @@ namespace CashaWeb.Controllers
         {
             _postService = postService;
             _logger = logger;
+        }
+
+        [HttpGet("{postId = int}")]
+        public IActionResult GetPost([FromRoute] int postId)
+        {
+            try
+            {
+                Post? post = _postService.GetPostById(postId);
+
+                if (post == null)
+                {
+                    return NotFound($"No posts with index{postId}");
+                }
+
+                return Ok(post);
+            }
+            catch(ArgumentNullException e)
+            {
+                _logger.LogError(e.Message);
+                return ValidationProblem(e.Message);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+                return ValidationProblem(e.Message);
+            }
         }
     }
 }
