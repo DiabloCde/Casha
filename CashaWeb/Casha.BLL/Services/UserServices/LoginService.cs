@@ -22,7 +22,7 @@ namespace Casha.BLL.Services.UserServices
 
         public async Task<string> Login(string username, string password)
         {
-            var logged = _userReposity.GetUsers(x => x.UserName.Equals(username)).First();
+            var logged = _userReposity.GetUsers(x => x.UserName.Equals(username)).FirstOrDefault();
 
             if (logged == null)
             {
