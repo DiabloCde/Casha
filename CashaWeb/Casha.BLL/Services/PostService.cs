@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Casha.BLL.Services
 {
-    internal class PostService : IPostService
+    public class PostService : IPostService
     {
         private readonly IPostRepository _postRepository;
         private readonly ILogger<PostService> _logger;
