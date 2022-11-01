@@ -37,7 +37,8 @@ namespace CashaWeb.Controllers
                     return NotFound($"No posts with index {postId}");
                 }
 
-                return Ok(post);
+                var postView = getPostViewModel(post);
+                return Ok(postView);
             }
             catch (ArgumentNullException e)
             {
@@ -88,7 +89,7 @@ namespace CashaWeb.Controllers
                 else
                 {
                     return new PostViewModel
-                    { 
+                    {
                         PostId = post.PostId,
                         Title = post.Title,
                         PostedDate = post.PostedDate,
@@ -101,9 +102,75 @@ namespace CashaWeb.Controllers
             {
                 _logger.LogError(e.Message);
             }
+
             return null;
-            
         }
+
+        [HttpPost]
+        public IActionResult CreatePost(PostCreateModel postView)
+        {
+            try
+            {
+                var post = new Post
+                {
+                    Title = postView.Title == null ? "No title" : postView.Title,
+                    PostedDate = postView.PostedDate == null ? DateTime.Today : postView.PostedDate.Value,
+                    Description = postView.Description == null ? "No Description" : postView.Description,
+                    UserId = postView.UserId == null ? "No User in post" : postView.UserId
+                };
+
+                _postService.CreatePost(post);
+                PostViewModel? postViewModel = getPostViewModel(post);
+                return Ok(postViewModel);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("{postId=int}")]
+        public IActionResult DeletePost([FromRoute] int postId)
+        {
+            try
+            {
+                _postService.DeltePost(postId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{postId=int}")]
+        public IActionResult UpdatePost([FromRoute] int postId, [FromBody] PostCreateModel postUpdate)
+        {
+            try
+            {
+                var post = new Post
+                {
+                    PostId = postId,
+                    Title = postUpdate.Title == null ? "No title" : postUpdate.Title,
+                    PostedDate = postUpdate.PostedDate == null ? DateTime.Today : postUpdate.PostedDate.Value,
+                    Description = postUpdate.Description == null ? "No Description" : postUpdate.Description,
+                    UserId = postUpdate.UserId == null ? "" : postUpdate.UserId
+                };
+
+                _postService.UpdatePost(post);
+                var postViewModel = getPostViewModel(post);
+                return Ok(postViewModel);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest(e.Message);
+            }
+        }
+
+
 
     }
 }
