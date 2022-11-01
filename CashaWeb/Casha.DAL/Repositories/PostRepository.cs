@@ -71,6 +71,7 @@ namespace Casha.DAL.Repositories
                 oldPost.Title = post.Title;
                 oldPost.UserId = post.UserId;
 
+                _context.Posts.Update(oldPost);
                 _context.SaveChanges();
             }
         }
