@@ -52,8 +52,13 @@ namespace Casha.BLL.Services.UserServices
                 {
                     var roleResult = await userManager.AddToRoleAsync(user, defaultRole.Name);
                 }
+                return true;
+            } else
+            {
+                logger.LogError(result.ToString());
+                return false;
             }
-            return true;
+            
         }
         public async Task<bool> isThereSuchLoginAsync(String login)
         {
