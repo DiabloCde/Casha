@@ -65,7 +65,7 @@ function AdminEditRecipes() {
                     </form>
                     <button className='add_button' id= 'add_button' onClick={addRecipe}>Add</button>
 
-                    <table className='table'>
+                    <table className='table_admin'>
                         <tr className='table_row'>
                             <th className='table_cell'>Name</th>
                             <th className='table_cell'>Cuisine</th>
