@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 
 import axios from "axios";
+//import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 
 import "./ProfileSettings.css";
 import ProfileMenu from "../../components/ProfileMenuComponent/ProfileMenu.js";
@@ -143,7 +145,8 @@ function ProfileSettings() {
 				console.log(userImg);
 			});
 	}
-
+	Cookies.set('p', 'MyValue')
+	console.log(Cookies.get('loggedToken'))
 	return (
 		<div className="ProfileSettings p-2">
 			<div className="container">
