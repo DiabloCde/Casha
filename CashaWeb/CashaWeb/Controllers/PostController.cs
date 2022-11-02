@@ -81,6 +81,7 @@ namespace CashaWeb.Controllers
                         Title = post.Title,
                         PostedDate = post.PostedDate,
                         Description = post.Description,
+                        PostImageUrl = post.PostImageUrl,
                         UserId = post.UserId,
                         DisplayName = user.DisplayName,
                         ProfilePictureUrl = user.ProfilePictureUrl
@@ -94,6 +95,7 @@ namespace CashaWeb.Controllers
                         Title = post.Title,
                         PostedDate = post.PostedDate,
                         Description = post.Description,
+                        PostImageUrl = post.PostImageUrl,
                         UserId = post.UserId,
                     };
                 }
@@ -116,6 +118,7 @@ namespace CashaWeb.Controllers
                     Title = postView.Title == null ? "No title" : postView.Title,
                     PostedDate = postView.PostedDate == null ? DateTime.Today : postView.PostedDate.Value,
                     Description = postView.Description == null ? "No Description" : postView.Description,
+                    PostImageUrl = postView.PostImageUrl,
                     UserId = postView.UserId == null ? "No User in post" : postView.UserId
                 };
 
@@ -156,6 +159,7 @@ namespace CashaWeb.Controllers
                     Title = postUpdate.Title == null ? "No title" : postUpdate.Title,
                     PostedDate = postUpdate.PostedDate == null ? DateTime.Today : postUpdate.PostedDate.Value,
                     Description = postUpdate.Description == null ? "No Description" : postUpdate.Description,
+                    PostImageUrl = postUpdate.PostImageUrl,
                     UserId = postUpdate.UserId == null ? "" : postUpdate.UserId
                 };
 
@@ -179,24 +183,25 @@ namespace CashaWeb.Controllers
             {
                 var posts = _postService.GetPostsFiltered(userId);
                 List<PostViewModel> postViewModels = new List<PostViewModel>();
+
                 foreach (var post in posts)
                 {
                     var postView = getPostViewModel(post);
 
-                    if(postView == null)
+                    if (postView is null)
                     {
                         continue;
                     }
 
                     postViewModels.Add(postView);
                 }
+
                 return Ok(postViewModels);
             }
             catch(Exception e)
             {
                 _logger.LogError(e.Message);
                 return BadRequest(e.Message);
-
             }
         }
 
