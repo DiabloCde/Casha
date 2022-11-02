@@ -1,17 +1,16 @@
 import React from "react"
 import { useRef, useState, useEffect, useContext } from "react"
 import axios from "axios"
-import moment from "moment/moment"
+import moment from "moment"
 
 import styles from "./createProfileBlog.css"
 
-const URL_GETUSERPOSTS = "https://localhost:7128/api/Post/UserPosts/e802fce3-10bc-4ce4-a90f-bc94967eee13"
+const URL_GETUSERPOSTS =
+  "https://localhost:7128/api/Post/UserPosts/e802fce3-10bc-4ce4-a90f-bc94967eee13"
 
 function CreateProfileBlog() {
   const [userPosts, setUserPosts] = useState([])
   const [isRendered, setIsRendered] = useState(false)
-
-
 
   async function getUserPosts() {
     const response = await axios({
@@ -25,8 +24,8 @@ function CreateProfileBlog() {
   }
 
   useEffect(() => {
-    getUserPosts();
-    setIsRendered(true);
+    getUserPosts()
+    setIsRendered(true)
   }, [])
 
   if (isRendered) {
@@ -35,31 +34,32 @@ function CreateProfileBlog() {
       <div className="wrapperBlog">
         <h1>Blog:</h1>
         <div className="blogs">
-          {userPosts?.reverse().map((item) =>
-            <div className="postOfReceipt" key={item.postId} >
-              <div className="postInfo" >
-                <img  src={item.profilePictureUrl} alt="" />
-                <p >{item.displayName}</p>
-                <p >{moment(item.postedDate).format('DD.MM.YYYY')}</p>
+          {userPosts?.reverse().map((item) => (
+            <div className="postOfReceipt" key={item.postId}>
+              <div className="postInfo">
+                <img src={item.profilePictureUrl} alt="" />
+                <p>{item.displayName}</p>
+                <p>{moment(item.postedDate).format("DD.MM.YYYY")}</p>
               </div>
               <div className="postMainInfo">
-                <p >{item.title}</p>
-                <img key = {item.postId} src={item.postImageUrl} alt="" />
+                <p>{item.title}</p>
+                <img
+                  className="pic"
+                  key={item.postId}
+                  src={item.postImageUrl}
+                  alt=""
+                />
                 <button className="btn openReceipt">Open receipt</button>
-                <p >{item.description}</p>
+                <p>{item.description}</p>
                 <button className="btn">Comments</button>
               </div>
             </div>
-          )}
-
+          ))}
         </div>
       </div>
     )
-  }
-  else {
-    return (
-      <h1>Please Wait</h1>
-    )
+  } else {
+    return <h1>Please Wait</h1>
   }
 }
 export default CreateProfileBlog

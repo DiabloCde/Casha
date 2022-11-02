@@ -7,4 +7,25 @@
 .profileMenu {
   margin-top: 0px;
   position: fixed;
+  margin-left: 40px;
+  width: 13%;
+}
+.circle {
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.nickName {
+  font-size: 23px;
+}
+.navbar {
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .circle {
+    width: 100px;
+    height: 100px;
+  }
 }

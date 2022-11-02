@@ -9,18 +9,17 @@ import { Link } from "react-router-dom"
 import axios from "axios"
 
 const URL_GETUSER =
-  "https://localhost:7128/api/User/028f54b4-6c1e-4533-a81d-616a2e4c065b"
+  "https://localhost:7128/api/User/e802fce3-10bc-4ce4-a90f-bc94967eee13"
 
-const URL_GETUSERPOSTS = "https://localhost:7128/api/Post/UserPosts/e802fce3-10bc-4ce4-a90f-bc94967eee13"
+const URL_GETUSERPOSTS =
+  "https://localhost:7128/api/Post/UserPosts/e802fce3-10bc-4ce4-a90f-bc94967eee13"
 
 function OtherUserMainPage() {
-
   const [userInfo, setUserInfo] = useState({})
   const [isRendered, setIsRendered] = useState(false)
   const profileMenuTexts = ["Overview", "User recipes"]
   const profileMenuLinks = ["/to", "/to"]
   const activeText = "Overview"
-
 
   async function getUser() {
     const response = await axios({
@@ -33,14 +32,13 @@ function OtherUserMainPage() {
     })
   }
 
-
   useEffect(() => {
-    getUser();
-   setIsRendered(true);
- }, [])
+    getUser()
+    setIsRendered(true)
+  }, [])
 
   if (isRendered === true) {
-    console.log(userInfo);
+    console.log(userInfo)
     return (
       <>
         <UserHeader />

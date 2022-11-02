@@ -49,15 +49,15 @@ function ProfileMenu(props) {
 
     return (
         <div className="profileMenu">
-            <div className="d-flex flex-column">
-                <div className="d-flex">
-                    <img className="rounded-circle maxWidthForIng" src={props.imgLink} alt="img" />
+            <div className="d-flex flex-column align-items-center">
+                <div className="d-flex ">
+                    <img className="circle" src={props.imgLink} alt="img" />
                 </div>
-                <div className="d-flex  p-3">
-                    <strong className="">{props.userNickName}</strong>
+                <div className="d-flex p-3 userNick">
+                    <strong className="nickName">{props.userNickName}</strong>
                 </div>
             </div>
-            <div className="nav d-flex  text-center">
+            <div className="nav d-flex  text-center navbar">
                 <ul className="nav p-3 navbar-nav w-100">
                     {profileMenu.map((element) => {
                         if (element.active) {
@@ -77,7 +77,7 @@ function ProfileMenu(props) {
                         return (
                             <li key={element.name} className="nav-item">
                                 <div className="d-flex align-items-center text-center">
-                                    <Link className=" nav-link border border-dark" to={element.link}>
+                                    <Link className="w-100 nav-link border border-dark" to={element.link}>
                                         <p>{element.name}</p>
                                     </Link>
                                 </div>
