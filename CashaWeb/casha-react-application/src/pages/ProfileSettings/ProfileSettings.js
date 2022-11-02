@@ -177,9 +177,6 @@ function ProfileSettings() {
 											aria-describedby="inputGroup-sizing-default"
 										/>
 									</InputGroup>
-									{/* <Button className="btn btn-sm btn-warning w-100 yellowButton">
-										<strong className="colorBlack">Edit</strong>
-									</Button> */}
 								</div>
 							</div>
 							<div className="col col-8 container p-2">
