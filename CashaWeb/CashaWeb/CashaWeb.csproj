@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Casha.DAL\Casha.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ApiModels\" />
+  </ItemGroup>
+
 </Project>

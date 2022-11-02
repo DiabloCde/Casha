@@ -6,8 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-		<Folder Include="Services\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Casha.Core\Casha.Core.csproj" />

@@ -37,6 +37,7 @@ namespace CashaWeb.Controllers
                 UserViewModel userViewModel = new UserViewModel
                 {
                     Id = user.Id,
+                    Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     DisplayName = user.DisplayName,
@@ -132,12 +133,13 @@ namespace CashaWeb.Controllers
                 List<UserViewModel> userViewModels = users.Select(u => new UserViewModel
                 {
                     Id = u.Id,
+                    Email = u.Email,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     DisplayName = u.DisplayName,
                     Bio = u.Bio,
                     ProfilePictureUrl = u.ProfilePictureUrl,
-                    IsCertified = u.IsCertified
+                    IsCertified = u.IsCertified,
                 }).ToList();
 
                 return Ok(userViewModels);

@@ -1,4 +1,4 @@
-﻿namespace CashaWeb.ApiModels
+﻿namespace CashaWeb.ViewModels
 {
     public class LoginUser
     {
