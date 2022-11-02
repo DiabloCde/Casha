@@ -3,7 +3,8 @@ import { Button, InputGroup, FormControl } from "react-bootstrap";
 
 import axios from "axios";
 //import Cookies from "universal-cookie";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
+import {useCookies} from "react-cookie";
 
 import "./ProfileSettings.css";
 import ProfileMenu from "../../components/ProfileMenuComponent/ProfileMenu.js";
@@ -22,6 +23,7 @@ const ChangePasswordUrl = "https://localhost:7128/api/Account/changePassword";
 
 function ProfileSettings() {
 	const [user, setUser] = useState([]);
+	const [cookies, setCookie] = useCookies();
 
 	// temporary variables to store user changes
 	const [userImg, setUserImg] = useState("");
@@ -145,8 +147,8 @@ function ProfileSettings() {
 				console.log(userImg);
 			});
 	}
-	Cookies.set('p', 'MyValue')
-	console.log(Cookies.get('loggedToken'))
+
+	console.log(cookies);
 	return (
 		<div className="ProfileSettings p-2">
 			<div className="container">
