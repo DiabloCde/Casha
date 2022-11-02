@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 
-import axios from "../../api/axios";
+import axios from "axios";
 
 import "./ProfileSettings.css";
 import ProfileMenu from "../../components/ProfileMenuComponent/ProfileMenu.js";
