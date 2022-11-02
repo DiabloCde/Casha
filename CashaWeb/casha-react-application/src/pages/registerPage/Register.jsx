@@ -4,12 +4,14 @@ import { messages } from "../../common/ErrorMessages";
 
 import React from "react";
 import { useRef, useState, useEffect, useContext } from "react";
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Link, redirect } from "react-router-dom";
 
 const API_URL = "https://localhost:7128/api/Account/register";
 
 function Register() {
+    const navigate = useNavigate();
 	const userRef = useRef();
 
 	const [login, setlogin] = useState("");
@@ -44,7 +46,7 @@ function Register() {
 
 			const response = await axios.post(API_URL, body);
 			alert("Account created!");
-			redirect("/Login");
+            navigate('/Login');
 		} catch (err) {
 			//errors that expected from back
 			console.log(err);
