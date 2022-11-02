@@ -74,6 +74,7 @@ namespace CashaWeb.Controllers
                 User user = new User
                 {
                     Id = userId,
+                    Email = userViewModel.Email,
                     FirstName = userViewModel.FirstName,
                     LastName = userViewModel.LastName,
                     DisplayName = userViewModel.DisplayName,
