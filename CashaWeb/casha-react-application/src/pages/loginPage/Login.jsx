@@ -5,11 +5,13 @@ import { useRef, useState, useEffect, useContext } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useCookies } from "react-cookie";
 
 const URL = "https://localhost:7128/api/Account/login";
 
 function Login() {
 
+    const [cookies, setCookie] = useCookies();
     const navigate = useNavigate();
     const userRef = useRef();
     const errRef = useRef();
@@ -17,6 +19,7 @@ function Login() {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [token, setToken] = useState('');
 
 
     useEffect(() => {
@@ -39,11 +42,15 @@ function Login() {
                 data: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
             })
-                .then((response) => { console.log(response) })
+                .then((response) => {
+                    setToken(response.data);
+                    console.log(response.data);
+                })
 
-            console.log(body);
-            navigate('/ProfileSettings');
-        } catch (err) {                
+            console.log(response);    
+            setCookie('token',token);
+            navigate('/'); //ProfileSettings
+        } catch (err) {
             if (!err?.response) {
                 alert("No Server Response");
             } else if (err.response?.status === 400) {
