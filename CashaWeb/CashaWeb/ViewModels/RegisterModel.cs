@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CashaWeb.ApiModels
+namespace CashaWeb.ViewModels
 {
     public class RegisterModel
     {

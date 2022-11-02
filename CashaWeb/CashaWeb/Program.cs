@@ -26,12 +26,13 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
-builder.Services.AddScoped<IRegistrationService, RegistrationService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPostService, PostService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders()
