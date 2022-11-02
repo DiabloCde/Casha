@@ -29,6 +29,10 @@ function ProfileSettings() {
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 
+<<<<<<< HEAD
+=======
+	// TODO onLoad function
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 	useEffect(() => {
 		getUser();
 	}, []);
@@ -37,10 +41,18 @@ function ProfileSettings() {
 		setTempVariables();
 	}, [user]);
 
+<<<<<<< HEAD
+=======
+	// TODO API GET user (user id in cookies)(set user data into variable 'user')
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 	async function getUser() {
 		try {
 			const response = await axios.get(URL_USER + USER_ID);
 			setUser(response.data);
+<<<<<<< HEAD
+=======
+			//setTempVariables();
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 		} catch (err) {
 			//errors that expected from back
 			if (!err?.response) {
@@ -53,23 +65,43 @@ function ProfileSettings() {
 				alert("Login failed");
 			}
 		}
+<<<<<<< HEAD
 	}
 
 	function setTempVariables() {
 		// take data from user
+=======
+		//Names same as back expectes
+	}
+
+	// TODO SET temporary variables to store user changes
+	function setTempVariables() {
+		console.log(user);
+		// temporary
+		// take data from user!!!
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 		setUserImg(user.profilePictureUrl);
 		setUserNickName(user.displayName);
 		setUserName(user.firstName);
 		setUserSurname(user.lastName);
+<<<<<<< HEAD
 		// TODO ADD Email in API request
+=======
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 		//setUserEmail();
 		setUserBio(user.bio);
 	}
 
+<<<<<<< HEAD
 	// TODO  ADD Email in API request
 	const handleSubmit = async e => {
 		e.preventDefault();
 		// New updated user
+=======
+	// TODO API update user data (take data from temporary variables)
+	const handleSubmit = async e => {
+		e.preventDefault();
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 		let newUser = {
 			id: user.id,
 			bio: userBio,
@@ -104,7 +136,11 @@ function ProfileSettings() {
 		const formdata = new FormData();
 		formdata.append("image", ev.target.files[0]);
 		fetch(API_Imgur, {
+<<<<<<< HEAD
 			method: "POST",
+=======
+			method: "post",
+>>>>>>> 23dd70405366905225a79ddc9db517004f94d4ff
 			headers: {
 				Authorization: "Client-ID " + Client_ID,
 				Accept: "application/json"
