@@ -2,7 +2,7 @@ import styles from '../../common/styles/Auth.css';
 
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ function Login() {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
+
 
     useEffect(() => {
         setErrMsg('');
@@ -42,13 +42,8 @@ function Login() {
                 .then((response) => { console.log(response) })
 
             console.log(body);
-            setSuccess(true);
-            console.log(success);
-            if(success === true){
-                navigate('/EditRecipes');
-            }
-
-        } catch (err) {                 //errors that expected from back
+            navigate('/EditRecipes');
+        } catch (err) {                
             if (!err?.response) {
                 alert("No Server Response");
             } else if (err.response?.status === 400) {
@@ -60,8 +55,6 @@ function Login() {
             }
 
         }
-
-        //console.log(JSON.stringify({user, pwd}));
     }
 
     return (
