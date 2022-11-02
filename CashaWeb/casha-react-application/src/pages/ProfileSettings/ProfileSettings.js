@@ -29,7 +29,6 @@ function ProfileSettings() {
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 
-	// TODO onLoad function
 	useEffect(() => {
 		getUser();
 	}, []);
@@ -38,12 +37,10 @@ function ProfileSettings() {
 		setTempVariables();
 	}, [user]);
 
-	// TODO API GET user (user id in cookies)(set user data into variable 'user')
 	async function getUser() {
 		try {
 			const response = await axios.get(URL_USER + USER_ID);
 			setUser(response.data);
-			//setTempVariables();
 		} catch (err) {
 			//errors that expected from back
 			if (!err?.response) {
@@ -56,25 +53,23 @@ function ProfileSettings() {
 				alert("Login failed");
 			}
 		}
-		//Names same as back expectes
 	}
 
-	// TODO SET temporary variables to store user changes
 	function setTempVariables() {
-		console.log(user);
-		// temporary
-		// take data from user!!!
+		// take data from user
 		setUserImg(user.profilePictureUrl);
 		setUserNickName(user.displayName);
 		setUserName(user.firstName);
 		setUserSurname(user.lastName);
+		// TODO ADD Email in API request
 		//setUserEmail();
 		setUserBio(user.bio);
 	}
 
-	// TODO API update user data (take data from temporary variables)
+	// TODO  ADD Email in API request
 	const handleSubmit = async e => {
 		e.preventDefault();
+		// New updated user
 		let newUser = {
 			id: user.id,
 			bio: userBio,
@@ -109,7 +104,7 @@ function ProfileSettings() {
 		const formdata = new FormData();
 		formdata.append("image", ev.target.files[0]);
 		fetch(API_Imgur, {
-			method: "post",
+			method: "POST",
 			headers: {
 				Authorization: "Client-ID " + Client_ID,
 				Accept: "application/json"
