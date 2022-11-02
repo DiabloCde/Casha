@@ -42,7 +42,7 @@ function Login() {
                 .then((response) => { console.log(response) })
 
             console.log(body);
-            navigate('/EditRecipes');
+            navigate('/ProfileSettings');
         } catch (err) {                
             if (!err?.response) {
                 alert("No Server Response");

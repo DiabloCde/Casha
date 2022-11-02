@@ -44,7 +44,7 @@ function CreateProfileBlog() {
               </div>
               <div className="postMainInfo">
                 <p >{item.title}</p>
-                <img key = {item.postId} src={item.profilePictureUrl} alt="" />
+                <img key = {item.postId} src={item.postImageUrl} alt="" />
                 <button className="btn openReceipt">Open receipt</button>
                 <p >{item.description}</p>
                 <button className="btn">Comments</button>
