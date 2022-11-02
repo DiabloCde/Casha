@@ -6,7 +6,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-const URL = "https://localhost:7128/api/Login/login";
+const URL = "https://localhost:7128/api/Account/login";
 
 function Login() {
 
