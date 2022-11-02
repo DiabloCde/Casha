@@ -12,6 +12,8 @@ namespace CashaWeb.ViewModels
 
         public string? Description { get; set; }
 
+        public string PostImageUrl { get; set; }
+
         public string? UserId { get; set; }
 
         public string? DisplayName { get; set; }

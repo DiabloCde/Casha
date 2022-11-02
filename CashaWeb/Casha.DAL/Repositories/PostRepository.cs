@@ -69,6 +69,7 @@ namespace Casha.DAL.Repositories
                 oldPost.Description = post.Description;
                 oldPost.PostedDate = post.PostedDate;
                 oldPost.Title = post.Title;
+                oldPost.PostImageUrl = post.PostImageUrl;
                 oldPost.UserId = post.UserId;
 
                 _context.Posts.Update(oldPost);
