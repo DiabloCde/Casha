@@ -16,6 +16,8 @@ const Client_ID = "e9a6b3bb9d8860f";
 const URL_USER = "https://localhost:7128/api/User/";
 const USER_ID = "028f54b4-6c1e-4533-a81d-616a2e4c065b";
 
+const ChangePasswordUrl = "https://localhost:7128/api/Account/changePassword";
+
 function ProfileSettings() {
 	const [user, setUser] = useState([]);
 
@@ -56,17 +58,18 @@ function ProfileSettings() {
 	}
 
 	function setTempVariables() {
+		//console.log(user);
 		// take data from user
-		setUserImg(user.profilePictureUrl);
-		setUserNickName(user.displayName);
-		setUserName(user.firstName);
-		setUserSurname(user.lastName);
-		setUserEmail(user.email);
-		setUserBio(user.bio);
+		setUserImg(user.profilePictureUrl == null ? "" : user.profilePictureUrl);
+		setUserNickName(user.displayName == null ? "" : user.displayName);
+		setUserName(user.firstName == null ? "" : user.firstName);
+		setUserSurname(user.lastName == null ? "" : user.lastName);
+		setUserEmail(user.email == null ? "" : user.email);
+		setUserBio(user.bio == null ? "" : user.bio);
 	}
 
 	// TODO  ADD Email in API request
-	const handleSubmit = async e => {
+	const updateUserHandleSubmit = async e => {
 		e.preventDefault();
 		// New updated user
 		let newUser = {
@@ -79,15 +82,15 @@ function ProfileSettings() {
 			isCertified: user.isCertified,
 			profilePictureUrl: userImg
 		};
+		console.log(newUser);
 		try {
 			const response = await axios.put(URL_USER + USER_ID, newUser);
-			console.log(response);
 		} catch (err) {
 			//errors that expected from back
 			if (!err?.response) {
 				alert("No Server Response");
 			} else if (err.response?.status === 400) {
-				alert("Missing Password or Login");
+				alert("400");
 			} else if (err.response?.status === 401) {
 				alert("Unathorized");
 			} else {
@@ -97,7 +100,31 @@ function ProfileSettings() {
 	};
 
 	// TODO API change user password (data: currentPassword, newPassword)
-	function changeUserPassword() {}
+	const changeUserPasswordHandleSubmit = async e => {
+		e.preventDefault();
+		// New updated user
+		let ChangePasswordViewModel = {
+			username: user.displayName,
+			oldPassword: currentPassword,
+			newPassword: newPassword
+		};
+
+		try {
+			const response = await axios.post(ChangePasswordUrl, ChangePasswordViewModel);
+			console.log(response);
+		} catch (err) {
+			//errors that expected from back
+			if (!err?.response) {
+				alert("No Server Response");
+			} else if (err.response?.status === 400) {
+				alert("400");
+			} else if (err.response?.status === 401) {
+				alert("Unathorized");
+			} else {
+				alert("Login failed");
+			}
+		}
+	};
 
 	// Save img in imgur and write img to object
 	function saveImg(ev) {
@@ -151,10 +178,9 @@ function ProfileSettings() {
 											aria-describedby="inputGroup-sizing-default"
 										/>
 									</InputGroup>
-									{/* // TODO add onClick function to load new user img */}
-									<Button className="btn btn-sm btn-warning w-100 yellowButton">
+									{/* <Button className="btn btn-sm btn-warning w-100 yellowButton">
 										<strong className="colorBlack">Edit</strong>
-									</Button>
+									</Button> */}
 								</div>
 							</div>
 							<div className="col col-8 container p-2">
@@ -222,8 +248,7 @@ function ProfileSettings() {
 							</div>
 							<div className="row container">
 								<div className="d-flex justify-content-end p-2">
-									{/* // TODO add onClick function to edit user data */}
-									<Button onClick={handleSubmit} className="btn btn-sm btn-warning yellowButton">
+									<Button onClick={updateUserHandleSubmit} className="btn btn-sm btn-warning yellowButton">
 										<strong className="colorBlack">Save</strong>
 									</Button>
 								</div>
@@ -270,8 +295,9 @@ function ProfileSettings() {
 								</div>
 								<div className="row">
 									<div className="d-flex justify-content-start p-2">
-										{/* // TODO add onClick function to edit user password */}
-										<Button className="btn btn-sm btn-warning yellowButton">
+										<Button
+											onClick={changeUserPasswordHandleSubmit}
+											className="btn btn-sm btn-warning yellowButton">
 											<strong className="colorBlack">Save</strong>
 										</Button>
 									</div>
