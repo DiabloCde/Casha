@@ -3,6 +3,7 @@ import Register from "./pages/registerPage/Register.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AdminEditRecipes from "./pages/adminEditRecipes/AdminEditRecipes.jsx";
 import ProfileSettings from "./pages/ProfileSettings/ProfileSettings.js";
+import OtherUserMainPage from "./pages/otherUserMainPage/otherUserMainPage.jsx";
 
 function App() {
 	return (
@@ -12,6 +13,7 @@ function App() {
 				<Route path="/Register" element={<Register />} />
 				<Route path="/EditRecipes" element={<AdminEditRecipes />} />
 				<Route path="/ProfileSettings" element={<ProfileSettings />} />
+                <Route path="/OtherUserMainPage" element={<OtherUserMainPage/>}/>
 				{/* Default Router */}
 				<Route path="/" element={<Navigate to="/Login" />} />
 			</Routes>
