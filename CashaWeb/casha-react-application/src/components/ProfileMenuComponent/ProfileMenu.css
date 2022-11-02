@@ -1,6 +1,10 @@
 .activeMenuItem {
-	background-color: rgb(111, 238, 12, 0.33);
+  background-color: rgb(111, 238, 12, 0.33);
 }
 .maxWidthForIng {
-	width: 50% !important;
+  width: 50% !important;
+}
+.profileMenu {
+  margin-top: 200px;
+  position: fixed;
 }
