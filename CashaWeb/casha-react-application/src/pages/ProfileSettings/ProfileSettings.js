@@ -14,7 +14,7 @@ const API_Imgur = "https://api.imgur.com/3/image/";
 const Client_ID = "e9a6b3bb9d8860f";
 
 const URL_USER = "https://localhost:7128/api/User/";
-const USER_ID = "028f54b4-6c1e-4533-a81d-616a2e4c065b";
+const USER_ID = "f4ce72b6-f67f-433b-925c-e0aa6798cd87";
 
 const ChangePasswordUrl = "https://localhost:7128/api/Account/changePassword";
 
@@ -68,7 +68,6 @@ function ProfileSettings() {
 		setUserBio(user.bio == null ? "" : user.bio);
 	}
 
-	// TODO  ADD Email in API request
 	const updateUserHandleSubmit = async e => {
 		e.preventDefault();
 		// New updated user
@@ -102,7 +101,7 @@ function ProfileSettings() {
 	// TODO API change user password (data: currentPassword, newPassword)
 	const changeUserPasswordHandleSubmit = async e => {
 		e.preventDefault();
-		// New updated user
+		// View model to change password
 		let ChangePasswordViewModel = {
 			username: user.displayName,
 			oldPassword: currentPassword,
@@ -111,13 +110,12 @@ function ProfileSettings() {
 
 		try {
 			const response = await axios.post(ChangePasswordUrl, ChangePasswordViewModel);
-			console.log(response);
 		} catch (err) {
 			//errors that expected from back
 			if (!err?.response) {
 				alert("No Server Response");
 			} else if (err.response?.status === 400) {
-				alert("400");
+				alert("Not correct password");
 			} else if (err.response?.status === 401) {
 				alert("Unathorized");
 			} else {
@@ -125,7 +123,8 @@ function ProfileSettings() {
 			}
 		}
 	};
-
+	// How to use:
+	// Instead of localhost write your local ip address, like: 192.168.197
 	// Save img in imgur and write img to object
 	function saveImg(ev) {
 		const formdata = new FormData();
