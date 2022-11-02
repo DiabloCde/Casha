@@ -1,6 +1,7 @@
 import React from "react"
 import { useRef, useState, useEffect, useContext } from "react"
 import axios from "axios"
+import moment from "moment/moment"
 
 import styles from "./createProfileBlog.css"
 
@@ -35,23 +36,21 @@ function CreateProfileBlog() {
         <h1>Blog:</h1>
         <div className="blogs">
           {userPosts?.reverse().map((item) =>
-            <>
-              <div className="postOfReceipt">
-                <div className="postInfo">
-                  <img key={item.postId} src={item.profilePictureUrl} alt="" />
-                  <p key={item.postId}>{item.displayName}</p>
-                  <p key={item.postId}>{item.displayName}</p>
-                </div>
-                <div className="postMainInfo">
-                  <p key={item.postId}>{item.title}</p>
-                  <img src="./img/Pic.png" alt="" />
-                  <button className="btn openReceipt">Open receipt</button>
-                  <p key={item.postId}>{item.description}</p>
-                  <button className="btn">Comments</button>
-                </div>
+            <div className="postOfReceipt" key={item.postId} >
+              <div className="postInfo" >
+                <img  src={item.profilePictureUrl} alt="" />
+                <p >{item.displayName}</p>
+                <p >{moment(item.postedDate).format('DD.MM.YYYY')}</p>
               </div>
-
-            </>)}
+              <div className="postMainInfo">
+                <p >{item.title}</p>
+                <img key = {item.postId} src={item.profilePictureUrl} alt="" />
+                <button className="btn openReceipt">Open receipt</button>
+                <p >{item.description}</p>
+                <button className="btn">Comments</button>
+              </div>
+            </div>
+          )}
 
         </div>
       </div>
