@@ -2,17 +2,17 @@ import styles from '../../common/styles/Auth.css';
 
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
 import { Link } from "react-router-dom";
 
-const LOGIN_URL = '/address from back for this page';
-
-
+const URL = "https://localhost:7128/api/Login/login";
 
 function Login() {
     const { setAuth } = useContext(AuthContext);
 
+    const navigate = useNavigate();
     const userRef = useRef();
     const errRef = useRef();
 
@@ -28,30 +28,36 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ userName: user, password: pwd }),
-                {
-                    headers: { 'Content-type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            //Names same as back expectes
-            console.log(JSON.stringify(response?.data)); //temp
-            const accessToken = response?.data?.accessToken;  //what back returns
-            const roles = response?.data?.roles; //what back returns
-            setAuth({user,pwd,roles,accessToken}); //storing information in this object and store it in global context
-            setUser('');
-            setPwd('');
+            console.log(JSON.stringify({ login: user, password: pwd }));
+
+            let body = {
+                login: user,
+                password: pwd
+            }
+
+            const response = await axios({
+                method: 'post',
+                url: URL,
+                data: JSON.stringify(body),
+                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+            })
+                .then((response) => { console.log(response) })
+
+            console.log(body);
             setSuccess(true);
+            console.log(success);
+            if(success === true){
+                navigate('/EditRecipes');
+            }
 
         } catch (err) {                 //errors that expected from back
-            if(!err?.response){
+            if (!err?.response) {
                 alert("No Server Response");
-            } else if(err.response?.status === 400){
+            } else if (err.response?.status === 400) {
                 alert("Missing Password or Login");
-            } else if(err.response?.status === 401){
+            } else if (err.response?.status === 401) {
                 alert("Unathorized")
-            }else{
+            } else {
                 alert("Login failed");
             }
 
@@ -66,7 +72,7 @@ function Login() {
                 <div class="Auth_Image_Container">
                     <img src='./img/Logo.png'></img>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} method="Post">
                     <div className="Form_Input_Area_Wrapper">
                         <div class="Auth_Input_Wrap">
                             <div class="Input_Blocks First_Input_Block">
