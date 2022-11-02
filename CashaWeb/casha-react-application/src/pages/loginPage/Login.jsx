@@ -3,14 +3,12 @@ import styles from '../../common/styles/Auth.css';
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import AuthContext from '../../context/AuthProvider';
-import axios from '../../api/axios';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const URL = "https://localhost:7128/api/Login/login";
 
 function Login() {
-    const { setAuth } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const userRef = useRef();

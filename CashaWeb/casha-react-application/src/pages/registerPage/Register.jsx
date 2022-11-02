@@ -4,14 +4,12 @@ import  { messages } from '../../common/ErrorMessages';
 
 import React from 'react'
 import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from '../../context/AuthProvider';
-import axios from '../../api/axios';
+import axios from 'axios';
 import { Link, redirect } from "react-router-dom";
 
 const API_URL = 'https://localhost:7128/api/Registration';
 
 function Register() {
-    const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
 
