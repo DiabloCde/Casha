@@ -8,7 +8,7 @@ import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
 import { Link, redirect } from "react-router-dom";
 
-const API_URL = '/address from back for this page';
+const API_URL = 'https://localhost:7128/api/Registration';
 
 function Register() {
     const { setAuth } = useContext(AuthContext);
@@ -18,7 +18,6 @@ function Register() {
     const [login, setlogin] = useState('');
     const [pwd, setPwd] = useState('');
     const [pwdRep, setPwdRep] = useState('');
-    const [success, setSuccess] = useState(false);
     // Object => { property : message }
     //const [validity, setValidity] = useState({});
 
@@ -29,30 +28,31 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log("submit");
         let validity = getUpdatedValidity();
-        setSuccess(validate(validity));
+        let success = validate(validity);
 
         if (success === false) {
             showErrors(validity);
+            console.log("not succes");
             return;
         }
 
         try {
-            const response = await axios.post(API_URL,
-                JSON.stringify({
-                    "Login":login,
-                    "Password":pwd,
-                    "PasswordConfirm":pwdRep,
-                }),
-                {
-                    headers: { 'Content-type': 'application/json' },
-                    withCredentials: true
-                }
-            );
+            console.log("try");
+
+            let body = {
+                Login:login,
+                Password:pwd,
+                PasswordConfirm:pwdRep,
+            }
+
+            const response = await axios.post(API_URL, body);
             alert("Account created!");
             redirect("/Login");
 
         } catch (err) {  //errors that expected from back
+            console.log(err);
             if(!err?.response){
                 alert("No Server Response");
             } else if(err.response?.status === 400){
