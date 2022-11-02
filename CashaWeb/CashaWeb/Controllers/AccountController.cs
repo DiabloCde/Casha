@@ -31,7 +31,7 @@ namespace CashaWeb.Controllers
 
                 Response.Cookies.Append("loggedToken", token, cookieOptions);
 
-                return Ok();
+                return Ok(token);
             }
             catch (InvalidOperationException ex)
             {
