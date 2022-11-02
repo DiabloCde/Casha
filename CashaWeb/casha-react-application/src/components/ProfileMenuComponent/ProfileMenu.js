@@ -26,64 +26,67 @@ import { Link } from "react-router-dom";
 */
 
 function ProfileMenu(props) {
-	const [profileMenu, setProfileMenu] = useState([]);
-	function createProfileMenu() {
-		let object = [];
-		for (let i = 0; i < props.profileMenuTexts.length; i++) {
-			let isActive = false;
-			if (props.profileMenuTexts[i] === props.activeText) {
-				isActive = true;
-			}
-			object.push({
-				name: props.profileMenuTexts[i],
-				link: props.profileMenuLinks[i],
-				active: isActive
-			});
-		}
-		setProfileMenu(object);
-	}
-	// onLoad function
-	useEffect(() => {
-		createProfileMenu();
-	}, []);
+    const [profileMenu, setProfileMenu] = useState([]);
+    function createProfileMenu() {
+        let object = [];
+        for (let i = 0; i < props.profileMenuTexts.length; i++) {
+            let isActive = false;
+            if (props.profileMenuTexts[i] === props.activeText) {
+                isActive = true;
+            }
+            object.push({
+                name: props.profileMenuTexts[i],
+                link: props.profileMenuLinks[i],
+                active: isActive,
+            });
+        }
+        setProfileMenu(object);
+    }
+    // onLoad function
+    useEffect(() => {
+        createProfileMenu();
+    }, []);
 
-	return (
-		<div className="profileMenu">
-			<div className="d-flex flex-column">
-				<div className="d-flex justify-content-center">
-					<img className="rounded-circle maxWidthForIng" src={props.imgLink} alt="img" />
-				</div>
-				<div className="d-flex justify-content-center p-3">
-					<strong className="">{props.userNickName}</strong>
-				</div>
-			</div>
-			<div className="nav d-flex justify-content-center text-center">
-				<ul className="nav p-3 navbar-nav w-100">
-					{profileMenu.map(element => {
-						if (element.active) {
-							return (
-								<li key={element.name} className="nav-item">
-									<div className="d-flex justify-content-center align-items-center text-center border">
-										<Link className="w-100 nav-link border border-dark activeMenuItem" to={element.link}>
-											<strong>{element.name}</strong>
-										</Link>
-									</div>
-								</li>
-							);
-						}
-						return (
-							<li key={element.name} className="nav-item">
-								<div className="d-flex justify-content-center align-items-center text-center">
-									<Link className="w-100 nav-link border border-dark" to={element.link}>
-										<p>{element.name}</p>
-									</Link>
-								</div>
-							</li>
-						);
-					})}
-				</ul>
-			</div>
-		</div>
-	);
+    return (
+        <div className="profileMenu">
+            <div className="d-flex flex-column">
+                <div className="d-flex">
+                    <img className="rounded-circle maxWidthForIng" src={props.imgLink} alt="img" />
+                </div>
+                <div className="d-flex  p-3">
+                    <strong className="">{props.userNickName}</strong>
+                </div>
+            </div>
+            <div className="nav d-flex  text-center">
+                <ul className="nav p-3 navbar-nav w-100">
+                    {profileMenu.map((element) => {
+                        if (element.active) {
+                            return (
+                                <li key={element.name} className="nav-item">
+                                    <div className="d-flex align-items-center text-center border">
+                                        <Link
+                                            className="w-100 nav-link border border-dark activeMenuItem"
+                                            to={element.link}
+                                        >
+                                            <strong>{element.name}</strong>
+                                        </Link>
+                                    </div>
+                                </li>
+                            );
+                        }
+                        return (
+                            <li key={element.name} className="nav-item">
+                                <div className="d-flex align-items-center text-center">
+                                    <Link className=" nav-link border border-dark" to={element.link}>
+                                        <p>{element.name}</p>
+                                    </Link>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
+        </div>
+    );
 }
 export default ProfileMenu;
