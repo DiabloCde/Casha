@@ -58,6 +58,7 @@ function ProfileSettings() {
 	}
 
 	function setTempVariables() {
+		//console.log(user);
 		// take data from user
 		setUserImg(user.profilePictureUrl == null ? "" : user.profilePictureUrl);
 		setUserNickName(user.displayName == null ? "" : user.displayName);
@@ -80,6 +81,7 @@ function ProfileSettings() {
 			isCertified: user.isCertified,
 			profilePictureUrl: userImg
 		};
+		console.log(newUser);
 		try {
 			const response = await axios.put(URL_USER + USER_ID, newUser);
 		} catch (err) {
@@ -96,6 +98,7 @@ function ProfileSettings() {
 		}
 	};
 
+	// TODO API change user password (data: currentPassword, newPassword)
 	const changeUserPasswordHandleSubmit = async e => {
 		e.preventDefault();
 		// View model to change password
@@ -121,7 +124,7 @@ function ProfileSettings() {
 		}
 	};
 	// How to use:
-	// Instead of localhost write your local ip address, like: 192.168.1.197
+	// Instead of localhost write your local ip address, like: 192.168.197
 	// Save img in imgur and write img to object
 	function saveImg(ev) {
 		const formdata = new FormData();
@@ -137,6 +140,7 @@ function ProfileSettings() {
 			.then(res => res.json())
 			.then(data => {
 				setUserImg(data.data.link);
+				console.log(userImg);
 			});
 	}
 
@@ -173,6 +177,9 @@ function ProfileSettings() {
 											aria-describedby="inputGroup-sizing-default"
 										/>
 									</InputGroup>
+									{/* <Button className="btn btn-sm btn-warning w-100 yellowButton">
+										<strong className="colorBlack">Edit</strong>
+									</Button> */}
 								</div>
 							</div>
 							<div className="col col-8 container p-2">
