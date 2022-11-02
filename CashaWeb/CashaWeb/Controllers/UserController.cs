@@ -34,7 +34,18 @@ namespace CashaWeb.Controllers
                     return NotFound();
                 }
 
-                return Ok(user);
+                UserViewModel userViewModel = new UserViewModel
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    DisplayName = user.DisplayName,
+                    Bio = user.Bio,
+                    ProfilePictureUrl = user.ProfilePictureUrl,
+                    IsCertified = user.IsCertified
+                };
+
+                return Ok(userViewModel);
             }
             catch (ArgumentNullException ex)
             {
