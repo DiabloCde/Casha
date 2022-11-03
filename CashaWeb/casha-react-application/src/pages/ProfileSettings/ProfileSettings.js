@@ -26,7 +26,7 @@ function ProfileSettings() {
 	const [user, setUser] = useState([]);
 	const [cookies, setCookie] = useCookies();
 	//const [userId, setUserId] = useState('');
-	let userId;
+	let userId = "";
 	//const [info, setInfo] = useState([]);
 
 	// temporary variables to store user changes
@@ -101,16 +101,9 @@ function ProfileSettings() {
 		console.log(newUser);
 
 		try {
-			const response = await axios({
-				method: 'put',
-				url: URL_USER + userId,
-				data: JSON.stringify(newUser),
-				headers: { 'Content-Type': 'application/json; charset=utf-8' }
-			}).then((response) =>{
-				console.log(response.status)
-				console.log(response.data)
-			})
-			//const response = await axios.put(URL_USER + userId, JSON.stringify(newUser));
+			const response = await axios.put(URL_USER, newUser);
+			console.log(response.data);
+			console.log(response.status);
 		} catch (err) {
 			//errors that expected from back
 			if (!err?.response) {
