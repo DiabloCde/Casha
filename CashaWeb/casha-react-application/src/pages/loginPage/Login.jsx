@@ -19,7 +19,7 @@ function Login() {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [token, setToken] = useState('');
+    const [token, setToken] = useState({});
 
 
     useEffect(() => {
@@ -43,13 +43,15 @@ function Login() {
                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
             })
                 .then((response) => {
-                    setToken(response.data);
+                    setCookie('token',response.data);
+                    //setToken(response.data);
                     console.log(response.data);
                 })
 
-            console.log(response);    
-            setCookie('token',token);
-            navigate('/'); //ProfileSettings
+            console.log(cookies);    
+            console.log(token);
+           // setCookie('token',token);
+            navigate('/ProfileSettings'); 
         } catch (err) {
             if (!err?.response) {
                 alert("No Server Response");
