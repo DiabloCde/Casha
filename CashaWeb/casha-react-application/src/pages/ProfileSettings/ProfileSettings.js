@@ -163,8 +163,8 @@ function ProfileSettings() {
 						</div>
 						<div className="row">
 							<div className="col">
-								<div className="row d-flex justify-content-center text-center p-2">
-									<img className="rounded-circle maxWidthForIng" src={userImg} alt="img" />
+								<div className="my_image row d-flex justify-content-center text-center p-2">
+									<img className="rounded-circle" src={userImg} alt="img" />
 								</div>
 								<div className="row d-flex justify-content-center text-center p-2">
 									<InputGroup className="mb-3">

@@ -8,3 +8,8 @@
 .yellowButton:hover {
 	background-color: #fdca79;
 }
+
+.my_image{
+	width:200px;
+	height: 160px;
+}
