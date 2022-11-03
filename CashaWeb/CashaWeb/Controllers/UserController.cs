@@ -62,10 +62,8 @@ namespace CashaWeb.Controllers
             }
         }
 
-        [HttpPut("{userId}")]
+        [HttpPut]
         public IActionResult UpdateUser(
-            [FromRoute]
-            string userId,
             [FromBody]
             UserViewModel userViewModel)
         {
@@ -73,7 +71,7 @@ namespace CashaWeb.Controllers
             {
                 User user = new User
                 {
-                    Id = userId,
+                    Id = userViewModel.Id,
                     Email = userViewModel.Email,
                     FirstName = userViewModel.FirstName,
                     LastName = userViewModel.LastName,
