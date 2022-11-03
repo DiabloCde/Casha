@@ -4,7 +4,8 @@ import { Button, InputGroup, FormControl } from "react-bootstrap";
 import axios from "axios";
 //import Cookies from "universal-cookie";
 //import Cookies from "js-cookie";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
+import jwtDecode from "jwt-decode";
 
 import "./ProfileSettings.css";
 import ProfileMenu from "../../components/ProfileMenuComponent/ProfileMenu.js";
@@ -17,13 +18,16 @@ const API_Imgur = "https://api.imgur.com/3/image/";
 const Client_ID = "e9a6b3bb9d8860f";
 
 const URL_USER = "https://localhost:7128/api/User/";
-const USER_ID = "f4ce72b6-f67f-433b-925c-e0aa6798cd87";
+//const USER_ID = "f4ce72b6-f67f-433b-925c-e0aa6798cd87";
 
 const ChangePasswordUrl = "https://localhost:7128/api/Account/changePassword";
 
 function ProfileSettings() {
 	const [user, setUser] = useState([]);
 	const [cookies, setCookie] = useCookies();
+	//const [userId, setUserId] = useState('');
+	let userId;
+	//const [info, setInfo] = useState([]);
 
 	// temporary variables to store user changes
 	const [userImg, setUserImg] = useState("");
@@ -36,6 +40,7 @@ function ProfileSettings() {
 	const [newPassword, setNewPassword] = useState("");
 
 	useEffect(() => {
+		getUserId();
 		getUser();
 	}, []);
 
@@ -43,9 +48,16 @@ function ProfileSettings() {
 		setTempVariables();
 	}, [user]);
 
+	function getUserId() {
+		const info = (jwtDecode(cookies['token']));
+		console.log(info);
+		userId = info["Id"];
+		console.log(userId);
+	}
+
 	async function getUser() {
 		try {
-			const response = await axios.get(URL_USER + USER_ID);
+			const response = await axios.get(URL_USER + userId);
 			setUser(response.data);
 		} catch (err) {
 			//errors that expected from back
@@ -77,17 +89,28 @@ function ProfileSettings() {
 		// New updated user
 		let newUser = {
 			id: user.id,
-			bio: userBio,
 			email: userEmail,
-			displayName: userNickName,
 			firstName: userName,
 			lastName: userSurname,
-			isCertified: user.isCertified,
-			profilePictureUrl: userImg
+			displayName: userNickName,
+			bio: userBio,
+			profilePictureUrl: userImg,
+			isCertified: user.isCertified
 		};
+
 		console.log(newUser);
+
 		try {
-			const response = await axios.put(URL_USER + USER_ID, newUser);
+			const response = await axios({
+				method: 'put',
+				url: URL_USER + userId,
+				data: JSON.stringify(newUser),
+				headers: { 'Content-Type': 'application/json; charset=utf-8' }
+			}).then((response) =>{
+				console.log(response.status)
+				console.log(response.data)
+			})
+			//const response = await axios.put(URL_USER + userId, JSON.stringify(newUser));
 		} catch (err) {
 			//errors that expected from back
 			if (!err?.response) {
@@ -148,7 +171,6 @@ function ProfileSettings() {
 			});
 	}
 
-	console.log(cookies);
 	return (
 		<div className="ProfileSettings p-2">
 			<div className="container">
