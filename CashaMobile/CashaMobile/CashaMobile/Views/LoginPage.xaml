@@ -9,7 +9,7 @@
                 <StackLayout Orientation="Vertical" Spacing="10">
                     <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login"   
                            PlaceholderColor="Green" HeightRequest="40"
-                           Keyboard="Login"  
+                           Keyboard="Default"  
                            TextColor="White"/>
                     <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password"   
                            PlaceholderColor="Green" HeightRequest="40"   
