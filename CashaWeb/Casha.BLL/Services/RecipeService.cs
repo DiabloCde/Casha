@@ -114,5 +114,115 @@ namespace Casha.BLL.Services
                 _logger.LogError(ex.Message);
             }
         }
+
+        public void AddProductToRecipe(RecipeProduct recipeProduct)
+        {
+            if (recipeProduct.RecipeId <= 0)
+            {
+                throw new ArgumentNullException("The recipeId is not valid.");
+            }
+
+            if (recipeProduct.ProductId <= 0)
+            {
+                throw new ArgumentNullException("The productId is not valid.");
+            }
+
+            try
+            {
+                _recipeRepository.AddProductToRecipe(recipeProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        public void RemoveProductFromRecipe(int productId, int recipeId)
+        {
+            if (recipeId <= 0)
+            {
+                throw new ArgumentNullException("The recipeId is not valid.");
+            }
+
+            if (productId <= 0)
+            {
+                throw new ArgumentNullException("The productId is not valid.");
+            }
+
+            try
+            {
+                _recipeRepository.RemoveProductFromRecipe(productId, recipeId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        public void UpdateProductInRecipe(RecipeProduct recipeProduct)
+        {
+            if (recipeProduct.RecipeId <= 0)
+            {
+                throw new ArgumentNullException("The recipeId is not valid.");
+            }
+
+            if (recipeProduct.ProductId <= 0)
+            {
+                throw new ArgumentNullException("The productId is not valid.");
+            }
+
+            try
+            {
+                _recipeRepository.UpdateProductInRecipe(recipeProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        public void AddCategoryToRecipe(RecipeCategory recipeCategory)
+        {
+            if (recipeCategory.RecipeId <= 0)
+            {
+                throw new ArgumentNullException("The recipeId is not valid.");
+            }
+
+            if (recipeCategory.CategoryId <= 0)
+            {
+                throw new ArgumentNullException("The categoryId is not valid.");
+            }
+
+            try
+            {
+                _recipeRepository.AddCategoryToRecipe(recipeCategory);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+        }
+
+        public void RemoveCategoryFromRecipe(int categoryId, int recipeId)
+        {
+            if (recipeId <= 0)
+            {
+                throw new ArgumentNullException("The recipeId is not valid.");
+            }
+
+            if (categoryId <= 0)
+            {
+                throw new ArgumentNullException("The categoryId is not valid.");
+            }
+
+            try
+            {
+                _recipeRepository.RemoveCategoryFromRecipe(categoryId, recipeId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+        }
     }
 }

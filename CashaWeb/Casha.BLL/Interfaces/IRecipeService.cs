@@ -20,5 +20,15 @@ namespace Casha.BLL.Interfaces
         void DeleteRecipe(int recipeId);
 
         void UpdateRecipe(Recipe recipe);
+
+        void AddProductToRecipe(RecipeProduct recipeProduct);
+
+        void RemoveProductFromRecipe(int productId, int recipeId);
+
+        void UpdateProductInRecipe(RecipeProduct recipeProduct);
+
+        void AddCategoryToRecipe(RecipeCategory recipeCategory);
+
+        void RemoveCategoryFromRecipe(int categoryId, int recipeId);
     }
 }
