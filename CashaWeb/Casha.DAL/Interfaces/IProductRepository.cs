@@ -18,20 +18,6 @@ namespace Casha.DAL.Interfaces
 
         void DeleteProduct(int productId);
 
-        void UpdateProduct(Product product);
-
-        List<RecipeProduct> GetRecipeProducts(Expression<Func<RecipeProduct, bool>> filter);
-
-        void AddProductToRecipe(RecipeProduct recipeProduct);
-
-        void RemoveProductFromRecipe(int productId, int recipeId);
-
-        void UpdateProductInRecipe(RecipeProduct recipeProduct);
-
-        /*void AddProductTypeToProduct();
-
-        void RemoveProductTypeFromProduct();
-
-        void UpdateProductTypeInProduct();*/
+        void UpdateProduct(Product product);     
     }
 }

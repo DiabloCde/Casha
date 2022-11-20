@@ -19,8 +19,6 @@ namespace Casha.DAL
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<ProductType> ProductTypes { get; set; }
-
         public DbSet<Recipe> Recipes { get; set; }
 
         public DbSet<RecipeCategory> RecipeCategories { get; set; }
@@ -78,10 +76,6 @@ namespace Casha.DAL
             modelBuilder.Entity<RecipeProduct>()
                 .HasOne(x => x.Product)
                 .WithMany(y => y.RecipeProducts);
-
-            modelBuilder.Entity<Product>()
-                .HasOne(x => x.ProductType)
-                .WithMany(y => y.Products);
 
             modelBuilder.Entity<UserProduct>()
                 .HasOne(x => x.Product)
