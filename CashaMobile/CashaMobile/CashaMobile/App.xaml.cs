@@ -1,4 +1,6 @@
 ﻿using CashaMobile.Services;
+using CashaMobile.Services.Interfaces;
+using CashaMobile.ViewModels;
 using CashaMobile.Views;
 using System;
 using Xamarin.Forms;
@@ -13,8 +15,9 @@ namespace CashaMobile
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            Startup.Init();
+
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
