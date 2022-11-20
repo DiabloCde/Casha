@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ApiModels\**" />
+    <Content Remove="ApiModels\**" />
+    <EmbeddedResource Remove="ApiModels\**" />
+    <None Remove="ApiModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -25,10 +32,6 @@
     <ProjectReference Include="..\Casha.BLL\Casha.BLL.csproj" />
     <ProjectReference Include="..\Casha.Core\Casha.Core.csproj" />
     <ProjectReference Include="..\Casha.DAL\Casha.DAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ApiModels\" />
   </ItemGroup>
 
 </Project>

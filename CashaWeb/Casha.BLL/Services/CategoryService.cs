@@ -69,7 +69,7 @@ namespace Casha.BLL.Services
         {
             try
             {
-                return this._categoryRepository.GetCategories(c => c.CategoryType.Equals(categoryType);
+                return this._categoryRepository.GetCategories(c => c.CategoryType.Equals(categoryType));
             }
             catch (Exception ex)
             {
