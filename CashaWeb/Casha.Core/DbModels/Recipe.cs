@@ -13,6 +13,8 @@ namespace Casha.Core.DbModels
 
         public string Name { get; set; }
 
+        public string RecipeImageUrl { get; set; }
+
         public Difficulty Difficulty { get; set; }
 
         public string Instruction { get; set; }

@@ -63,8 +63,77 @@ namespace Casha.DAL.Repositories
                 dbRecipe.Name = recipe.Name;
                 dbRecipe.Instruction = recipe.Instruction;
                 dbRecipe.Difficulty = recipe.Difficulty;
+                dbRecipe.RecipeImageUrl = recipe.RecipeImageUrl;
                 dbRecipe.UserId = recipe.UserId;
 
+                this._context.SaveChanges();
+            }
+        }
+
+        public void AddProductToRecipe(RecipeProduct recipeProduct)
+        {
+            this._context.RecipeProducts.Add(recipeProduct);
+            this._context.SaveChanges();
+        }
+
+        public List<RecipeProduct> GetRecipeProducts(Expression<Func<RecipeProduct, bool>> filter)
+        {
+            return this._context.RecipeProducts
+                .Include(x => x.Product)
+                .Include(x => x.Recipe)
+                .Where(filter)
+                .ToList();
+        }
+
+        public void RemoveProductFromRecipe(int productId, int recipeId)
+        {
+            RecipeProduct? recipeProduct = this._context.RecipeProducts
+                .FirstOrDefault(x => x.ProductId == productId && x.RecipeId == recipeId);
+
+            if (recipeProduct is not null)
+            {
+                this._context.RecipeProducts.Remove(recipeProduct);
+                this._context.SaveChanges();
+            }
+        }
+
+        public void UpdateProductInRecipe(RecipeProduct recipeProduct)
+        {
+            RecipeProduct? dbRecipeProduct = this._context.RecipeProducts
+                .FirstOrDefault(x => x.ProductId == recipeProduct.ProductId && x.RecipeId == recipeProduct.RecipeId);
+
+            if (dbRecipeProduct is not null)
+            {
+                dbRecipeProduct.Quantity = recipeProduct.Quantity;
+                dbRecipeProduct.Unit = recipeProduct.Unit;
+
+                this._context.SaveChanges();
+            }
+        }
+
+        public List<RecipeCategory> GetRecipeCategories(Expression<Func<RecipeCategory, bool>> filter)
+        {
+            return this._context.RecipeCategories
+                .Include(r => r.Recipe)
+                .Include(c => c.Category)
+                .Where(filter)
+                .ToList();
+        }
+
+        public void AddCategoryToRecipe(RecipeCategory recipeCategory)
+        {
+            this._context.RecipeCategories.Add(recipeCategory);
+            this._context.SaveChanges();
+        }
+
+        public void RemoveCategoryFromRecipe(int categoryId, int recipeId)
+        {
+            RecipeCategory? recipeCategory = this._context.RecipeCategories
+                .FirstOrDefault(x => x.CategoryId == categoryId && x.RecipeId == recipeId);
+
+            if (recipeCategory is not null)
+            {
+                this._context.RecipeCategories.Remove(recipeCategory);
                 this._context.SaveChanges();
             }
         }

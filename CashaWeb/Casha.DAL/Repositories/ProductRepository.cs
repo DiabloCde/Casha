@@ -19,12 +19,6 @@ namespace Casha.DAL.Repositories
             _context = context;
         }
 
-        public void AddProductToRecipe(RecipeProduct recipeProduct)
-        {
-            this._context.RecipeProducts.Add(recipeProduct);
-            this._context.SaveChanges();
-        }
-
         public void DeleteProduct(int productId)
         {
             Product? product = this._context.Products.Find(productId);
@@ -40,7 +34,6 @@ namespace Casha.DAL.Repositories
         {
             return this._context.Products
                 .Include(x => x.UserProducts)
-                .Include(x => x.ProductType)
                 .Include(x => x.UserProducts)
                 .FirstOrDefault(x => x.ProductId == productId);
         }
@@ -49,17 +42,7 @@ namespace Casha.DAL.Repositories
         {
             return this._context.Products
                 .Include(x => x.UserProducts)
-                .Include(x => x.ProductType)
                 .Include(x => x.UserProducts)
-                .Where(filter)
-                .ToList();
-        }
-
-        public List<RecipeProduct> GetRecipeProducts(Expression<Func<RecipeProduct, bool>> filter)
-        {
-            return this._context.RecipeProducts
-                .Include(x => x.Product)
-                .Include(x => x.Recipe)
                 .Where(filter)
                 .ToList();
         }
@@ -70,18 +53,6 @@ namespace Casha.DAL.Repositories
             this._context.SaveChanges();
         }
 
-        public void RemoveProductFromRecipe(int productId, int recipeId)
-        {
-            RecipeProduct? recipeProduct = this._context.RecipeProducts
-                .FirstOrDefault(x => x.ProductId == productId && x.RecipeId == recipeId);
-
-            if (recipeProduct is not null)
-            {
-                this._context.RecipeProducts.Remove(recipeProduct);
-                this._context.SaveChanges();
-            }
-        }
-
         public void UpdateProduct(Product product)
         {
             Product? dbProduct = this._context.Products.Find(product.ProductId);
@@ -89,21 +60,6 @@ namespace Casha.DAL.Repositories
             if (dbProduct is not null)
             {
                 dbProduct.Name = product.Name;
-                dbProduct.ProductTypeId = product.ProductTypeId;
-
-                this._context.SaveChanges();
-            }
-        }
-
-        public void UpdateProductInRecipe(RecipeProduct recipeProduct)
-        {
-            RecipeProduct? dbRecipeProduct = this._context.RecipeProducts
-                .FirstOrDefault(x => x.ProductId == recipeProduct.ProductId && x.RecipeId == recipeProduct.RecipeId);
-
-            if(dbRecipeProduct is not null)
-            {
-                dbRecipeProduct.Quantity = recipeProduct.Quantity;
-                dbRecipeProduct.Unit = recipeProduct.Unit;
 
                 this._context.SaveChanges();
             }

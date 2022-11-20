@@ -1,4 +1,5 @@
 ﻿using Casha.Core.DbModels;
+using Casha.Core.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,29 +7,25 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Casha.DAL.Interfaces
+namespace Casha.BLL.Interfaces
 {
-    public interface IRecipeRepository
+    public interface IRecipeService
     {
-        List<Recipe> GetRecipes(Expression<Func<Recipe, bool>> filter);
+        List<Recipe> GetRecipes(RecipeFilterDto recipeFilter);
 
         Recipe? GetRecipeByID(int recipeId);
 
-        void InsertRecipe(Recipe recipe);
+        void AddRecipe(Recipe recipe);
 
         void DeleteRecipe(int recipeId);
 
         void UpdateRecipe(Recipe recipe);
-
-        List<RecipeProduct> GetRecipeProducts(Expression<Func<RecipeProduct, bool>> filter);
 
         void AddProductToRecipe(RecipeProduct recipeProduct);
 
         void RemoveProductFromRecipe(int productId, int recipeId);
 
         void UpdateProductInRecipe(RecipeProduct recipeProduct);
-
-        List<RecipeCategory> GetRecipeCategories(Expression<Func<RecipeCategory, bool>> filter);
 
         void AddCategoryToRecipe(RecipeCategory recipeCategory);
 
