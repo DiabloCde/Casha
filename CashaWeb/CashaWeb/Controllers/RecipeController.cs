@@ -255,9 +255,9 @@ namespace CashaWeb.Controllers
             }
         }
 
-        [HttpDelete("product/{recipeId}")]
+        [HttpDelete("product/{recipeId}/{producrId}")]
         public IActionResult RemoveProductFromRecipe(
-            [FromQuery] 
+            [FromRoute] 
             int productId, 
             [FromRoute] 
             int recipeId)
@@ -350,9 +350,9 @@ namespace CashaWeb.Controllers
             }
         }
 
-        [HttpDelete("category/{recipeId}")]
+        [HttpDelete("category/{recipeId}/{categoryId}")]
         public IActionResult RemoveCategoryFromRecipe(
-            [FromQuery] 
+            [FromRoute] 
             int categoryId, 
             [FromRoute]
             int recipeId)
