@@ -219,5 +219,162 @@ namespace CashaWeb.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("product/{recipeId}")]
+        public IActionResult AddProductToRecipe(
+            [FromRoute] 
+            int recipeId, 
+            [FromBody] 
+            RecipeProductCreateModel recipeProductCreateModel)
+        {
+            try
+            {
+                RecipeProduct recipeProduct = new RecipeProduct
+                {
+                    RecipeId = recipeId,
+                    ProductId = recipeProductCreateModel.ProductId,
+                    Quantity = recipeProductCreateModel.Quantity,
+                    Unit = recipeProductCreateModel.Unit
+                };
+
+                this._recipeService.AddProductToRecipe(recipeProduct);
+
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return ValidationProblem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("product/{recipeId}")]
+        public IActionResult RemoveProductFromRecipe(
+            [FromQuery] 
+            int productId, 
+            [FromRoute] 
+            int recipeId)
+        {
+            try
+            {                
+                this._recipeService.RemoveProductFromRecipe(productId, recipeId);
+
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return ValidationProblem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("product/{recipeId}")]
+        public IActionResult UpdateProductInRecipe(
+            [FromRoute]
+            int recipeId,
+            [FromBody]
+            RecipeProductCreateModel recipeProductCreateModel)
+        {
+            try
+            {
+                RecipeProduct recipeProduct = new RecipeProduct
+                {
+                    RecipeId = recipeId,
+                    ProductId = recipeProductCreateModel.ProductId,
+                    Quantity = recipeProductCreateModel.Quantity,
+                    Unit = recipeProductCreateModel.Unit
+                };
+
+                this._recipeService.UpdateProductInRecipe(recipeProduct);
+
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return ValidationProblem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("category/{recipeId}")]
+        public IActionResult AddCategoryToRecipe(
+            [FromRoute]
+            int recipeId,
+            [FromBody]
+            RecipeCategoryViewModel recipeCategoryViewModel)
+        {
+            try
+            {
+                RecipeCategory recipeCategory = new RecipeCategory
+                {
+                    RecipeId = recipeId,
+                    CategoryId = recipeCategoryViewModel.CategoryId
+                };
+
+                this._recipeService.AddCategoryToRecipe(recipeCategory);
+
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return ValidationProblem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("category/{recipeId}")]
+        public IActionResult RemoveCategoryFromRecipe(
+            [FromQuery] 
+            int categoryId, 
+            [FromRoute]
+            int recipeId)
+        {
+            try
+            {
+                this._recipeService.RemoveCategoryFromRecipe(categoryId, recipeId);
+
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return ValidationProblem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
