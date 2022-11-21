@@ -29,6 +29,10 @@ function AdminViewUsers() {
         })
     }
 
+    async function filterUsers() {
+        alert('users filtered')
+    }
+
     useEffect(() => {
         getAllUsers()
         setIsRendered(true)
@@ -41,27 +45,53 @@ function AdminViewUsers() {
                 <AdminNavbar />
                 <main className='main'>
                     <div className="form_block" id='form_block'>
-                        <div className="user_block_wrapper">
-                            <div className="user_head_container">
-                                <h1>Users</h1>
-                            </div>
-                            <button className='add_button'>Add</button>
+                        <div className="user_head_container">
+                            <h1>Users</h1>
                         </div>
-                        <div className="users_table">
-                            {users?.reverse().map(item => (
-                                <div className="user_wrapper" key={item.id}>
-                                    <div className="profile_info_wrapper">
+
+                        <form action="POST" className="form">
+                            <div className="users_filtres">
+                                <div className="input_block">
+                                    <label htmlFor="name">Login:</label>
+                                    <input id="name" type="text" />
+                                </div>
+                                <div className="input_block">
+                                    <label htmlFor="cuisine">First Name:</label>
+                                    <input type="text" id="cuisine" />
+                                </div>
+                                <div className="input_block">
+                                    <label htmlFor="holidays">Second Name:</label>
+                                    <input type="text" id="holidays" />
+                                </div>
+                            </div>
+                            <button className="filter_button" type="button" onClick={filterUsers} >Filter</button>
+                        </form>
+
+                        <table className='table_admin'>
+                            <tr className='table_row'>
+                                <th className='table_cell'>Profile photo</th>
+                                <th className='table_cell'>Nick Name</th>
+                                <th className='table_cell'>Actions</th>
+                            </tr>
+                            {users?.reverse().map((item) => (
+                                <tr className='table_row' key={item.id}>
+                                    <td className='table_cell'>
                                         <div className="img_div">
                                             <img src={item.profilePictureUrl} alt="User Image" />
                                         </div>
+                                    </td>
+                                    <td className="table_cell">
                                         <div className="nick_name">
                                             <p>{item.displayName}</p>
                                         </div>
-                                    </div>
-                                    <button className='button_delete'>Delete</button>
-                                </div>
+                                    </td>
+                                    <td className="table_cell">
+                                        <button className='view_button'>View</button>
+                                    </td>
+                                </tr>
                             ))}
-                        </div>
+                        </table>
+                        <button className='loadMore_button' onClick={getAllUsers}>Load More</button>
                     </div>
                 </main>
             </>
