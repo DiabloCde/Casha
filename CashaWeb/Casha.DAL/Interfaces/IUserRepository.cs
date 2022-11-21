@@ -12,6 +12,8 @@ namespace Casha.DAL.Interfaces
     {
         List<User> GetUsers(Expression<Func<User, bool>> filter);
 
+        List<User> GetAllUsers();
+
         User? GetUserByID(string userId);
 
         void DeleteUser(string userId);

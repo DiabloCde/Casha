@@ -31,6 +31,16 @@ namespace Casha.DAL.Repositories
             }
         }
 
+        public List<User> GetAllUsers()
+        {
+            return this._context.Users
+                .Include(x => x.Posts)
+                .Include(x => x.Recipes)
+                .Include(x => x.Comments)
+                .Include(x => x.UserProducts)
+                .ToList();
+        }
+
         public User? GetUserByID(string userId)
         {
             return this._context.Users
