@@ -13,6 +13,8 @@ namespace Casha.BLL.Interfaces
     {
         List<Recipe> GetRecipes(RecipeFilterDto recipeFilter);
 
+        List<Recipe> GetAll();
+
         Recipe? GetRecipeByID(int recipeId);
 
         void AddRecipe(Recipe recipe);

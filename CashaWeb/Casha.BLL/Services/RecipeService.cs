@@ -224,5 +224,21 @@ namespace Casha.BLL.Services
                 _logger.LogError(ex.Message);
             }
         }
+
+        public List<Recipe> GetAll()
+        {
+            List<Recipe> list = new List<Recipe>();
+
+            try
+            {
+                list = _recipeRepository.GetAll();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return list;
+        }
     }
 }
