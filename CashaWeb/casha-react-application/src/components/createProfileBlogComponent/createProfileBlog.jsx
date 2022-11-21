@@ -5,8 +5,7 @@ import moment from "moment"
 
 import styles from "./createProfileBlog.css"
 
-const URL_GETUSERPOSTS =
-  "https://localhost:7128/api/Post/UserPosts/e802fce3-10bc-4ce4-a90f-bc94967eee13"
+const URL_GETUSERPOSTS ="https://localhost:7128/api/Post/UserPosts/e802fce3-10bc-4ce4-a90f-bc94967eee13"
 
 function CreateProfileBlog() {
   const [userPosts, setUserPosts] = useState([])

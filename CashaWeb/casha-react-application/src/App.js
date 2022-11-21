@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AdminEditRecipes from "./pages/adminEditRecipes/AdminEditRecipes.jsx";
 import ProfileSettings from "./pages/ProfileSettings/ProfileSettings.js";
 import OtherUserMainPage from "./pages/otherUserMainPage/otherUserMainPage.jsx";
+import AdminViewUsers from "./pages/adminViewUsers/AdminViewUsers.jsx";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				<Route path="/EditRecipes" element={<AdminEditRecipes />} />
 				<Route path="/ProfileSettings" element={<ProfileSettings />} />
                 <Route path="/OtherUserMainPage" element={<OtherUserMainPage/>}/>
+				<Route path = "/AdminViewUsers" element = {<AdminViewUsers/>}/>
 				{/* Default Router */}
 				<Route path="/" element={<Navigate to="/Login" />} />
 			</Routes>
