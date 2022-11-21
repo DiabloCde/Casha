@@ -119,7 +119,7 @@ function AdminEditRecipes() {
                                 </tr>
                             ))}
                         </table>
-                        <button className='loadMore_button'>Load More</button>
+                        <button className='loadMore_button' onClick={getAllRecipes}>Load More</button>
                     </div>
                 </main>
             </>
