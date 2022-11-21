@@ -33,7 +33,7 @@ function EditRecipesBlock() {
                 </div>
                 <div className="input_block">
                     <label htmlFor="cuisine">Type of cuisine:</label>
-                    <input type="text" id="cuisine" onChange={e=> setCuisine(e.target.value)}/>
+                    <input type="text" id="cuisine"/>
                 </div>
                 <div className="input_block">
                     <label htmlFor="holidays">Holidays:</label>
