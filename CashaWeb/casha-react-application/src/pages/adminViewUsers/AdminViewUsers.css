@@ -1,22 +1,3 @@
-.user_block_wrapper {
-    display: flex;
-    justify-content: space-between;
-    max-height: 100px;
-}
-
-.user_block_wrapper p {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 40px;
-    color: #000000;
-}
-
-.add_button_viewUsers:hover {
-    cursor: pointer;
-}
-
 .user_wrapper {
     display: flex;
     justify-content: space-between;
