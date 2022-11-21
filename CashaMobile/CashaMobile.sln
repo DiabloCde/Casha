@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashaMobile.Android", "CashaMobile\CashaMobile.Android\CashaMobile.Android.csproj", "{874BF839-D5A3-4724-957D-C9576D3A6E02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashaMobile", "CashaMobile\CashaMobile\CashaMobile.csproj", "{78449A79-04A3-4070-BEC7-D1674AA97FC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{874BF839-D5A3-4724-957D-C9576D3A6E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874BF839-D5A3-4724-957D-C9576D3A6E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874BF839-D5A3-4724-957D-C9576D3A6E02}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{874BF839-D5A3-4724-957D-C9576D3A6E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874BF839-D5A3-4724-957D-C9576D3A6E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874BF839-D5A3-4724-957D-C9576D3A6E02}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{78449A79-04A3-4070-BEC7-D1674AA97FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78449A79-04A3-4070-BEC7-D1674AA97FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78449A79-04A3-4070-BEC7-D1674AA97FC4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{78449A79-04A3-4070-BEC7-D1674AA97FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78449A79-04A3-4070-BEC7-D1674AA97FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78449A79-04A3-4070-BEC7-D1674AA97FC4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D3CA0C6-867B-4713-984C-F723CC385807}
+	EndGlobalSection
+EndGlobal
