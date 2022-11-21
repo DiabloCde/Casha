@@ -9,18 +9,21 @@ import AdminNavbar from '../../components/adminNavbarComponent/AdminNavbar';
 
 import styles from './AdminViewUsers.css';
 
-const URL_GETUSERS = "https://localhost:7128/api/User?search=s"
-const EMPTY_STRING = ""
-
+//const URL_GETUSERS = "https://localhost:7128/api/User?search=s"
+const URL_GETUSERS = "https://localhost:7128/api/User/All"
 
 function AdminViewUsers() {
     const [users, setUsers] = useState([]);
     const [isRendered, setIsRendered] = useState(false);
 
+    const [login, setLogin] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [secondName, setSecondName] = useState("");
+
     async function getAllUsers() {
         const response = await axios({
             method: "get",
-            url: URL_GETUSERS + EMPTY_STRING,
+            url: URL_GETUSERS,
             data: JSON.stringify(),
             headers: { "Content-Type": "application/json; charset=utf-8" },
         }).then((response) => {
@@ -30,7 +33,7 @@ function AdminViewUsers() {
     }
 
     async function filterUsers() {
-        alert('users filtered')
+        console.log(login);
     }
 
     useEffect(() => {
@@ -48,20 +51,19 @@ function AdminViewUsers() {
                         <div className="user_head_container">
                             <h1>Users</h1>
                         </div>
-
                         <form action="POST" className="form">
                             <div className="users_filtres">
                                 <div className="input_block">
-                                    <label htmlFor="name">Login:</label>
-                                    <input id="name" type="text" />
+                                    <label htmlFor="login">Login:</label>
+                                    <input id="login" type="text" onChange={e=>setLogin(e.target.value)}/>
                                 </div>
                                 <div className="input_block">
-                                    <label htmlFor="cuisine">First Name:</label>
-                                    <input type="text" id="cuisine" />
+                                    <label htmlFor="firstName">First Name:</label>
+                                    <input type="text" id="firstName" onChange = {e=>setFirstName(e.target.value)}/>
                                 </div>
                                 <div className="input_block">
-                                    <label htmlFor="holidays">Second Name:</label>
-                                    <input type="text" id="holidays" />
+                                    <label htmlFor="secondName">Second Name:</label>
+                                    <input type="text" id="secondName" onChange={e=>setSecondName(e.target.value)}/>
                                 </div>
                             </div>
                             <button className="filter_button" type="button" onClick={filterUsers} >Filter</button>
