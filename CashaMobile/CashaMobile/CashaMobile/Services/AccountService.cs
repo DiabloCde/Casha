@@ -1,12 +1,9 @@
-﻿using CashaMobile.Services;
-using CashaMobile.Services.Interfaces;
+﻿using CashaMobile.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CashaMobile.Services
@@ -14,30 +11,20 @@ namespace CashaMobile.Services
     public class AccountService : IAccountService
     {
         private readonly HttpClient _httpClient;
+        private readonly CookieContainer _cookieJar;
+        private readonly Uri _uri;
 
         public AccountService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+
+            _cookieJar = new CookieContainer();
+            _uri = _httpClient.BaseAddress;
         }
 
         public async Task<bool> LoginAsync(string login, string password)
         {
-            Uri address = _httpClient.BaseAddress;
-            
-            var cookieJar = new CookieContainer();
-            var handler = new HttpClientHandler
-            {
-                CookieContainer = cookieJar,
-                UseCookies = true,
-                UseDefaultCredentials = false
-
-            };
-
-            var client = new HttpClient(handler)
-            {
-                BaseAddress = address,
-            };
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var client = SetUpHttp();
 
             HttpResponseMessage response = await client.PostAsync("Account/login",
                 new StringContent(JsonSerializer.Serialize(new { Login = login, Password = password }),
@@ -45,7 +32,7 @@ namespace CashaMobile.Services
 
             response.EnsureSuccessStatusCode();
 
-            var responseCookies = cookieJar.GetCookies(address);
+            var responseCookies = _cookieJar.GetCookies(_uri);
             foreach (Cookie cookie in responseCookies)
             {
                 string cookieName = cookie.Name;
@@ -55,6 +42,47 @@ namespace CashaMobile.Services
             }
 
             return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public async Task<bool> RegiterAsync(string login, string password, string passwordConfirm)
+        {
+            var cookieJar = new CookieContainer();
+            var client = SetUpHttp();
+
+            HttpResponseMessage response = await client.PostAsync("Account/register",
+                new StringContent(JsonSerializer.Serialize(
+                    new 
+                    { 
+                        Login = login,
+                        Password = password,
+                        PasswordConfirm = passwordConfirm
+                    }),
+                    Encoding.UTF8, "application/json"));
+
+            response.EnsureSuccessStatusCode();
+
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        private HttpClient SetUpHttp()
+        {
+            Uri address = _httpClient.BaseAddress;
+
+            var handler = new HttpClientHandler
+            {
+                CookieContainer = _cookieJar,
+                UseCookies = true,
+                UseDefaultCredentials = false
+            };
+
+            var client = new HttpClient(handler)
+            {
+                BaseAddress = address,
+            };
+
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            return client;
         }
     }
 }
