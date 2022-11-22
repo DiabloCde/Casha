@@ -103,7 +103,7 @@ namespace Casha.BLL.Services.UserServices
             List<User> users = new List<User>();
             try
             {
-                users = _userRepository.GetUsersAdminFilter(userName??"", firstName??"", secondName??"");
+                users = _userRepository.GetUsersAdminFilter(userName ?? "", firstName ?? "", secondName ?? "");
             }
             catch (Exception ex)
             {
