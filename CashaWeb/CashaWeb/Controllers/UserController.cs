@@ -154,6 +154,37 @@ namespace CashaWeb.Controllers
         }
 
         [HttpGet]
+        [Route("AdminFilter")]
+        public IActionResult GetUsersAdminFilter([FromQuery] string? userName, [FromQuery] string? firstName, [FromQuery] string? secondName)
+        {
+            try
+            {
+                List<User> users = this._userService.GetUsersAdminFilter(userName, firstName, secondName);
+
+                List<UserViewModel> userViewModels = users.Select(u => new UserViewModel
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    DisplayName = u.DisplayName,
+                    Bio = u.Bio,
+                    ProfilePictureUrl = u.ProfilePictureUrl,
+                    IsCertified = u.IsCertified,
+                }).ToList();
+
+                return Ok(userViewModels);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
         [Route("All")]
         public IActionResult GetAllUsers()
         {
