@@ -21,7 +21,7 @@
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
 
-            <Button Command="{Binding SubmitCommand}" Text="Register" TextColor="Black"  
+            <Button Command="{Binding ToRegisterCommand}" Text="Register" TextColor="Black"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
         </StackLayout>

@@ -38,11 +38,14 @@ namespace CashaMobile.ViewModels
         }
         public ICommand SubmitCommand { protected set; get; }
 
+        public ICommand ToRegisterCommand { protected set; get; }
+
         private readonly IAccountService _accountService;
 
         public LoginViewModel(IAccountService accountService)
         {
             SubmitCommand = new Command(OnSubmit);
+            ToRegisterCommand = new Command(OnToRegister);
             _accountService = accountService;
         }
 
@@ -53,5 +56,12 @@ namespace CashaMobile.ViewModels
                 DisplayInvalidLoginPrompt();
             }
         }
+
+        public void OnToRegister()
+        {
+            App.Current.MainPage = new RegisterPage(); 
+        }
+
+
     }
 }

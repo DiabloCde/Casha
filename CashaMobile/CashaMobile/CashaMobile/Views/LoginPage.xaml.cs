@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CashaMobile.Services;
+using System.Net.Http;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,12 +15,20 @@ namespace CashaMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        public LoginViewModel viewModel;
+
         public LoginPage()
         {
-            var vm = Startup.Resolve<LoginViewModel>();
-            this.BindingContext = vm;
-            vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
             InitializeComponent();
+
+            viewModel = Startup.Resolve<LoginViewModel>();
+            BindingContext = viewModel;
+
+            //var client = new HttpClient();
+            //client.BaseAddress = new Uri(App.Current.Properties["ApiAdress"].ToString());
+
+            //viewModel = new LoginViewModel(new AccountService(new HttpClient()));
+
 
             Login.Completed += (object sender, EventArgs e) =>
             {
@@ -27,7 +37,7 @@ namespace CashaMobile.Views
 
             Password.Completed += (object sender, EventArgs e) =>
             {
-                vm.SubmitCommand.Execute(null);
+                viewModel.SubmitCommand.Execute(null);
             };
         }
     }

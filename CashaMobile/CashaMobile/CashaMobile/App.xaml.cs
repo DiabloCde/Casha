@@ -17,6 +17,9 @@ namespace CashaMobile
 
             Startup.Init();
 
+            App.Current.Properties["ApiAddress"] = "!!!Address!!!";
+            App.Current.SavePropertiesAsync();
+
             MainPage = new LoginPage();
         }
 
