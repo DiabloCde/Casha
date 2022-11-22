@@ -39,7 +39,6 @@ namespace CashaMobile.Services
             };
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
-
             HttpResponseMessage response = await client.PostAsync("Account/login",
                 new StringContent(JsonSerializer.Serialize(new { Login = login, Password = password }),
                     Encoding.UTF8, "application/json"));

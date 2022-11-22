@@ -55,13 +55,16 @@ namespace CashaMobile.ViewModels
             {
                 DisplayInvalidLoginPrompt();
             }
+            else
+            {
+                App.Current.MainPage = new NavigationPage();
+                Console.WriteLine(App.Current.Properties["loggedToken"]);
+            }
         }
 
         public void OnToRegister()
         {
             App.Current.MainPage = new RegisterPage(); 
         }
-
-
     }
 }

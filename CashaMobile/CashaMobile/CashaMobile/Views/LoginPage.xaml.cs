@@ -22,6 +22,12 @@ namespace CashaMobile.Views
             InitializeComponent();
 
             viewModel = Startup.Resolve<LoginViewModel>();
+
+            viewModel.DisplayInvalidLoginPrompt = () =>
+            {
+                DisplayAlert("Login error", "There is error during login", "Ok");
+            };
+
             BindingContext = viewModel;
 
             Login.Completed += (object sender, EventArgs e) =>
