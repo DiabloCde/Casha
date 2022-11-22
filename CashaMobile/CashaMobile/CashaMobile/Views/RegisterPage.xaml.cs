@@ -35,10 +35,10 @@ namespace CashaMobile.Views
 
             Password.Completed += (object sender, EventArgs e) =>
             {
-                PasswordRep.Focus();
+                PasswordConfirm.Focus();
             };
 
-            PasswordRep.Completed += (object sender, EventArgs e) =>
+            PasswordConfirm.Completed += (object sender, EventArgs e) =>
             {
                 viewModel.SubmitCommand.Execute(null);
             };
