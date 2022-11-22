@@ -103,12 +103,12 @@ function AdminEditRecipes() {
                                     <td className='table_cell'>{item.name}</td>
                                     <td className="table_cell">
                                         <RecipeCategoryCell
-                                        categories={item.recipeCategories}
-                                    />
+                                            categories={item.recipeCategories}
+                                        />
                                     </td>
                                     <td className="table_cell complexity_cell">
                                         <RecipeComplexityCell
-                                        complexity={item.difficulty}
+                                            complexity={item.difficulty}
                                         />
                                     </td>
                                     <td className="tablecell">
