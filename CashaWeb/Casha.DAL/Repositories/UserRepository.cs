@@ -62,10 +62,35 @@ namespace Casha.DAL.Repositories
                 .ToList();
         }
 
+        public List<User> GetUsersAdminFilter(string userName, string firstName, string secondName)
+        {
+            List<User> users = _context.Users
+                .Include(x => x.Posts)
+                .Include(x => x.Recipes)
+                .Include(x => x.Comments)
+                .Include(x => x.UserProducts)
+                .ToList();
+
+            if (userName.Length > 0)
+            {
+                users = users.Where(u => u.DisplayName != null && u.DisplayName.Contains(userName)).ToList();
+            }
+            if(firstName.Length > 0)
+            {
+                users = users.Where(u=>u.FirstName != null && u.FirstName.Contains(firstName)).ToList();
+            }
+            if (secondName.Length > 0)
+            {
+                users = users.Where(u => u.LastName != null && u.LastName.Contains(secondName)).ToList();
+            }
+
+            return users;
+        }
+
         public void UpdateUser(User user)
         {
             User? dbUser = this._context.Users.Find(user.Id);
-            
+
             if (dbUser is not null)
             {
                 dbUser.FirstName = user.FirstName;
