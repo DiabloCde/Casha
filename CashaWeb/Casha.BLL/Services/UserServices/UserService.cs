@@ -98,6 +98,21 @@ namespace Casha.BLL.Services.UserServices
             return new List<User>();
         }
 
+        public List<User> GetUsersAdminFilter(string? userName, string? firstName, string? secondName)
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                users = _userRepository.GetUsersAdminFilter(userName??"", firstName??"", secondName??"");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return users;
+        }
+
         public void UpdateUser(User user)
         {
             try

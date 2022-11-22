@@ -18,6 +18,8 @@ namespace Casha.BLL.Interfaces
 
         List<User> GetUsers(bool isAllUsers = true, bool isCertifiedUsers = false, string search = "");
 
+        List<User> GetUsersAdminFilter(string? userName, string? firstName, string? secondName);
+
         List<User> GetAllUsers();
     }
 }
