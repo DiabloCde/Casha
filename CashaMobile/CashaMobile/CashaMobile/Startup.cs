@@ -23,6 +23,7 @@ namespace CashaMobile
             });
 
             services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegisterViewModel>();
 
             var serviceProvider = services.BuildServiceProvider();
 

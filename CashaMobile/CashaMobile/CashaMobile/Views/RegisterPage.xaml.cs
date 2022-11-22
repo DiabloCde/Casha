@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CashaMobile.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +13,20 @@ namespace CashaMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-        // view model need to ne added
-        //public RegisterViewModel viewModel;
+        public RegisterViewModel viewModel;
 
         public RegisterPage()
         {
             InitializeComponent();
 
-            // view model need to ne added as dependency injection 
-            //viewModel = Startup.Resolve<RegisterViewModel>();
+            viewModel = Startup.Resolve<RegisterViewModel>();
 
-            // DisplayInvalidRegisterPrompt view model need to ne added
-            //viewModel.DisplayInvalidRegisterPrompt = () =>
-            //{
-            //    DisplayAlert("Register error", "There is error during register", "Ok");
-            //};
+            viewModel.DisplayInvalidRegisterPrompt = () =>
+            {
+                DisplayAlert("Register error", "There is error during register", "Ok");
+            };
 
-            //BindingContext = viewModel;
+            BindingContext = viewModel;
 
             Login.Completed += (object sender, EventArgs e) =>
             {
@@ -42,8 +40,7 @@ namespace CashaMobile.Views
 
             PasswordRep.Completed += (object sender, EventArgs e) =>
             {
-                // SubmitCommand in view model need to ne added
-                // viewModel.SubmitCommand.Execute(null);
+                viewModel.SubmitCommand.Execute(null);
             };
         }
     }

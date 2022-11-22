@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace CashaMobile.ViewModels
 {
-    internal class RegisterViewModel : INotifyPropertyChanged
+    public class RegisterViewModel : INotifyPropertyChanged
     {
         public Action DisplayInvalidRegisterPrompt;
 
