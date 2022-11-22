@@ -10,16 +10,20 @@
                     <Entry x:Name="Login" Text="{Binding Login}" Placeholder="Login"   
                            PlaceholderColor="Green" HeightRequest="40"
                            Keyboard="Default"  
-                           TextColor="White"/>
+                           TextColor="Green"/>
                     <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password"   
                            PlaceholderColor="Green" HeightRequest="40"   
                            IsPassword="True"  
-                           TextColor="White"/>
+                           TextColor="Green"/>
                 </StackLayout>
             </Frame>
             <Button Command="{Binding SubmitCommand}" Text="Login" TextColor="Black"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="OrangeRed" />
+                    BackgroundColor="#FFB62A" />
+
+            <Button Command="{Binding SubmitCommand}" Text="Register" TextColor="Black"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#FFB62A" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
