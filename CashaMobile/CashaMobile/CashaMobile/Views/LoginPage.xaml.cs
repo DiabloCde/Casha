@@ -24,12 +24,6 @@ namespace CashaMobile.Views
             viewModel = Startup.Resolve<LoginViewModel>();
             BindingContext = viewModel;
 
-            //var client = new HttpClient();
-            //client.BaseAddress = new Uri(App.Current.Properties["ApiAdress"].ToString());
-
-            //viewModel = new LoginViewModel(new AccountService(new HttpClient()));
-
-
             Login.Completed += (object sender, EventArgs e) =>
             {
                 Password.Focus();
