@@ -25,7 +25,7 @@
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
 
-            <Button Command="{Binding ToRegisterCommand}" Text="Login" TextColor="Black"  
+            <Button Command="{Binding ToLoginCommand}" Text="Login" TextColor="Black"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
         </StackLayout>

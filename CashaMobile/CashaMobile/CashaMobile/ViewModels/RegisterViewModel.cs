@@ -38,7 +38,7 @@ namespace CashaMobile.ViewModels
         private string passwordConfirm;
         public string PasswordConfirm
         {
-            get { return password; }
+            get { return passwordConfirm; }
             set
             {
                 passwordConfirm = value;
