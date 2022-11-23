@@ -35,6 +35,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders()
