@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, useContext } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 const URL = "https://localhost:7128/api/Account/login";
 
@@ -17,7 +18,7 @@ function Login() {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-
+    const [jwt, setJwt] = useState('');
 
     useEffect(() => {
         setErrMsg('');
@@ -39,11 +40,22 @@ function Login() {
                 data: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
             })
-                .then((response) => { console.log(response) })
+                .then((response) => {
+                    console.log(response.data);
+                    setJwt(response.data);
+                })
 
-            console.log(body);
-            navigate('/ProfileSettings');
-        } catch (err) {                
+            var decodedToken = jwtDecode(jwt);
+            console.log(decodedToken);
+            console.log(decodedToken.role);
+
+            if(decodedToken.role = "Admin"){
+                navigate("/EditRecipes");
+                return;
+            }
+            
+            navigate("/ProfileSettings")
+        } catch (err) {
             if (!err?.response) {
                 alert("No Server Response");
             } else if (err.response?.status === 400) {
@@ -53,7 +65,6 @@ function Login() {
             } else {
                 alert("Login failed");
             }
-
         }
     }
 
