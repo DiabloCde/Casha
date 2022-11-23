@@ -18,7 +18,6 @@ function Login() {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [jwt, setJwt] = useState('');
 
     useEffect(() => {
         setErrMsg('');
@@ -27,37 +26,33 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(JSON.stringify({ login: user, password: pwd }));
-
             let body = {
                 login: user,
                 password: pwd
             }
 
-            const response = await axios({
+            await axios({
                 method: 'post',
                 url: URL,
                 data: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
+            }).then((response)=>{
+                console.log(response.data);
+                var decodedToken = jwtDecode(response.data);
+                console.log(decodedToken);
+                
+                if(decodedToken.role == "Admin"){
+                    navigate("/AdminViewUsers");
+                    return;
+                }
+                
+                navigate("/ProfileSettings")
             })
-                .then((response) => {
-                    console.log(response.data);
-                    setJwt(response.data);
-                })
 
-            var decodedToken = jwtDecode(jwt);
-            console.log(decodedToken);
-            console.log(decodedToken.role);
-
-            if(decodedToken.role = "Admin"){
-                navigate("/EditRecipes");
-                return;
-            }
-            
-            navigate("/ProfileSettings")
         } catch (err) {
             if (!err?.response) {
-                alert("No Server Response");
+                //alert("No Server Response");
+                console.log(err);
             } else if (err.response?.status === 400) {
                 alert("Missing Password or Login");
             } else if (err.response?.status === 401) {
