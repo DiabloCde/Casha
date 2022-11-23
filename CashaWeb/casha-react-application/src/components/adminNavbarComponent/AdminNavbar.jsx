@@ -8,7 +8,7 @@ import styles from './AdminNavbar.css';
 function AdminNavbar() {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState("/EditRecipes");
-    //const [curretnAdminPanel, setCurrentAdminPanel] = useState("");
+    const [currentAdminPanel, setCurrentAdminPanel] = useState('');
     const key = 'currentAdminPanel';
     const classColorName = 'choosen';
     var flag = false;

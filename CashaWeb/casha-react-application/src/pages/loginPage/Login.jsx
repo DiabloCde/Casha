@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, useContext } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 const URL = "https://localhost:7128/api/Account/login";
 
@@ -18,7 +19,6 @@ function Login() {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
-
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
@@ -26,26 +26,33 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(JSON.stringify({ login: user, password: pwd }));
-
             let body = {
                 login: user,
                 password: pwd
             }
 
-            const response = await axios({
+            await axios({
                 method: 'post',
                 url: URL,
                 data: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
+            }).then((response)=>{
+                console.log(response.data);
+                var decodedToken = jwtDecode(response.data);
+                console.log(decodedToken);
+                
+                if(decodedToken.role == "Admin"){
+                    navigate("/AdminViewUsers");
+                    return;
+                }
+                
+                navigate("/ProfileSettings")
             })
-                .then((response) => { console.log(response) })
 
-            console.log(body);
-            navigate('/ProfileSettings');
-        } catch (err) {                
+        } catch (err) {
             if (!err?.response) {
-                alert("No Server Response");
+                //alert("No Server Response");
+                console.log(err);
             } else if (err.response?.status === 400) {
                 alert("Missing Password or Login");
             } else if (err.response?.status === 401) {
@@ -53,7 +60,6 @@ function Login() {
             } else {
                 alert("Login failed");
             }
-
         }
     }
 
