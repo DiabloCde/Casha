@@ -1,6 +1,8 @@
-﻿using Casha.BLL.Interfaces;
+using Casha.BLL.Interfaces;
 using Casha.Core.DbModels;
+using Casha.Core.Enums;
 using Casha.DAL.Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,39 +15,110 @@ namespace Casha.BLL.Services
     {
         private readonly IUserProductRepository _userProductRepository;
 
-        public UserProductService(IUserProductRepository userProductRepository)
+        private readonly ILogger<UserProductService> _logger;
+
+        public UserProductService(IUserProductRepository userProductRepository, ILogger<UserProductService> logger)
         {
             _userProductRepository = userProductRepository;
+            _logger = logger;
         }
 
-        public void AddProductToUserFridge(UserProduct userProduct)
+        public void AddUserProduct(UserProduct userProduct)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this._userProductRepository.InsertUserProduct(userProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
 
-        public void DeleteProductFromUserFridge(int userProductId)
+        public void DeleteUserProduct(int userProductId)
         {
-            throw new NotImplementedException();
+            if (userProductId <= 0)
+            {
+                throw new ArgumentNullException("The userProductId is not valid.");
+            }
+
+            try
+            {
+                this._userProductRepository.DeleteUserProduct(userProductId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
 
-        public List<Product> GetUserProductsInFridge(string userId)
+        public List<UserProduct> GetAllUserProducts()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return this._userProductRepository.GetUserProducts(c => c.UserProductId > 0);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return new List<UserProduct>();
+            }
+        }
+        
+        public UserProduct? GetUserProductByID(int userProductId)
+        {
+            if (userProductId <= 0)
+            {
+                throw new ArgumentNullException("The userProductId is not valid.");
+            }
+
+            try
+            {
+                return this._userProductRepository.GetUserProductByID(userProductId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return null;
+            }
         }
 
-        public List<Product> GetUserProductsInFridge(string userId, DateTimeOffset from, DateTimeOffset to, string search = "")
+        public List<UserProduct> GetUserProductsByUserId(string userId)
         {
-            throw new NotImplementedException();
+            if (userId == "")
+            {
+                throw new ArgumentNullException("The UserId is not valid.");
+            }
+
+            try
+            {
+                return this._userProductRepository.GetUserProducts(i => i.UserId == userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return new List<UserProduct>();
+            }
         }
 
-        public List<Product> GetUserProductsInFridge(string userId, DateTimeOffset lastExpirationDay, string search = "")
+        public void UpdateUserProduct(UserProduct userProduct)
         {
-            throw new NotImplementedException();
-        }
+            if (userProduct.UserProductId <= 0)
+            {
+                throw new ArgumentNullException("The userProductId is not valid.");
+            }
 
-        public void UpdateProductInUserFridge(UserProduct userProduct)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                this._userProductRepository.UpdateUserProduct(userProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
     }
 }

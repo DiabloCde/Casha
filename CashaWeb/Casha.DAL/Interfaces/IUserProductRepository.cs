@@ -1,18 +1,23 @@
-﻿using Casha.Core.DbModels;
+using Casha.Core.DbModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Casha.DAL.Interfaces
 {
     public interface IUserProductRepository
     {
-        List<Product> GetUserProducts(string userId);
+        List<UserProduct> GetUserProducts(Expression<Func<UserProduct, bool>> filter);
 
-        List<Product> GetUserProducts(string userId, Expression<Func<Product, bool>> expression);
+        UserProduct? GetUserProductByID(int userProductId);
 
-        void AddUserProduct(UserProduct userProduct);
-
-        void UpdateUserProduct(UserProduct userProduct);
+        void InsertUserProduct(UserProduct userProduct);
 
         void DeleteUserProduct(int userProductId);
+
+        void UpdateUserProduct(UserProduct userProduct);
     }
 }

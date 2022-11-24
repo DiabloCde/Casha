@@ -1,4 +1,4 @@
-﻿using Casha.Core.DbModels;
+using Casha.Core.DbModels;
 using Casha.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,16 +19,9 @@ namespace Casha.DAL.Repositories
             _context = context;
         }
 
-        public void AddUserProduct(UserProduct userProduct)
-        {
-            _context.UserProducts.Add(userProduct);
-            _context.SaveChanges();
-        }
-
         public void DeleteUserProduct(int userProductId)
         {
-            UserProduct? userProduct = this._context.UserProducts.FirstOrDefault(u =>
-                u.UserProductId == userProductId);
+            UserProduct? userProduct = this._context.UserProducts.Find(userProductId);
 
             if (userProduct is not null)
             {
@@ -37,55 +30,38 @@ namespace Casha.DAL.Repositories
             }
         }
 
-        public List<Product> GetUserProducts(string userId)
+        public UserProduct? GetUserProductByID(int userProductId)
         {
-            List<Product> products = new List<Product>();
-
-            User? user = _context.Users
-                .Include(u => u.UserProducts)
-                    .ThenInclude(p => p.Product)
-                .FirstOrDefault(u => u.Id.Equals(userId));
-
-            if (user is not null)
-            {
-                products = user.UserProducts.Select(p => p.Product).ToList();
-            }
-
-            return products;
+            return _context.UserProducts
+                .Include(c => c.User)
+                .Include(c => c.Product)
+                .FirstOrDefault(c => c.UserProductId == userProductId);
         }
 
-        public List<Product> GetUserProducts(string userId, Expression<Func<Product, bool>> expression)
+        public List<UserProduct> GetUserProducts(Expression<Func<UserProduct, bool>> filter)
         {
-            List<Product> products = new List<Product>();
+            return this._context.UserProducts
+                .Include(c => c.User)
+                .Include(c => c.Product)
+                .Where(filter)
+                .ToList();
+        }
 
-            User? user = _context.Users
-                .Include(u => u.UserProducts)
-                    .ThenInclude(p => p.Product)
-                .FirstOrDefault(u => u.Id.Equals(userId));
-
-            if (user is not null)
-            {
-                products = user.UserProducts
-                    .AsQueryable()
-                    .Select(p => p.Product)
-                    .Where(expression)
-                    .ToList();
-            }
-
-            return products;
+        public void InsertUserProduct(UserProduct userProduct)
+        {
+            this._context.UserProducts.Add(userProduct);
+            this._context.SaveChanges();
         }
 
         public void UpdateUserProduct(UserProduct userProduct)
         {
-            UserProduct? dbUserProduct = _context.UserProducts.FirstOrDefault(u => 
-                u.UserId.Equals(userProduct.UserId)
-                && u.ProductId == u.ProductId
-                && u.UserProductId == u.UserProductId);
+
+            UserProduct? dbUserProduct = this._context.UserProducts.Find(userProduct.UserProductId);
 
             if (dbUserProduct is not null)
             {
-                dbUserProduct.ExpirationDate = userProduct.ExpirationDate;
                 dbUserProduct.Quantity = userProduct.Quantity;
+                dbUserProduct.ExpirationDate = userProduct.ExpirationDate;
 
                 this._context.SaveChanges();
             }

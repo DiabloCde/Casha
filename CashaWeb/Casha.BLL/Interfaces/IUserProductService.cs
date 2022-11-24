@@ -1,19 +1,26 @@
-﻿using Casha.Core.DbModels;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Casha.Core.DbModels;
+using Casha.Core.Enums;
 
 namespace Casha.BLL.Interfaces
 {
     public interface IUserProductService
     {
-        void AddProductToUserFridge(UserProduct userProduct);
+        List<UserProduct> GetAllUserProducts();
 
-        void DeleteProductFromUserFridge(int userProductId);
+        UserProduct? GetUserProductByID(int userProductId);
 
-        void UpdateProductInUserFridge(UserProduct userProduct);
+        void AddUserProduct(UserProduct userProduct);
 
-        List<Product> GetUserProductsInFridge(string userId);
+        void DeleteUserProduct(int userProductId);
 
-        List<Product> GetUserProductsInFridge(string userId, DateTimeOffset from, DateTimeOffset to, string search = "");
+        void UpdateUserProduct(UserProduct userProduct);
 
-        List<Product> GetUserProductsInFridge(string userId, DateTimeOffset lastExpirationDay, string search = "");
+        public List<UserProduct> GetUserProductsByUserId(string userId);
     }
 }
