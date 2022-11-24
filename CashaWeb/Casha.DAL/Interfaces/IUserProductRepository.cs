@@ -1,4 +1,4 @@
-﻿using Casha.Core.DbModels;
+using Casha.Core.DbModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CashaMobile.Views.LoginPage"
+             x:Class="CashaMobile.Views.RegisterPage"
              BackgroundImage="login_background.jpg">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
@@ -15,13 +15,17 @@
                            PlaceholderColor="Green" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="Green"/>
+                    <Entry x:Name="PasswordRep" Text="{Binding PasswordRep}" Placeholder="Repeat password"   
+                           PlaceholderColor="Green" HeightRequest="40"   
+                           IsPassword="True"  
+                           TextColor="Green"/>
                 </StackLayout>
             </Frame>
-            <Button Command="{Binding SubmitCommand}" Text="Login" TextColor="Black"  
+            <Button Command="{Binding SubmitCommand}" Text="Register" TextColor="Black"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
 
-            <Button Command="{Binding ToRegisterCommand}" Text="Register" TextColor="Black"  
+            <Button Command="{Binding ToRegisterCommand}" Text="Login" TextColor="Black"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
         </StackLayout>

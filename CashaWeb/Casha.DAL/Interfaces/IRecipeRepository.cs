@@ -12,6 +12,8 @@ namespace Casha.DAL.Interfaces
     {
         List<Recipe> GetRecipes(Expression<Func<Recipe, bool>> filter);
 
+        List<Recipe> GetAll();
+
         Recipe? GetRecipeByID(int recipeId);
 
         void InsertRecipe(Recipe recipe);

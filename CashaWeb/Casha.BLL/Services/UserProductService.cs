@@ -1,4 +1,4 @@
-﻿using Casha.BLL.Interfaces;
+using Casha.BLL.Interfaces;
 using Casha.Core.DbModels;
 using Casha.Core.Enums;
 using Casha.DAL.Interfaces;
@@ -14,6 +14,7 @@ namespace Casha.BLL.Services
     public class UserProductService : IUserProductService
     {
         private readonly IUserProductRepository _userProductRepository;
+
         private readonly ILogger<UserProductService> _logger;
 
         public UserProductService(IUserProductRepository userProductRepository, ILogger<UserProductService> logger)

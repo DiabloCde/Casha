@@ -1,4 +1,4 @@
-﻿using Casha.Core.DbModels;
+using Casha.Core.DbModels;
 using Casha.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -55,6 +55,7 @@ namespace Casha.DAL.Repositories
 
         public void UpdateUserProduct(UserProduct userProduct)
         {
+
             UserProduct? dbUserProduct = this._context.UserProducts.Find(userProduct.UserProductId);
 
             if (dbUserProduct is not null)

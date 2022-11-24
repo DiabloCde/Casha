@@ -137,5 +137,17 @@ namespace Casha.DAL.Repositories
                 this._context.SaveChanges();
             }
         }
+
+        public List<Recipe> GetAll()
+        {
+            List<Recipe> list = _context.Recipes
+                .Include(x => x.User)
+                .Include(x => x.RecipeProducts)
+                .ThenInclude(x=>x.Product)
+                .Include(x => x.RecipeCategories)
+                .ThenInclude(x=>x.Category).ToList();
+
+            return list;
+        }
     }
 }

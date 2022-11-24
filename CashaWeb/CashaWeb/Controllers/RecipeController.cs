@@ -22,7 +22,7 @@ namespace CashaWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetRecipes([FromBody] RecipeFilterDto recipeFilter)
+        public IActionResult GetRecipes([FromQuery] RecipeFilterDto recipeFilter)
         {
             try
             {
@@ -61,6 +61,49 @@ namespace CashaWeb.Controllers
                 this._logger.LogError(ex.Message);
 
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("All")]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                List<Recipe> recipes = _recipeService.GetAll();
+                List<RecipeViewModel> recipeViewModels = recipes.Select(recipe => new RecipeViewModel
+                {
+                    RecipeId = recipe.RecipeId,
+                    Name = recipe.Name,
+                    RecipeImageUrl = recipe.RecipeImageUrl,
+                    Difficulty = recipe.Difficulty,
+                    Instruction = recipe.Instruction,
+                    UserId = recipe.UserId,
+                    UserName = recipe.User.DisplayName,
+                    RecipeCategories = recipe.RecipeCategories.Select(r => new RecipeCategoryViewModel
+                    {
+                        CategoryId = r.CategoryId,
+                        CategoryName = r.Category.CategoryName,
+                        CategoryType = r.Category.CategoryType,
+                        RecipeId = r.RecipeId
+                    }).ToList(),
+                    RecipeProducts = recipe.RecipeProducts.Select(r => new RecipeProductViewModel
+                    {
+                        RecipeId = r.RecipeId,
+                        ProductId = r.ProductId,
+                        ProductName = r.Product.Name,
+                        Quantity = r.Quantity,
+                        Unit = r.Unit
+                    }).ToList()
+                }).ToList();
+
+                return Ok(recipeViewModels);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
@@ -181,7 +224,7 @@ namespace CashaWeb.Controllers
         public IActionResult UpdateRecipe(
             [FromRoute]
             int recipeId,
-            [FromBody] 
+            [FromBody]
             RecipeUpdateModel recipeUpdateModel)
         {
             try
@@ -222,9 +265,9 @@ namespace CashaWeb.Controllers
 
         [HttpPost("product/{recipeId}")]
         public IActionResult AddProductToRecipe(
-            [FromRoute] 
-            int recipeId, 
-            [FromBody] 
+            [FromRoute]
+            int recipeId,
+            [FromBody]
             RecipeProductCreateModel recipeProductCreateModel)
         {
             try
@@ -257,13 +300,13 @@ namespace CashaWeb.Controllers
 
         [HttpDelete("product/{recipeId}/{productId}")]
         public IActionResult RemoveProductFromRecipe(
-            [FromRoute] 
-            int productId, 
-            [FromRoute] 
+            [FromRoute]
+            int productId,
+            [FromRoute]
             int recipeId)
         {
             try
-            {                
+            {
                 this._recipeService.RemoveProductFromRecipe(productId, recipeId);
 
                 return Ok();
@@ -352,8 +395,8 @@ namespace CashaWeb.Controllers
 
         [HttpDelete("category/{recipeId}/{categoryId}")]
         public IActionResult RemoveCategoryFromRecipe(
-            [FromRoute] 
-            int categoryId, 
+            [FromRoute]
+            int categoryId,
             [FromRoute]
             int recipeId)
         {
