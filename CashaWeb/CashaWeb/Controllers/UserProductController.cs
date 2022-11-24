@@ -36,6 +36,7 @@ namespace CashaWeb.Controllers
                     ProductId = c.ProductId,
                     Quantity = c.Quantity,
                     ExpirationDate = c.ExpirationDate,
+                    ProductName = c.Product.Name,
 
                 }).ToList();
 
@@ -49,7 +50,7 @@ namespace CashaWeb.Controllers
             }
         }
 
-        [HttpGet("/User/{userId}")]
+        [HttpGet("User/{userId}")]
         public IActionResult GetUserProductsByUserId([FromRoute] string userId)
         {
             try
@@ -63,6 +64,7 @@ namespace CashaWeb.Controllers
                     ProductId = c.ProductId,
                     Quantity = c.Quantity,
                     ExpirationDate = c.ExpirationDate,
+                    ProductName = c.Product.Name,
 
                 }).ToList();
 
@@ -95,6 +97,7 @@ namespace CashaWeb.Controllers
                     ProductId = userProduct.ProductId,
                     Quantity = userProduct.Quantity,
                     ExpirationDate = userProduct.ExpirationDate,
+                    ProductName = userProduct.Product.Name,
                 };
 
                 return Ok(userProductViewModel);
