@@ -1,5 +1,6 @@
 ﻿using CashaMobile.Services.Interfaces;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -39,7 +40,13 @@ namespace CashaMobile.Services
                 string cookieValue = cookie.Value;
 
                 App.Current.Properties[cookieName] = cookieValue;
+                Console.WriteLine(cookieValue);
             }
+
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(App.Current.Properties["token"].ToString());
+
+            App.Current.Properties["userId"] = jwtSecurityToken.Id;
 
             return response.StatusCode == HttpStatusCode.OK;
         }
