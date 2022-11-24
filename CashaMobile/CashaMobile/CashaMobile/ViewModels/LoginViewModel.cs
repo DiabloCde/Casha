@@ -57,7 +57,7 @@ namespace CashaMobile.ViewModels
             }
             else
             {
-                App.Current.MainPage = new NavigationPage();
+                App.Current.MainPage = new NavigationPage(new MainPage());
                 Console.WriteLine(App.Current.Properties["loggedToken"]);
             }
         }

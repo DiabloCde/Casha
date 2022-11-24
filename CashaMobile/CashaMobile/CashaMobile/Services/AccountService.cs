@@ -40,11 +40,10 @@ namespace CashaMobile.Services
                 string cookieValue = cookie.Value;
 
                 App.Current.Properties[cookieName] = cookieValue;
-                Console.WriteLine(cookieValue);
             }
 
             var handler = new JwtSecurityTokenHandler();
-            var jwtSecurityToken = handler.ReadJwtToken(App.Current.Properties["token"].ToString());
+            var jwtSecurityToken = handler.ReadJwtToken(App.Current.Properties["loggedToken"].ToString());
 
             App.Current.Properties["userId"] = jwtSecurityToken.Id;
 
