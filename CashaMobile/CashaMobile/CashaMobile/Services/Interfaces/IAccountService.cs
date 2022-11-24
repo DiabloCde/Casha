@@ -8,5 +8,7 @@ namespace CashaMobile.Services.Interfaces
     public interface IAccountService
     {
         Task<bool> LoginAsync(string login, string password);
+
+        Task<bool> RegiterAsync(string login, string password, string passwordConfirm);
     }
 }

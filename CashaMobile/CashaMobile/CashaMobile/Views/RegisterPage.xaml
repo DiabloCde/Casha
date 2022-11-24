@@ -15,7 +15,7 @@
                            PlaceholderColor="Green" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="Green"/>
-                    <Entry x:Name="PasswordRep" Text="{Binding PasswordRep}" Placeholder="Repeat password"   
+                    <Entry x:Name="PasswordConfirm" Text="{Binding PasswordConfirm}" Placeholder="Confirm password"   
                            PlaceholderColor="Green" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="Green"/>
@@ -25,7 +25,7 @@
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
 
-            <Button Command="{Binding ToRegisterCommand}" Text="Login" TextColor="Black"  
+            <Button Command="{Binding ToLoginCommand}" Text="Login" TextColor="Black"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#FFB62A" />
         </StackLayout>
