@@ -14,11 +14,18 @@ namespace CashaMobile
 
         public static IServiceProvider Init()
         {
+            Uri apiAddress = new Uri("http://192.168.1.239:5128/api/");
             var services = new ServiceCollection();
 
             services.AddHttpClient<IAccountService, AccountService>(h =>
             {
-                h.BaseAddress = new Uri("http://192.168.1.239:5128/api/");
+                h.BaseAddress = apiAddress;
+                h.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
+            services.AddHttpClient<IUserProductService, UserProductService>(h =>
+            {
+                h.BaseAddress = apiAddress;
                 h.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 

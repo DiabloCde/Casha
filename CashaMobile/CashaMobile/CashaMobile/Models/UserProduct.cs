@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CashaMobile.Models
 {
-    public class UsesrProduct
+    public class UserProduct
     {
         public int UserProductId { get; set; }
 
