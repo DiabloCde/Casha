@@ -3,6 +3,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -45,7 +46,15 @@ namespace CashaMobile.Services
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(App.Current.Properties["loggedToken"].ToString());
 
-            App.Current.Properties["userId"] = jwtSecurityToken.Id;
+
+            foreach (Claim claim in jwtSecurityToken.Claims)
+            {
+                if (claim.Type == "Id")
+                {
+                    App.Current.Properties["userId"] = claim.Value;
+                    break;
+                } 
+            }
 
             return response.StatusCode == HttpStatusCode.OK;
         }

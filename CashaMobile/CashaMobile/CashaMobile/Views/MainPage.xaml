@@ -8,13 +8,13 @@
             TabIndex="1"
             >
   <!--Pages can be added as references or inline-->
-    <local:FridgePage Title="Fridge" />
-    <ContentPage Title="Main">
+    <local:FridgePage Title="Fridge" IconImageSource="fridge_icon"/>
+    <ContentPage Title="Main" IconImageSource="recipes_icon">
         <ContentPage.Content>
             <Label Text="Main!!!!!"></Label>
         </ContentPage.Content>
     </ContentPage>
-    <ContentPage Title="Profile">
+    <ContentPage Title="Profile" IconImageSource="profile_icon">
         <ContentPage.Content>
              <Label Text="Profile!!!!"></Label>
         </ContentPage.Content>

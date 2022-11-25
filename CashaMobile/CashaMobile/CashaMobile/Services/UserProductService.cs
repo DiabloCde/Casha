@@ -35,35 +35,51 @@ namespace CashaMobile.Services
 
         public async Task<UserProduct> GetUserProductByID(int userProductId)
         {
-            HttpResponseMessage requestResult = await _httpClient.GetAsync($"UserProduct/{userProductId}");
-
-            if (requestResult.IsSuccessStatusCode)
+            try
             {
-                string stringResult = await requestResult.Content.ReadAsStringAsync();
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"UserProduct/{userProductId}");
 
-                return JsonSerializer.Deserialize<UserProduct>(stringResult, options);
+                if (requestResult.IsSuccessStatusCode)
+                {
+                    string stringResult = await requestResult.Content.ReadAsStringAsync();
 
+                    return JsonSerializer.Deserialize<UserProduct>(stringResult, options);
+
+                }
+                else
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
         public async Task<List<UserProduct>> GetUserProductsByUserId(string userId)
         {
-            HttpResponseMessage requestResult = await _httpClient.GetAsync($"UserProduct/User/{userId}");
-
-            if (requestResult.IsSuccessStatusCode)
+            try
             {
-                string stringResult = await requestResult.Content.ReadAsStringAsync();
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"UserProduct/User/{userId}");
 
-                return JsonSerializer.Deserialize<List<UserProduct>>(stringResult, options);
+                if (requestResult.IsSuccessStatusCode)
+                {
+                    string stringResult = await requestResult.Content.ReadAsStringAsync();
 
+                    return JsonSerializer.Deserialize<List<UserProduct>>(stringResult, options);
+
+                }
+                else
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
             }
-            else
+            catch(Exception e)
             {
-                throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                Console.WriteLine(e.Message);
+                return new List<UserProduct>();
             }
         }
 
