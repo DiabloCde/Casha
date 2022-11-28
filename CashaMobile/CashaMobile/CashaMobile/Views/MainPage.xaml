@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="CashaMobile.Views.MainPage"
+            xmlns:local="clr-namespace:CashaMobile.Views"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            TabIndex="1"
+            >
+  <!--Pages can be added as references or inline-->
+    <local:FridgePage Title="Fridge" IconImageSource="fridge_icon"/>
+    <ContentPage Title="Main" IconImageSource="recipes_icon">
+        <ContentPage.Content>
+            <Label Text="Main!!!!!"></Label>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="Profile" IconImageSource="profile_icon">
+        <ContentPage.Content>
+             <Label Text="Profile!!!!"></Label>
+        </ContentPage.Content>
+    </ContentPage>
+    
+</TabbedPage>

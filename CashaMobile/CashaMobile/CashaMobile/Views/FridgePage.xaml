@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:CashaMobile.ViewModels" 
+             x:Class="CashaMobile.Views.FridgePage"
+             Title="Fridge">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="70"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Image Source="fridge" 
+                   Aspect="AspectFill"
+                   Grid.Row="0"></Image>
+            <Frame CornerRadius="160"  
+                   Padding="0"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   BackgroundColor="#CCFFFFFF">
+                <Label Text="Fridge" 
+                       Padding="30,10"
+                       FontSize="36"
+                       TextColor="Black"/>
+            </Frame>
+
+            <Frame Padding="0"
+                   Margin="10"
+                   BackgroundColor="#FFB62A"
+                   CornerRadius="20"
+                   Grid.Row="1">
+                <Button Text="Add new product"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        x:Name="AddButton"
+                        Command="{Binding AddUserProduct}"></Button>
+            </Frame>
+            <RefreshView Command="{Binding LoadUserProducts}"
+                             RefreshColor="#FFB62A"
+                             IsRefreshing="{Binding IsListRefreshing}"
+                             Grid.Row="2">
+                <CollectionView ItemsSource="{Binding UserProducts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding ProductName}"
+                                           FontSize="36"
+                                           FontAttributes="Bold"
+                                           Grid.ColumnSpan="2"
+                                           TextColor="Black"/>
+                                    <Label Text="Storage period"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           Grid.Row="1"
+                                           TextColor="Black"/>
+                                    <Label Text="{Binding ExpirationDate}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           Grid.Row="1"
+                                           Grid.Column="1"
+                                           TextColor="Black"/>
+                                    <Button Grid.RowSpan="2"
+                                            Grid.Column="2"
+                                            ImageSource="thrashcan_icon"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FridgeViewModel}}, Path=DeleteUserProduct}"
+                                            CommandParameter="{Binding UserProductId}"/>
+
+
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

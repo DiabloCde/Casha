@@ -1,7 +1,9 @@
 ﻿using CashaMobile.Services.Interfaces;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -39,6 +41,19 @@ namespace CashaMobile.Services
                 string cookieValue = cookie.Value;
 
                 App.Current.Properties[cookieName] = cookieValue;
+            }
+
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(App.Current.Properties["loggedToken"].ToString());
+
+
+            foreach (Claim claim in jwtSecurityToken.Claims)
+            {
+                if (claim.Type == "Id")
+                {
+                    App.Current.Properties["userId"] = claim.Value;
+                    break;
+                } 
             }
 
             return response.StatusCode == HttpStatusCode.OK;
