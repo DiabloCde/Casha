@@ -25,7 +25,8 @@ namespace CashaMobile.Views
 
             viewModel.DisplayInvalidLoginPrompt = () =>
             {
-                DisplayAlert("Login error", "There is error during login", "Ok");
+                DisplayAlert("Login error", viewModel.ErrorMessage, "Ok");
+                viewModel.ErrorMessage = "";
             };
 
             BindingContext = viewModel;

@@ -36,6 +36,17 @@ namespace CashaMobile.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("Password"));
             }
         }
+
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ErrorMessage"));
+            }
+        }
         public ICommand SubmitCommand { protected set; get; }
 
         public ICommand ToRegisterCommand { protected set; get; }
@@ -51,14 +62,22 @@ namespace CashaMobile.ViewModels
 
         public async void OnSubmit()
         {
-            if (!await _accountService.LoginAsync(login, password))
+            try
             {
-                DisplayInvalidLoginPrompt();
+                if (!await _accountService.LoginAsync(login, password))
+                {
+                    DisplayInvalidLoginPrompt();
+                }
+                else
+                {
+                    App.Current.MainPage = new NavigationPage(new MainPage());
+                    Console.WriteLine(App.Current.Properties["loggedToken"]);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                App.Current.MainPage = new NavigationPage(new MainPage());
-                Console.WriteLine(App.Current.Properties["loggedToken"]);
+                ErrorMessage = ex.Message;
+                DisplayInvalidLoginPrompt();
             }
         }
 

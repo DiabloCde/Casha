@@ -46,6 +46,17 @@ namespace CashaMobile.ViewModels
             }
         }
 
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ErrorMessage"));
+            }
+        }
+
         public ICommand SubmitCommand { protected set; get; }
 
         public ICommand ToLoginCommand { protected set; get; }
@@ -61,13 +72,21 @@ namespace CashaMobile.ViewModels
 
         public async void OnSubmit()
         {
-            if (!await _accountService.RegiterAsync(login, password, passwordConfirm))
+            try
             {
-                DisplayInvalidRegisterPrompt();
+                if (!await _accountService.RegiterAsync(login, password, passwordConfirm))
+                {
+                    DisplayInvalidRegisterPrompt();
+                }
+                else
+                {
+                    OnToLogin();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                OnToLogin();
+                ErrorMessage = ex.Message;
+                DisplayInvalidRegisterPrompt();
             }
         }
 

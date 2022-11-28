@@ -23,7 +23,9 @@ namespace CashaMobile.Views
 
             viewModel.DisplayInvalidRegisterPrompt = () =>
             {
-                DisplayAlert("Register error", "There is error during register", "Ok");
+                DisplayAlert("Register error", viewModel.ErrorMessage, "Ok");
+                viewModel.PasswordConfirm = "";
+                viewModel.Password = "";
             };
 
             BindingContext = viewModel;
