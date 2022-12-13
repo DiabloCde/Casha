@@ -5,6 +5,7 @@ using Casha.Core.DbModels;
 using Casha.DAL;
 using Casha.DAL.Interfaces;
 using Casha.DAL.Repositories;
+using CashaWeb;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
