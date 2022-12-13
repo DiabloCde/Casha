@@ -9,7 +9,7 @@ namespace Casha.Core.Enums
     public enum Unit
     {
         tsp,
-        tspb,
+        tbsp,
         g,
         ml,
         piece
