@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CashaMobile.ViewModels
 {
-    public class RecipesByProductViewModel
+    public class RecipesByProductViewModel : ViewModelBase
     {
         public ObservableCollection<RecipesCard> RecipesCards { get; private set; }
 
@@ -22,7 +22,11 @@ namespace CashaMobile.ViewModels
         public string SearchLine
         {
             get { return searchLine; }
-            set { searchLine = value; }
+            set 
+            { 
+                searchLine = value;
+                OnPropertyChanged();
+            }
         }
 
         public RecipesByProductViewModel()
