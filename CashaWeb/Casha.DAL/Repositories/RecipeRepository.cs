@@ -35,7 +35,9 @@ namespace Casha.DAL.Repositories
             return this._context.Recipes
                 .Include(x => x.User)
                 .Include(x => x.RecipeProducts)
+                    .ThenInclude(p => p.Product)
                 .Include(x => x.RecipeCategories)
+                    .ThenInclude(c => c.Category)
                 .Where(filter).ToList();
         }
 

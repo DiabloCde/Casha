@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Casha.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace Casha.Core.DbModels
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
+
+        public Unit Unit { get; set; }
 
         public DateTime ExpirationDate { get; set; }
     }
