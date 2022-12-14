@@ -44,7 +44,19 @@ namespace CashaMobile.Services
 
         public async Task DeleteUserProduct(int userProductId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var requestResult = await _httpClient.DeleteAsync($"UserProduct/{userProductId}");
+
+                if (!requestResult.IsSuccessStatusCode)
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public async Task<UserProduct> GetUserProductByID(int userProductId)
