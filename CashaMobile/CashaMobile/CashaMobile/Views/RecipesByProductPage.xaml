@@ -16,10 +16,11 @@
             </StackLayout>
             <ListView x:Name="listOfProducts"
                       HasUnevenRows="True"
-                      ItemsSource="{Binding RecipesCards}">
+                      ItemsSource="{Binding RecipesCards}"
+                      SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell Tapped="ViewCell_Tapped">
                             <StackLayout>
                                 <Frame Padding="15" Margin="15,0,15,0" HasShadow="True" CornerRadius="15">
                                     <StackLayout>

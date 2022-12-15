@@ -32,5 +32,7 @@ namespace Casha.BLL.Interfaces
         void AddCategoryToRecipe(RecipeCategory recipeCategory);
 
         void RemoveCategoryFromRecipe(int categoryId, int recipeId);
+
+        List<Recipe> GetRecipesByExpiredProduct(string userId, int productId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using CashaMobile.ViewModels;
+﻿using CashaMobile.Models;
+using CashaMobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,19 @@ namespace CashaMobile.Views
     public partial class RecipesByProductPage : ContentPage
     {
         public RecipesByProductViewModel ViewModel { get; set; }
-        public RecipesByProductPage()
+        public RecipesByProductPage(UserProduct userProduct)
         {
             InitializeComponent();
-            ViewModel = new RecipesByProductViewModel();
+            ViewModel = new RecipesByProductViewModel(userProduct);
             BindingContext = ViewModel;
+        }
+
+        private void ViewCell_Tapped(object sender, EventArgs e)
+        {
+            ViewCell viewCell = sender as ViewCell;
+            RecipesCard card = (RecipesCard)viewCell.BindingContext;
+            // You can get RecipesCard to ViewModel by clicking on item in list of RecipesCards
+            // Console.WriteLine(card.RecipeName);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace CashaWeb.Controllers
                     Quantity = c.Quantity,
                     ExpirationDate = c.ExpirationDate,
                     ProductName = c.Product.Name,
-
+                    Unit = c.Unit,
                 }).ToList();
 
                 return Ok(userProductViewModels);
@@ -65,7 +65,7 @@ namespace CashaWeb.Controllers
                     Quantity = c.Quantity,
                     ExpirationDate = c.ExpirationDate,
                     ProductName = c.Product.Name,
-
+                    Unit = c.Unit,
                 }).ToList();
 
                 return Ok(userProductViewModels);
@@ -98,6 +98,7 @@ namespace CashaWeb.Controllers
                     Quantity = userProduct.Quantity,
                     ExpirationDate = userProduct.ExpirationDate,
                     ProductName = userProduct.Product.Name,
+                    Unit = userProduct.Unit,
                 };
 
                 return Ok(userProductViewModel);
@@ -127,6 +128,7 @@ namespace CashaWeb.Controllers
                     ProductId = userProductCreateModel.ProductId,
                     Quantity = userProductCreateModel.Quantity,
                     ExpirationDate = userProductCreateModel.ExpirationDate,
+                    Unit = userProductCreateModel.Unit,
                 };
 
                 this._userProductService.AddUserProduct(userProduct);
@@ -180,6 +182,7 @@ namespace CashaWeb.Controllers
                     UserId = userProductCreateModel.UserId,
                     ExpirationDate = userProductCreateModel.ExpirationDate,
                     Quantity = userProductCreateModel.Quantity,
+                    Unit = userProductCreateModel.Unit,
                 };
 
                 this._userProductService.UpdateUserProduct(userProduct);

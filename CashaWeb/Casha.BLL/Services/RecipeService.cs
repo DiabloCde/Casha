@@ -17,11 +17,17 @@ namespace Casha.BLL.Services
     {
         private readonly IRecipeRepository _recipeRepository;
 
+        private readonly IUserProductRepository _userProductRepository;
+
         private readonly ILogger<RecipeService> _logger;
 
-        public RecipeService(IRecipeRepository recipeRepository, ILogger<RecipeService> logger)
+        public RecipeService(
+            IRecipeRepository recipeRepository,
+            IUserProductRepository userProductRepository,
+            ILogger<RecipeService> logger)
         {
             _recipeRepository = recipeRepository;
+            _userProductRepository = userProductRepository;
             _logger = logger;
         }
 
@@ -239,6 +245,27 @@ namespace Casha.BLL.Services
             }
 
             return list;
+        }
+
+        public List<Recipe> GetRecipesByExpiredProduct(string userId, int productId)
+        {
+            List<Recipe> allRecipes = new List<Recipe>();
+
+            List<UserProduct> userProducts = _userProductRepository.GetUserProducts(u => u.UserId == userId);
+
+            try
+            {
+                allRecipes = _recipeRepository
+                    .GetRecipes(r => r.RecipeProducts.Any(p => p.ProductId == productId))
+                    .OrderByDescending(r => r.RecipeProducts.Count(p => userProducts.Any(up => up.ProductId == p.ProductId)))
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return allRecipes;
         }
     }
 }
