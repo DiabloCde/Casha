@@ -1,4 +1,5 @@
 ﻿using CashaMobile.Models;
+using CashaMobile.Models.Enums;
 using CashaMobile.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,21 @@ namespace CashaMobile.Services
             {
                 Console.WriteLine(ex.Message);
                 return null;
+            }
+        }
+
+        public Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter)
+        {
+            switch (filter)
+            {
+                case RecipeFilter.IncludeAll:
+                    break;
+                case RecipeFilter.IncludeExpired:
+                    break;
+                case RecipeFilter.IncludeAllProductsInFridge:
+                    break;
+                case RecipeFilter.IncludeAnyProductInFrige:
+                    break;
             }
         }
     }
