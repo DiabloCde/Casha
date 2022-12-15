@@ -1,14 +1,13 @@
 ﻿using CashaMobile.Models;
 using CashaMobile.Services.Interfaces;
+using System.Windows.Input;
 
 namespace CashaMobile.ViewModels
 {
     public class UserProductViewModel : ViewModelBase
     {
         private IUserProductService _userProductService;
-
         private UserProduct _userProduct;
-
 
         public UserProductViewModel(IUserProductService userProductService)
         {
@@ -24,5 +23,8 @@ namespace CashaMobile.ViewModels
                 OnPropertyChanged("UserProduct");
             }
         }
+
+        public ICommand CreateUserProduct { get; protected set; }
+        public ICommand DiscardUserProduct { get; protected set; }
     }
 }
