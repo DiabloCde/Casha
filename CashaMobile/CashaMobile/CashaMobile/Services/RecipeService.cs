@@ -78,7 +78,7 @@ namespace CashaMobile.Services
         {
             try
             {
-                HttpResponseMessage requestResult = await _httpClient.GetAsync($"Recipe/All");
+                HttpResponseMessage requestResult = await _httpClient.GetAsync("Recipe/All");
 
                 if (requestResult.IsSuccessStatusCode)
                 {
