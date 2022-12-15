@@ -24,5 +24,14 @@ namespace CashaMobile.Models
         public List<RecipeProduct> RecipeProducts { get; set; }
 
         public List<RecipeCategory> RecipeCategories { get; set; }
+
+        public Recipe(string name, string recipeImageUrl, string instruction, List<RecipeProduct> recipeProducts)
+        {
+            Name = name;
+            RecipeImageUrl = recipeImageUrl;
+            Instruction = instruction;
+            RecipeProducts = recipeProducts;
+
+        }
     }
 }
