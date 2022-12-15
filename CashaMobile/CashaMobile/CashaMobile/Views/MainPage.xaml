@@ -9,6 +9,7 @@
             >
   <!--Pages can be added as references or inline-->
     <local:FridgePage Title="Fridge" IconImageSource="fridge_icon"/>
+    <local:RecipesPage Title="Main" IconImageSource="recipes_icon"/>
     <ContentPage Title="Main" IconImageSource="recipes_icon">
         <ContentPage.Content>
             <Label Text="Main!!!!!"></Label>

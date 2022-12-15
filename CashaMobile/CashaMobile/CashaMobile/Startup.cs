@@ -29,6 +29,12 @@ namespace CashaMobile
                 h.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 
+            services.AddHttpClient<IRecipeService, RecipeService>(h =>
+            {
+                h.BaseAddress = apiAddress;
+                h.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterViewModel>();
             services.AddTransient<FridgeViewModel>();
