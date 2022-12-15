@@ -2,6 +2,7 @@
 using CashaMobile.Services.Interfaces;
 using CashaMobile.Views;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace CashaMobile.ViewModels
 {
@@ -13,9 +14,11 @@ namespace CashaMobile.ViewModels
         public UserProductViewModel(IUserProductService userProductService)
         {
             _userProductService = userProductService;
+
+            DiscardUserProduct = new Command(OnDiscardUserProduct);
         }
 
-        private UserProduct UserProduct
+        public UserProduct UserProduct
         {
             get => _userProduct;
             set
