@@ -11,6 +11,6 @@ namespace CashaMobile.Services.Interfaces
     {
         Task<Recipe> GetRecipeByID(int recipeId);
 
-        Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter);
+        Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter, string name = null);
     }
 }
