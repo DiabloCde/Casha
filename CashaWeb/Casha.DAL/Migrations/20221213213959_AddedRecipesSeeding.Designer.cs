@@ -4,6 +4,7 @@ using Casha.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Casha.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221213213959_AddedRecipesSeeding")]
+    partial class AddedRecipesSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1018,7 +1020,7 @@ namespace Casha.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3f21f28-242f-4857-9253-1b9806ac241a",
+                            ConcurrencyStamp = "3a593ddb-abaa-418d-89ad-56366e8cebba",
                             DisplayName = "admin",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
@@ -1028,9 +1030,9 @@ namespace Casha.DAL.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKTm7nZGgqeKpE33CIeZjrB1yMqibaN2TESAtD1loXD+/3DDH2l9vtiiqZ3uz9OXBg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECrubOlwsbAqioDfrp6R3iCtmmWkypW24pVfwxbOXrLwBkl5Mb1P/ovlhiyTGw3UAw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "267da887-a771-4070-833d-442aee220f7d",
+                            SecurityStamp = "b126b7f4-ab32-431b-8c1e-cf7b85f82baf",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -1051,9 +1053,6 @@ namespace Casha.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Unit")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")

@@ -15,10 +15,10 @@ namespace CashaMobile.Views
     public partial class RecipesByProductPage : ContentPage
     {
         public RecipesByProductViewModel ViewModel { get; set; }
-        public RecipesByProductPage()
+        public RecipesByProductPage(UserProduct userProduct)
         {
             InitializeComponent();
-            ViewModel = new RecipesByProductViewModel();
+            ViewModel = new RecipesByProductViewModel(userProduct);
             BindingContext = ViewModel;
         }
 

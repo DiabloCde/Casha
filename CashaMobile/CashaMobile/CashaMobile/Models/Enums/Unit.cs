@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Casha.Core.Enums
+namespace CashaMobile.Models.Enums
 {
     public enum Unit
     {
         tsp,
-        tbsp,
+        tspb,
         g,
         ml,
         piece
