@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CashaMobile.Views.DetailedRecipePage">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <Label Text="RECIPE" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Title" Padding="10,10,10,5"/>
+            <StackLayout>
+                <Frame Padding="15" Margin="15,0,15,0" HasShadow="True" CornerRadius="15">
+                    <StackLayout>
+                        <StackLayout>
+                            <Label Text="{Binding Name}" FontSize="22" BackgroundColor="#B0F25C" VerticalOptions="Center" HorizontalOptions="Center"  TextColor="Black"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Recipe categories: " FontSize="16" TextColor="Black" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding Categories}" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Difficulty: " FontSize="18" TextColor="Black" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding DifficultyString}" FontSize="18" TextColor="Black" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                            </StackLayout>
+
+                            
+                                <Image  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFit">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding ImageUrl}" CacheValidity="1" CachingEnabled="true"/>
+                                    </Image.Source>
+                                </Image>
+                            
+                            <Label Text="Ingredients" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Title"/>
+                            <ListView HeightRequest="200" x:Name="listOfRecipeProducts"
+                                                    HasUnevenRows="True"
+                                                        ItemsSource="{Binding RecipeProducts}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Frame CornerRadius="10"  BackgroundColor="#B0F25C">
+                                            <StackLayout Orientation="Horizontal" >
+                                                <Frame CornerRadius="10"   Margin="0,2,2,0">
+                                                    <Label Text="{Binding ProductName}" TextColor="Black" FontSize="16" />
+                                                </Frame>
+                                                <Frame CornerRadius="10"   Margin="0,2,2,0">
+                                                    <Label Text="{Binding Quantity}" TextColor="Black" FontSize="16" />
+                                                </Frame>
+                                                <Frame CornerRadius="10"   Margin="0,2,2,0">
+                                                    <Label Text="{Binding Unit}" TextColor="Black" FontSize="16" />
+                                                </Frame>
+                                            </StackLayout>
+                                            </Frame>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <Label Text="Instruction" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Title"/>
+                            <Frame CornerRadius="10">
+                                <Label Text="{Binding Instruction}" TextColor="Black" FontSize="16" />
+                            </Frame>
+                            <StackLayout Orientation="Horizontal" BackgroundColor="DarkGreen" HorizontalOptions="Center">
+                                <Label Text="Recipe author: " FontSize="18" TextColor="White" HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding UserName}" FontSize="18" TextColor="White" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+       </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

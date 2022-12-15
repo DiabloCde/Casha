@@ -20,7 +20,7 @@ namespace CashaMobile
             App.Current.Properties["ApiAddress"] = "!!!Address!!!";
             App.Current.SavePropertiesAsync();
 
-            MainPage = new LoginPage();
+            MainPage = new DetailedRecipePage();
         }
 
         protected override void OnStart()
