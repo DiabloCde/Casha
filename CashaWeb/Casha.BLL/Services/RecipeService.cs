@@ -268,5 +268,22 @@ namespace Casha.BLL.Services
 
             return allRecipes;
         }
+
+        public List<Recipe> GetRecipesByExpiredProducts(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> expired = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .Where(u => (u.ExpirationDate - u.ExpirationDate).TotalDays <= 1)
+                .ToList();
+
+            foreach (UserProduct userProduct in expired)
+            {
+                result.AddRange(GetRecipesByExpiredProduct(userId, userProduct.ProductId, 2));
+            }
+
+            return result;
+        }
     }
 }
