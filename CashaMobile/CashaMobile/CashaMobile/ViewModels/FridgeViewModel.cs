@@ -22,7 +22,7 @@ namespace CashaMobile.ViewModels
             _userProducts = new ObservableCollection<UserProduct>();
 
             LoadUserProducts = new Command(async () => await OnLoadUserProducts());
-            AddUserProduct = new Command(() => Console.WriteLine("Added"));
+            AddUserProduct = new Command(OnAddUserProduct);
             DeleteUserProduct = new Command(async (userProductId) => await OnDeleteUserProduct((int)userProductId));
         }
 
@@ -76,6 +76,11 @@ namespace CashaMobile.ViewModels
             await _userProductService.DeleteUserProduct(userProductId);
 
             await OnLoadUserProducts();
+        }
+
+        public void OnAddUserProduct()
+        {
+            //App.Current.MainPage = new UserProductPage();
         }
     }
 }
