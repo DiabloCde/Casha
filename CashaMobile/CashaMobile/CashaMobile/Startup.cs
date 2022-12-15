@@ -14,7 +14,7 @@ namespace CashaMobile
 
         public static IServiceProvider Init()
         {
-            Uri apiAddress = new Uri("http://192.168.1.239:5128/api/");
+            Uri apiAddress = new Uri("http://192.168.0.102:5128/api/");
             var services = new ServiceCollection();
 
             services.AddHttpClient<IAccountService, AccountService>(h =>

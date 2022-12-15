@@ -17,7 +17,7 @@ namespace CashaMobile
 
             Startup.Init();
 
-            App.Current.Properties["ApiAddress"] = "http://192.168.1.239:5128/api/";
+            App.Current.Properties["ApiAddress"] = "http://192.168.0.102:5128/api/";
             App.Current.SavePropertiesAsync();
 
             MainPage = new LoginPage();
