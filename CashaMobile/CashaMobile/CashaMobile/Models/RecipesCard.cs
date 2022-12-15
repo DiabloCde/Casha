@@ -20,6 +20,18 @@ namespace CashaMobile.Models
             InitializeItems(items);
         }
 
+        public static RecipesCard Empty()
+        {
+            return new RecipesCard("No matching recipes", 
+                new List<ProductCard>
+                {
+                    new ProductCard("empty", ProductBackgroundColor.Disabled),
+                    new ProductCard("empty", ProductBackgroundColor.Disabled),
+                    new ProductCard("empty", ProductBackgroundColor.Disabled),
+                }
+            );
+        }
+
         private void InitializeItems(IEnumerable<ProductCard> items)
         {
             if (Count(items) < MaxNumberOfDisplayedItems)
