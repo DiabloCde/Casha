@@ -1,4 +1,5 @@
-﻿using CashaMobile.Services;
+﻿using CashaMobile.Models;
+using CashaMobile.Services;
 using CashaMobile.Services.Interfaces;
 using CashaMobile.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,9 +30,16 @@ namespace CashaMobile
                 h.DefaultRequestHeaders.Add("Accept", "application/json");
             });
 
+            services.AddHttpClient<IRecipeService, RecipeService>(h =>
+            {
+                h.BaseAddress = apiAddress;
+                h.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterViewModel>();
             services.AddTransient<FridgeViewModel>();
+            services.AddTransient<RecipesByProductViewModel>();
 
             var serviceProvider = services.BuildServiceProvider();
 
