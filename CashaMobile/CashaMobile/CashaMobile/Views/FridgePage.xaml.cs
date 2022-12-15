@@ -29,7 +29,6 @@ namespace CashaMobile.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             viewModel.LoadUserProducts.Execute(null);
         }
 
