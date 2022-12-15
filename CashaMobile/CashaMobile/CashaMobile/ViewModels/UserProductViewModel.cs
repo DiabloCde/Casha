@@ -1,6 +1,7 @@
 ﻿using CashaMobile.Models;
 using CashaMobile.Services.Interfaces;
 using CashaMobile.Views;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -31,7 +32,13 @@ namespace CashaMobile.ViewModels
         public ICommand CreateUserProduct { get; protected set; }
         public ICommand DiscardUserProduct { get; protected set; }
 
-        public void OnDiscardUserProduct()
+        public async Task OnCreateUserProduct()
+        {
+            await _userProductService.AddUserProduct(UserProduct);
+            ToFridge();
+        }
+
+        private void ToFridge()
         {
             App.Current.MainPage = new FridgePage();
         }
