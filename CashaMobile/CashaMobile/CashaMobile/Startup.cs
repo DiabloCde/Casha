@@ -38,6 +38,7 @@ namespace CashaMobile
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterViewModel>();
             services.AddTransient<FridgeViewModel>();
+            services.AddTransient<RecipesViewModel>();
 
             var serviceProvider = services.BuildServiceProvider();
 

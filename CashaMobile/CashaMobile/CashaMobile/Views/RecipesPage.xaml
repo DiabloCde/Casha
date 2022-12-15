@@ -17,16 +17,31 @@
                                TextColor="White" 
                                CancelButtonColor="White"  
                                PlaceholderColor="White"
-                               Placeholder="Search by name..."/>
+                               Placeholder="Search by name..."
+                               Text="{Binding SearchQuery}"/>
                 </Frame>
             </StackLayout>
             <StackLayout>
                 <Picker Title="Filtre properties"
+                        Margin="15"
                         TitleColor="#B0F25C"
-                        ItemsSource="{Binding FiltreValues}"
+                        ItemsSource="{Binding FilterValues}"
                         SelectedIndex="{Binding Filter, Converter={StaticResource IntEnum}}">
                 </Picker>
             </StackLayout>
+            <Frame Padding="0"
+                   Margin="15"
+                   BackgroundColor="#FFB62A"
+                   CornerRadius="20"
+                   Grid.Row="1">
+                <Button Text="Filtre"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        x:Name="AddButton"
+                        Command="{Binding FiltreRecipes}"></Button>
+            </Frame>
             <ListView x:Name="listOfProducts"
                       HasUnevenRows="True"
                       ItemsSource="{Binding RecipesCards}">

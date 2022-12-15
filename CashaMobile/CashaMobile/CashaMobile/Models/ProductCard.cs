@@ -8,7 +8,7 @@ namespace CashaMobile.Models
     {
         private const string ProductInFridgeColor = "#B0F25C";
         private const string PrdouctNotInFridgeColor = "#FF1818";
-        private const string ProductDisabledColor = "989898";
+        private const string ProductDisabledColor = "#989898";
 
         public string Name { get; set; }
         public string BackgroundColor { get; private set; }
