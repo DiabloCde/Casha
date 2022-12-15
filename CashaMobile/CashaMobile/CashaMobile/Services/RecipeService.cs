@@ -49,8 +49,10 @@ namespace CashaMobile.Services
             }
         }
 
-        public Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter)
+        public Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter, string name = null)
         {
+            ICollection<Recipe> filtered;
+
             switch (filter)
             {
                 case RecipeFilter.IncludeAll:
@@ -62,6 +64,13 @@ namespace CashaMobile.Services
                 case RecipeFilter.IncludeAnyProductInFrige:
                     break;
             }
+
+            if (name != null)
+            {
+                filtered.FindRecipeByName(name);
+            }
+
+            return filtered;
         }
     }
 }
