@@ -11,8 +11,25 @@
             </StackLayout>
             <StackLayout>
                 <Frame Padding="0" Margin="15" BackgroundColor="#B0F25C" HasShadow="False" CornerRadius="15" HeightRequest="40" Opacity=".7">
-                    <SearchBar BackgroundColor="Transparent" TextColor="White" CancelButtonColor="White"  PlaceholderColor="White"/>
+                    <SearchBar x:Name="searchBar" Text="{Binding SearchLine}" BackgroundColor="Transparent" TextColor="White" CancelButtonColor="White"  PlaceholderColor="White"/>
                 </Frame>
+                <Frame Padding="0"
+                   Margin="5"
+                   BackgroundColor="#FFB62A"
+                   CornerRadius="20"
+                   Grid.Row="1">
+                    <Button Text="Search"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        x:Name="SearchButton"
+                        Command="{Binding SearchCommand}"></Button>
+                </Frame>
+                <!--<Button Command="{Binding SubmitCommand}" Text="Search" TextColor="Black"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#FFB62A" />-->
             </StackLayout>
             <ListView x:Name="listOfProducts"
                       HasUnevenRows="True"
