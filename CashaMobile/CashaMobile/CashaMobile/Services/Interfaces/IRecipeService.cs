@@ -9,5 +9,6 @@ namespace CashaMobile.Services.Interfaces
     public interface IRecipeService
     {
         Task<Recipe> GetRecipeByID(int recipeId);
+        Task<List<Recipe>> GetRecipesByProductd(string userId, int productId);
     }
 }
