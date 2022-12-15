@@ -29,9 +29,16 @@ namespace CashaMobile.ViewModels
             }
         }
 
-        public RecipesByProductViewModel()
+        public RecipesByProductViewModel(UserProduct userProduct)
         {
             RecipesCards = new ObservableCollection<RecipesCard>();
+
+            Console.WriteLine(userProduct.ProductName);
+
+            // TODO
+            // - collect recipes from server using data from userProduct
+            // - populate RecipeCards with this data
+
             // Example
             // Produts
             ProductCard product1 = new ProductCard("Apple", ProductBackgroundColor.Green);
