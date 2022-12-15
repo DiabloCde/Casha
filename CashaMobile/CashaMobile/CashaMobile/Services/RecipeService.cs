@@ -49,13 +49,14 @@ namespace CashaMobile.Services
             }
         }
 
-        public Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter, string name = null)
+        public async Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter, string name = null)
         {
-            ICollection<Recipe> filtered;
+            ICollection<Recipe> filtered = null;
 
             switch (filter)
             {
                 case RecipeFilter.IncludeAll:
+                    filtered = await GetRecipes();
                     break;
                 case RecipeFilter.IncludeExpired:
                     break;
@@ -71,6 +72,31 @@ namespace CashaMobile.Services
             }
 
             return filtered;
+        }
+
+        private async Task<ICollection<Recipe>> GetRecipes()
+        {
+            try
+            {
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"Recipe/All");
+
+                if (requestResult.IsSuccessStatusCode)
+                {
+                    string stringResult = await requestResult.Content.ReadAsStringAsync();
+
+                    return JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
+                }
+                else
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new List<Recipe>();
         }
     }
 }
