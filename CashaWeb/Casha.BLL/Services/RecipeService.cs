@@ -247,7 +247,7 @@ namespace Casha.BLL.Services
             return list;
         }
 
-        private List<Recipe> GetRecipesByExpiredProduct(string userId, int productId, int top)
+        public List<Recipe> GetRecipesByExpiredProduct(string userId, int productId, int top)
         {
             List<Recipe> allRecipes = new List<Recipe>();
 
