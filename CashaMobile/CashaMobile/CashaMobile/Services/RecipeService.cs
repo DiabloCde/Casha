@@ -47,5 +47,30 @@ namespace CashaMobile.Services
                 return null;
             }
         }
+
+        public async Task<List<Recipe>> GetRecipesByProductd(string userId = "23d581c7-f64d-4308-a5ce-80584a081347", int productId = 3)
+        {
+            List<Recipe> recipes = new List<Recipe>();
+
+            try
+            {
+                HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync($"Recipe/user/{userId}/product/expired/{productId}");
+
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new Exception("Request error. Status code: " + httpResponseMessage.StatusCode);
+                }
+
+                string stringResult = await httpResponseMessage.Content.ReadAsStringAsync();
+                recipes = JsonSerializer.Deserialize<List<Recipe>>(stringResult);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return recipes;
+        }
     }
 }
