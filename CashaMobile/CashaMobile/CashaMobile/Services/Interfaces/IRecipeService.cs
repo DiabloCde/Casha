@@ -1,4 +1,5 @@
 ﻿using CashaMobile.Models;
+using CashaMobile.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,7 @@ namespace CashaMobile.Services.Interfaces
     public interface IRecipeService
     {
         Task<Recipe> GetRecipeByID(int recipeId);
+
+        Task<ICollection<Recipe>> GetRecipesByFilter(RecipeFilter filter);
     }
 }
