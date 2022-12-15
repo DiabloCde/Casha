@@ -62,7 +62,7 @@ namespace CashaMobile.Services
                 }
 
                 string stringResult = await httpResponseMessage.Content.ReadAsStringAsync();
-                recipes = JsonSerializer.Deserialize<List<Recipe>>(stringResult);
+                recipes = JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
 
             }
             catch (Exception e)
