@@ -16,7 +16,8 @@ namespace CashaMobile.ViewModels
         {
             _userProductService = userProductService;
 
-            DiscardUserProduct = new Command(OnDiscardUserProduct);
+            CreateUserProduct = new Command(async () => await OnCreateUserProduct());
+            DiscardUserProduct = new Command(ToFridge);
         }
 
         public UserProduct UserProduct
