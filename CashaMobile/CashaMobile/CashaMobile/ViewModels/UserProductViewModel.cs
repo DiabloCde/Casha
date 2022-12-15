@@ -1,5 +1,6 @@
 ﻿using CashaMobile.Models;
 using CashaMobile.Services.Interfaces;
+using CashaMobile.Views;
 using System.Windows.Input;
 
 namespace CashaMobile.ViewModels
@@ -26,5 +27,10 @@ namespace CashaMobile.ViewModels
 
         public ICommand CreateUserProduct { get; protected set; }
         public ICommand DiscardUserProduct { get; protected set; }
+
+        public void OnDiscardUserProduct()
+        {
+            App.Current.MainPage = new FridgePage();
+        }
     }
 }
