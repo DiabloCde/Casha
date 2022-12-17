@@ -4,7 +4,6 @@ using CashaMobile.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -59,6 +58,7 @@ namespace CashaMobile.Services
                     filtered = await GetRecipes();
                     break;
                 case RecipeFilter.IncludeExpired:
+                    filtered = await GetRecipesByExpired();
                     break;
                 case RecipeFilter.IncludeAllProductsInFridge:
                     break;
@@ -79,6 +79,33 @@ namespace CashaMobile.Services
             try
             {
                 HttpResponseMessage requestResult = await _httpClient.GetAsync("Recipe/All");
+
+                if (requestResult.IsSuccessStatusCode)
+                {
+                    string stringResult = await requestResult.Content.ReadAsStringAsync();
+
+                    return JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
+                }
+                else
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new List<Recipe>();
+        }
+
+        private async Task<ICollection<Recipe>> GetRecipesByExpired()
+        {
+            try
+            {
+                string userId = App.Current.Properties["userId"].ToString();
+
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"user/{userId}/product/expired");
 
                 if (requestResult.IsSuccessStatusCode)
                 {
