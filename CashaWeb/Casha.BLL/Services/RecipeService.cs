@@ -247,7 +247,7 @@ namespace Casha.BLL.Services
             return list;
         }
 
-        public List<Recipe> GetRecipesByExpiredProduct(string userId, int productId)
+        public List<Recipe> GetRecipesByExpiredProduct(string userId, int productId, int top)
         {
             List<Recipe> allRecipes = new List<Recipe>();
 
@@ -258,6 +258,7 @@ namespace Casha.BLL.Services
                 allRecipes = _recipeRepository
                     .GetRecipes(r => r.RecipeProducts.Any(p => p.ProductId == productId))
                     .OrderByDescending(r => r.RecipeProducts.Count(p => userProducts.Any(up => up.ProductId == p.ProductId)))
+                    .Take(top)
                     .ToList();
             }
             catch (Exception ex)
@@ -266,6 +267,23 @@ namespace Casha.BLL.Services
             }
 
             return allRecipes;
+        }
+
+        public List<Recipe> GetRecipesByExpiredProducts(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> expired = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .Where(u => (u.ExpirationDate - u.ExpirationDate).TotalDays <= 1)
+                .ToList();
+
+            foreach (UserProduct userProduct in expired)
+            {
+                result.AddRange(GetRecipesByExpiredProduct(userId, userProduct.ProductId, 2));
+            }
+
+            return result;
         }
     }
 }

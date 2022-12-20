@@ -1,11 +1,5 @@
 ﻿using Casha.Core.DbModels;
 using Casha.Core.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Casha.BLL.Interfaces
 {
@@ -33,6 +27,8 @@ namespace Casha.BLL.Interfaces
 
         void RemoveCategoryFromRecipe(int categoryId, int recipeId);
 
-        List<Recipe> GetRecipesByExpiredProduct(string userId, int productId);
+        List<Recipe> GetRecipesByExpiredProduct(string userId, int productId, int top);
+
+        List<Recipe> GetRecipesByExpiredProducts(string userId);
     }
 }

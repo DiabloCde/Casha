@@ -420,16 +420,14 @@ namespace CashaWeb.Controllers
             }
         }
 
-        [HttpGet("user/{userId}/product/expired/{productId}")]
-        public IActionResult GetRecipesByExpiredProduct(
+        [HttpGet("user/{userId}/product/expired")]
+        public IActionResult GetRecipesByExpiredProducts(
             [FromRoute]
-            string userId,
-            [FromRoute]
-            int productId)
+            string userId)
         {
             try
             {
-                List<Recipe> recipes = _recipeService.GetRecipesByExpiredProduct(userId, productId);
+                List<Recipe> recipes = _recipeService.GetRecipesByExpiredProducts(userId);
 
                 List<RecipeViewModel> recipeViewModels = recipes.Select(recipe => new RecipeViewModel
                 {
