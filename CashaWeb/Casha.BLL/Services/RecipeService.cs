@@ -63,7 +63,24 @@ namespace Casha.BLL.Services
             }
 
             return result;
-        } 
+        }
+
+        public List<Recipe> GetRecipesWithAllFridgeProduct(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> products = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .ToList();
+
+            result.AddRange(_recipeRepository
+                .GetRecipes(r => r.RecipeProducts
+                    .All(p => products
+                        .Any(a => a.ProductId
+                            .Equals(p.ProductId)))));
+
+            return result;
+        }
 
         public Recipe? GetRecipeByID(int recipeId)
         {
