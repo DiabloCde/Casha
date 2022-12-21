@@ -16,5 +16,12 @@ namespace CashaMobile.Models
         public double Quantity { get; set; }
 
         public Unit Unit { get; set; }
+
+        public RecipeProduct(string productName, double quantity, Unit unit)
+        {
+            ProductName = productName;
+            Quantity = quantity;
+            Unit = unit;
+        }
     }
 }

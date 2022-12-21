@@ -43,7 +43,11 @@
                              RefreshColor="#FFB62A"
                              IsRefreshing="{Binding IsListRefreshing}"
                              Grid.Row="2">
-                <CollectionView ItemsSource="{Binding UserProducts}">
+                <CollectionView ItemsSource="{Binding UserProducts}"
+                                x:Name="ProductsCollection"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding ShowRecipes}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductsCollection}}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame>

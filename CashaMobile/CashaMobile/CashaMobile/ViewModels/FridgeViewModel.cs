@@ -7,6 +7,7 @@ using CashaMobile.Models;
 using Xamarin.Forms;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using CashaMobile.Views;
 
 namespace CashaMobile.ViewModels
 {
@@ -24,6 +25,7 @@ namespace CashaMobile.ViewModels
             LoadUserProducts = new Command(async () => await OnLoadUserProducts());
             AddUserProduct = new Command(OnAddUserProduct);
             DeleteUserProduct = new Command(async (userProductId) => await OnDeleteUserProduct((int)userProductId));
+            ShowRecipes = new Command(async (selected) => await OnShowRecipes(selected));
         }
 
         public ObservableCollection<UserProduct> UserProducts
@@ -47,20 +49,19 @@ namespace CashaMobile.ViewModels
         }
 
         public ICommand LoadUserProducts { get; protected set; }
-        public ICommand OpenUserProductInfo { get; protected set; }
         public ICommand AddUserProduct { get; protected set; }
         public ICommand DeleteUserProduct { get; protected set; }
-        public ICommand SelectUserProduct { get; protected set; }
+        public ICommand ShowRecipes { get; protected set; }
 
 
         public async Task OnLoadUserProducts()
         {
             IsListRefreshing = true;
-            UserProducts.Clear();
 
             string userId = App.Current.Properties["userId"].ToString();
             List<UserProduct> userProducts =
                 await _userProductService.GetUserProductsByUserId(userId);
+            UserProducts.Clear();
 
             foreach (UserProduct item in userProducts)
             {
@@ -81,6 +82,24 @@ namespace CashaMobile.ViewModels
         public void OnAddUserProduct()
         {
             //App.Current.MainPage = new UserProductPage();
+        }
+        
+        public async Task OnShowRecipes(object productObj)
+        {
+            try
+            {
+                var product = productObj as UserProduct;
+
+                // Example of page transition
+                await App.Current.MainPage.Navigation
+                    .PushAsync(new RecipesByProductPage(product));
+                // If backwards transition is required, use Navigation.PopAsync(); 
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "An error occured" +
+                    " while trying to perform ths operation " + ex.Message, "OK");
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace CashaMobile.Views
             InitializeComponent();
 
             viewModel = Startup.Resolve<FridgeViewModel>();
-            viewModel.UserProducts.Add(new Models.UserProduct { ProductName = "Juice" });
 
             BindingContext = viewModel;
 
@@ -30,7 +29,6 @@ namespace CashaMobile.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             viewModel.LoadUserProducts.Execute(null);
         }
 
