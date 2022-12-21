@@ -125,5 +125,59 @@ namespace CashaMobile.Services
 
             return new List<Recipe>();
         }
+
+        private async Task<ICollection<Recipe>> GetRecipesWithAnyFridgeProduct()
+        {
+            try
+            {
+                string userId = App.Current.Properties["userId"].ToString();
+
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"user/{userId}/anyInFridge");
+
+                if (requestResult.IsSuccessStatusCode)
+                {
+                    string stringResult = await requestResult.Content.ReadAsStringAsync();
+
+                    return JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
+                }
+                else
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new List<Recipe>();
+        }
+
+        private async Task<ICollection<Recipe>> GetRecipesWithAllFridgeProduct()
+        {
+            try
+            {
+                string userId = App.Current.Properties["userId"].ToString();
+
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"user/{userId}/allInFridge");
+
+                if (requestResult.IsSuccessStatusCode)
+                {
+                    string stringResult = await requestResult.Content.ReadAsStringAsync();
+
+                    return JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
+                }
+                else
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return new List<Recipe>();
+        }
     }
 }
