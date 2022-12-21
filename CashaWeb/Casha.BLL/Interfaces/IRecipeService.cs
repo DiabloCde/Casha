@@ -27,6 +27,10 @@ namespace Casha.BLL.Interfaces
 
         void RemoveCategoryFromRecipe(int categoryId, int recipeId);
 
+        List<Recipe> GetRecipesWithAnyFridgeProduct(string userId);
+
+        List<Recipe> GetRecipesWithAllFridgeProduct(string userId);
+
         List<Recipe> GetRecipesByExpiredProduct(string userId, int productId, int top);
 
         List<Recipe> GetRecipesByExpiredProducts(string userId);

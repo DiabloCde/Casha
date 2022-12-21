@@ -61,8 +61,10 @@ namespace CashaMobile.Services
                     filtered = await GetRecipesByExpired();
                     break;
                 case RecipeFilter.IncludeAllProductsInFridge:
+                    filtered = await GetRecipesWithAllFridgeProduct();
                     break;
                 case RecipeFilter.IncludeAnyProductInFrige:
+                    filtered = await GetRecipesWithAnyFridgeProduct();
                     break;
             }
 
@@ -76,46 +78,43 @@ namespace CashaMobile.Services
 
         private async Task<ICollection<Recipe>> GetRecipes()
         {
-            try
-            {
-                HttpResponseMessage requestResult = await _httpClient.GetAsync("Recipe/All");
-
-                if (requestResult.IsSuccessStatusCode)
-                {
-                    string stringResult = await requestResult.Content.ReadAsStringAsync();
-
-                    return JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
-                }
-                else
-                {
-                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            return new List<Recipe>();
+            return await ParseRecipeResponse(await _httpClient.GetAsync("Recipe/All"));
         }
 
         private async Task<ICollection<Recipe>> GetRecipesByExpired()
         {
+            string userId = App.Current.Properties["userId"].ToString();
+
+            return await ParseRecipeResponse(await _httpClient.GetAsync($"user/{userId}/product/expired"));
+        }
+
+        private async Task<ICollection<Recipe>> GetRecipesWithAnyFridgeProduct()
+        {
+            string userId = App.Current.Properties["userId"].ToString();
+            
+            return await ParseRecipeResponse(await _httpClient.GetAsync($"user/{userId}/anyInFridge"));
+        }
+
+        private async Task<ICollection<Recipe>> GetRecipesWithAllFridgeProduct()
+        {
+            string userId = App.Current.Properties["userId"].ToString();
+
+            return await ParseRecipeResponse(await _httpClient.GetAsync($"user/{userId}/allInFridge"));
+        }
+
+        private async Task<ICollection<Recipe>> ParseRecipeResponse(HttpResponseMessage response)
+        {
             try
             {
-                string userId = App.Current.Properties["userId"].ToString();
-
-                HttpResponseMessage requestResult = await _httpClient.GetAsync($"user/{userId}/product/expired");
-
-                if (requestResult.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
-                    string stringResult = await requestResult.Content.ReadAsStringAsync();
+                    string stringResult = await response.Content.ReadAsStringAsync();
 
                     return JsonSerializer.Deserialize<List<Recipe>>(stringResult, _options);
                 }
                 else
                 {
-                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                    throw new Exception("Request error. Status code: " + response.StatusCode);
                 }
             }
             catch (Exception ex)
