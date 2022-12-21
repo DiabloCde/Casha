@@ -25,19 +25,45 @@ namespace CashaMobile.Services
 
         public async Task AddUserProduct(UserProduct userProduct)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var json = JsonSerializer.Serialize(userProduct);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var requestResult = await _httpClient.PostAsync($"UserProduct", data);
+
+                if (!requestResult.IsSuccessStatusCode)
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public async Task DeleteUserProduct(int userProductId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var requestResult = await _httpClient.DeleteAsync($"UserProduct/{userProductId}");
+
+                if (!requestResult.IsSuccessStatusCode)
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public async Task<UserProduct> GetUserProductByID(int userProductId)
         {
             try
             {
-                HttpResponseMessage requestResult = await _httpClient.GetAsync($"UserProduct/{userProductId}");
+                var requestResult = await _httpClient.GetAsync($"UserProduct/{userProductId}");
 
                 if (requestResult.IsSuccessStatusCode)
                 {
@@ -62,7 +88,7 @@ namespace CashaMobile.Services
         {
             try
             {
-                HttpResponseMessage requestResult = await _httpClient.GetAsync($"UserProduct/User/{userId}");
+                var requestResult = await _httpClient.GetAsync($"UserProduct/User/{userId}");
 
                 if (requestResult.IsSuccessStatusCode)
                 {
@@ -85,7 +111,21 @@ namespace CashaMobile.Services
 
         public async Task UpdateUserProduct(UserProduct userProduct)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var json = JsonSerializer.Serialize(userProduct);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var requestResult = await _httpClient.PutAsync($"UserProduct/{userProduct.UserProductId}", data);
+
+                if (!requestResult.IsSuccessStatusCode)
+                {
+                    throw new Exception("Request error. Status code: " + requestResult.StatusCode);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

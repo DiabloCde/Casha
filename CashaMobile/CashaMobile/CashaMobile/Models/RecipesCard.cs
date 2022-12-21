@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace CashaMobile.Models
 {
@@ -20,29 +21,43 @@ namespace CashaMobile.Models
             InitializeItems(items);
         }
 
-        private void InitializeItems(IEnumerable<ProductCard> items)
+        public static RecipesCard Empty()
         {
-            if (Count(items) < MaxNumberOfDisplayedItems)
-            {
-                throw new Exception("Product cars less then 3");
-            }
-
-            List<ProductCard> productCards = new List<ProductCard>();
-            productCards.AddRange(items);
-
-            FirstProductView = productCards[0];
-            SecondProductView = productCards[1];
-            ThirdProductView = productCards[2];
+            return new RecipesCard("No matching recipes", 
+                new List<ProductCard>
+                {
+                    new ProductCard("empty", ProductBackgroundColor.Disabled),
+                    new ProductCard("empty", ProductBackgroundColor.Disabled),
+                    new ProductCard("empty", ProductBackgroundColor.Disabled),
+                }
+            );
         }
 
-        private int Count(IEnumerable<ProductCard> items)
+        private void InitializeItems(IEnumerable<ProductCard> items)
         {
-            int count = 0;
-            foreach (var item in items)
+            for (int i = 0; i < MaxNumberOfDisplayedItems; ++i)
             {
-                count++;
+                if (items.Count() >= i + 1)
+                    InitializeItem(items.ElementAt(i), i);
+                else
+                    InitializeItem(ProductCard.Empty(), i);
             }
-            return count;
+        }
+
+        private void InitializeItem(ProductCard item, int index)
+        {
+            switch(index)
+            {
+                case 0:
+                    FirstProductView = item;
+                    break;
+                case 1:
+                    SecondProductView = item;
+                    break;
+                case 2:
+                    ThirdProductView = item;
+                    break;
+            }
         }
     }
 }

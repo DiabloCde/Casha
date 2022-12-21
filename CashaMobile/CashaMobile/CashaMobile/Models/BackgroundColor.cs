@@ -7,6 +7,7 @@ namespace CashaMobile.Models
     public enum ProductBackgroundColor
     {
         Green,
-        Red
+        Red,
+        Disabled
     }
 }

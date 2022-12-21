@@ -2,14 +2,7 @@
 using Casha.Core.DbModels;
 using Casha.Core.Dtos;
 using Casha.DAL.Interfaces;
-using Casha.DAL.Repositories;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Casha.BLL.Services
 {
@@ -52,6 +45,51 @@ namespace Casha.BLL.Services
             }
 
             return recipes;
+        }
+
+        public List<Recipe> GetRecipesWithAnyFridgeProduct(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> products = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .ToList();
+
+            foreach (var product in products)
+            {
+                var selected = _recipeRepository
+                    .GetRecipes(r => r.RecipeProducts
+                        .Any(p => p.ProductId == product.ProductId));
+
+                foreach (var innerProduct in selected)
+                    if (!result.Contains(innerProduct)) 
+                        result.Add(innerProduct);
+            }
+
+            return result;
+        }
+
+        public List<Recipe> GetRecipesWithAllFridgeProduct(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> products = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .ToList();
+
+            var temp = GetRecipesWithAnyFridgeProduct(userId);
+
+            foreach(Recipe recipe in temp)
+            {
+                if (recipe.RecipeProducts.All(p => 
+                    products.Find(a => 
+                        a.ProductId == p.ProductId) != null))
+                {
+                    result.Add(recipe);
+                }
+            }
+
+            return result;
         }
 
         public Recipe? GetRecipeByID(int recipeId)
@@ -247,7 +285,7 @@ namespace Casha.BLL.Services
             return list;
         }
 
-        public List<Recipe> GetRecipesByExpiredProduct(string userId, int productId)
+        public List<Recipe> GetRecipesByExpiredProduct(string userId, int productId, int top)
         {
             List<Recipe> allRecipes = new List<Recipe>();
 
@@ -258,6 +296,7 @@ namespace Casha.BLL.Services
                 allRecipes = _recipeRepository
                     .GetRecipes(r => r.RecipeProducts.Any(p => p.ProductId == productId))
                     .OrderByDescending(r => r.RecipeProducts.Count(p => userProducts.Any(up => up.ProductId == p.ProductId)))
+                    .Take(top)
                     .ToList();
             }
             catch (Exception ex)
@@ -266,6 +305,27 @@ namespace Casha.BLL.Services
             }
 
             return allRecipes;
+        }
+
+        public List<Recipe> GetRecipesByExpiredProducts(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> expired = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .Where(u => (u.ExpirationDate - DateTime.Now).TotalDays <= 1)
+                .ToList();
+
+            foreach (UserProduct userProduct in expired)
+            {
+                var recipes = GetRecipesByExpiredProduct(userId, userProduct.ProductId, 2);
+
+                foreach (var recipe in recipes)
+                    if (!result.Contains(recipe))
+                        result.Add(recipe);
+            }
+
+            return result;
         }
     }
 }

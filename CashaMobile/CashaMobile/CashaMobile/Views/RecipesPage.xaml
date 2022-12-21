@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CashaMobile.Views.RecipesPage"
+             Title="Recipes"
+             xmlns:helpers="clr-namespace:CashaMobile.Helpers">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:IntEnumConverter x:Key="IntEnum"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Frame Padding="0" Margin="15" BackgroundColor="#B0F25C" HasShadow="False" CornerRadius="15" HeightRequest="40" Opacity=".7">
+                    <SearchBar BackgroundColor="Transparent" 
+                               TextColor="White" 
+                               CancelButtonColor="White"  
+                               PlaceholderColor="White"
+                               Placeholder="Search by name..."
+                               Text="{Binding SearchQuery}"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout>
+                <Picker Title="Filtre properties"
+                        Margin="15"
+                        TitleColor="#B0F25C"
+                        ItemsSource="{Binding FilterValues}"
+                        SelectedIndex="{Binding Filter, Converter={StaticResource IntEnum}}">
+                </Picker>
+            </StackLayout>
+            <Frame Padding="0"
+                   Margin="15"
+                   BackgroundColor="#FFB62A"
+                   CornerRadius="20"
+                   Grid.Row="1">
+                <Button Text="Filtre"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        x:Name="AddButton"
+                        Command="{Binding FiltreRecipes}"></Button>
+            </Frame>
+            <ListView x:Name="listOfProducts"
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding RecipesCards}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Frame Padding="15" Margin="15,0,15,0" HasShadow="True" CornerRadius="15">
+                                    <StackLayout>
+                                        <StackLayout>
+                                            <Label Text="{Binding RecipeName}" FontSize="18" TextColor="Black"/>
+                                        </StackLayout>
+                                        <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center">
+                                            <!--First three products-->
+                                            <Frame CornerRadius="10" BackgroundColor="{Binding FirstProductView.BackgroundColor}" Opacity=".7" Margin="0,15,15,0">
+                                                <Label Text="{Binding FirstProductView.Name}" TextColor="Black" HorizontalOptions="Center" FontSize="16"/>
+                                            </Frame>
+                                            <Frame CornerRadius="10" BackgroundColor="{Binding SecondProductView.BackgroundColor}" Opacity=".7" Margin="0,15,15,0">
+                                                <Label Text="{Binding SecondProductView.Name}" TextColor="Black" FontSize="16"/>
+                                            </Frame>
+                                            <Frame CornerRadius="10" BackgroundColor="{Binding ThirdProductView.BackgroundColor}" Opacity=".7" Margin="0,15,15,0">
+                                                <Label Text="{Binding ThirdProductView.Name}" TextColor="Black" FontSize="16" />
+                                            </Frame>
+                                            <Frame CornerRadius="10" BackgroundColor="White" Opacity=".7" Margin="0,15,15,0" HasShadow="False" >
+                                                <Label Text="..." TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                                            </Frame>
+                                        </FlexLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
