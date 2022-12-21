@@ -82,12 +82,8 @@ namespace CashaMobile.ViewModels
         {
             try
             {
-                IEnumerable<Recipe> newRecipes = null;
-
-                //newRecipes = _recipeService.FiltreRecipes(SearchQuery, Filter);
-
-                Console.WriteLine(SearchQuery);
-                Console.WriteLine(Filter);
+                IEnumerable<Recipe> newRecipes = await _recipeService
+                    .GetRecipesByFilter(Filter, SearchQuery);
 
                 RecipesCards.Clear();
 

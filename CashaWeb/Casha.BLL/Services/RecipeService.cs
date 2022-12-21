@@ -275,7 +275,7 @@ namespace Casha.BLL.Services
 
             List<UserProduct> expired = _userProductRepository
                 .GetUserProducts(u => u.UserId == userId)
-                .Where(u => (u.ExpirationDate - u.ExpirationDate).TotalDays <= 1)
+                .Where(u => (u.ExpirationDate - DateTime.Now).TotalDays <= 1)
                 .ToList();
 
             foreach (UserProduct userProduct in expired)

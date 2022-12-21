@@ -61,14 +61,16 @@ namespace CashaMobile.Services
                     filtered = await GetRecipesByExpired();
                     break;
                 case RecipeFilter.IncludeAllProductsInFridge:
+                    filtered = await GetRecipes();
                     break;
                 case RecipeFilter.IncludeAnyProductInFrige:
+                    filtered = await GetRecipes();
                     break;
             }
 
             if (name != null)
             {
-                filtered.FindRecipeByName(name);
+                filtered = filtered.FindRecipeByName(name);
             }
 
             return filtered;
@@ -105,7 +107,7 @@ namespace CashaMobile.Services
             {
                 string userId = App.Current.Properties["userId"].ToString();
 
-                HttpResponseMessage requestResult = await _httpClient.GetAsync($"user/{userId}/product/expired");
+                HttpResponseMessage requestResult = await _httpClient.GetAsync($"Recipe/user/{userId}/product/expired");
 
                 if (requestResult.IsSuccessStatusCode)
                 {
