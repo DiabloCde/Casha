@@ -21,9 +21,9 @@ namespace CashaMobile.ViewModels
             _userProductService = userProductService;
             _userProducts = new ObservableCollection<UserProduct>();
 
-            LoadUserProducts = new Command(() => OnLoadUserProducts());
-            AddUserProduct = new Command(() => Console.WriteLine("Added"));
-            DeleteUserProduct = new Command((id) => Console.WriteLine("Delete: " + id.ToString()));
+            LoadUserProducts = new Command(async () => await OnLoadUserProducts());
+            AddUserProduct = new Command(OnAddUserProduct);
+            DeleteUserProduct = new Command(async (userProductId) => await OnDeleteUserProduct((int)userProductId));
         }
 
         public ObservableCollection<UserProduct> UserProducts
@@ -71,5 +71,16 @@ namespace CashaMobile.ViewModels
             IsListRefreshing = false;
         }
 
+        public async Task OnDeleteUserProduct(int userProductId)
+        {
+            await _userProductService.DeleteUserProduct(userProductId);
+
+            await OnLoadUserProducts();
+        }
+
+        public void OnAddUserProduct()
+        {
+            //App.Current.MainPage = new UserProductPage();
+        }
     }
 }

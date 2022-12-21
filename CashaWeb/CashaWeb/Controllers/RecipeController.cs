@@ -28,31 +28,45 @@ namespace CashaWeb.Controllers
             {
                 List<Recipe> recipes = this._recipeService.GetRecipes(recipeFilter);
 
-                List<RecipeViewModel> recipeViewModels = recipes.Select(recipe => new RecipeViewModel
-                {
-                    RecipeId = recipe.RecipeId,
-                    Name = recipe.Name,
-                    RecipeImageUrl = recipe.RecipeImageUrl,
-                    Difficulty = recipe.Difficulty,
-                    Instruction = recipe.Instruction,
-                    UserId = recipe.UserId,
-                    UserName = recipe.User.DisplayName,
-                    RecipeCategories = recipe.RecipeCategories.Select(r => new RecipeCategoryViewModel
-                    {
-                        CategoryId = r.CategoryId,
-                        CategoryName = r.Category.CategoryName,
-                        CategoryType = r.Category.CategoryType,
-                        RecipeId = r.RecipeId
-                    }).ToList(),
-                    RecipeProducts = recipe.RecipeProducts.Select(r => new RecipeProductViewModel
-                    {
-                        RecipeId = r.RecipeId,
-                        ProductId = r.ProductId,
-                        ProductName = r.Product.Name,
-                        Quantity = r.Quantity,
-                        Unit = r.Unit
-                    }).ToList()
-                }).ToList();
+                List<RecipeViewModel> recipeViewModels = recipes.MapRecipesToView();
+
+                return Ok(recipeViewModels);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("user/{userId}/anyInFridge")]
+        public IActionResult GetRecipesWithAnyFridgeProduct([FromRoute] string userId)
+        {
+            try
+            {
+                List<Recipe> recipes = this._recipeService.GetRecipesWithAnyFridgeProduct(userId);
+
+                List<RecipeViewModel> recipeViewModels = recipes.MapRecipesToView();
+
+                return Ok(recipeViewModels);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("user/{userId}/allInFridge")]
+        public IActionResult GetRecipesWithAllProductsInFridge([FromRoute] string userId)
+        {
+            try
+            {
+                List<Recipe> recipes = this._recipeService.GetRecipesWithAllFridgeProduct(userId);
+
+                List<RecipeViewModel> recipeViewModels = recipes.MapRecipesToView();
 
                 return Ok(recipeViewModels);
             }
@@ -429,31 +443,7 @@ namespace CashaWeb.Controllers
             {
                 List<Recipe> recipes = _recipeService.GetRecipesByExpiredProducts(userId);
 
-                List<RecipeViewModel> recipeViewModels = recipes.Select(recipe => new RecipeViewModel
-                {
-                    RecipeId = recipe.RecipeId,
-                    Name = recipe.Name,
-                    RecipeImageUrl = recipe.RecipeImageUrl,
-                    Difficulty = recipe.Difficulty,
-                    Instruction = recipe.Instruction,
-                    UserId = recipe.UserId,
-                    UserName = recipe.User.DisplayName,
-                    RecipeCategories = recipe.RecipeCategories.Select(r => new RecipeCategoryViewModel
-                    {
-                        CategoryId = r.CategoryId,
-                        CategoryName = r.Category.CategoryName,
-                        CategoryType = r.Category.CategoryType,
-                        RecipeId = r.RecipeId
-                    }).ToList(),
-                    RecipeProducts = recipe.RecipeProducts.Select(r => new RecipeProductViewModel
-                    {
-                        RecipeId = r.RecipeId,
-                        ProductId = r.ProductId,
-                        ProductName = r.Product.Name,
-                        Quantity = r.Quantity,
-                        Unit = r.Unit
-                    }).ToList()
-                }).ToList();
+                List<RecipeViewModel> recipeViewModels = recipes.MapRecipesToView();
 
                 return Ok(recipeViewModels);
             }
