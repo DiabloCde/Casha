@@ -13,6 +13,12 @@ namespace CashaMobile.Models
         public string Name { get; set; }
         public string BackgroundColor { get; private set; }
 
+
+        public static ProductCard Empty()
+        {
+            return new ProductCard("none", ProductBackgroundColor.Disabled);
+        }
+
         public ProductCard(string name, ProductBackgroundColor productBackgroundColor)
         {
             Name = name;

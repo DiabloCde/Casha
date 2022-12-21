@@ -57,9 +57,13 @@ namespace Casha.BLL.Services
 
             foreach (var product in products)
             {
-                result.AddRange(_recipeRepository
+                var selected = _recipeRepository
                     .GetRecipes(r => r.RecipeProducts
-                        .Any(p => p.ProductId == product.ProductId)).Take(2));
+                        .Any(p => p.ProductId == product.ProductId));
+
+                foreach (var innerProduct in selected)
+                    if (!result.Contains(innerProduct)) 
+                        result.Add(innerProduct);
             }
 
             return result;
@@ -73,11 +77,17 @@ namespace Casha.BLL.Services
                 .GetUserProducts(u => u.UserId == userId)
                 .ToList();
 
-            result.AddRange(_recipeRepository
-                .GetRecipes(r => r.RecipeProducts
-                    .All(p => products
-                        .Any(a => a.ProductId
-                            .Equals(p.ProductId)))));
+            var temp = GetRecipesWithAnyFridgeProduct(userId);
+
+            foreach(Recipe recipe in temp)
+            {
+                if (recipe.RecipeProducts.All(p => 
+                    products.Find(a => 
+                        a.ProductId == p.ProductId) != null))
+                {
+                    result.Add(recipe);
+                }
+            }
 
             return result;
         }
@@ -308,7 +318,11 @@ namespace Casha.BLL.Services
 
             foreach (UserProduct userProduct in expired)
             {
-                result.AddRange(GetRecipesByExpiredProduct(userId, userProduct.ProductId, 2));
+                var recipes = GetRecipesByExpiredProduct(userId, userProduct.ProductId, 2);
+
+                foreach (var recipe in recipes)
+                    if (!result.Contains(recipe))
+                        result.Add(recipe);
             }
 
             return result;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace CashaMobile.Models
 {
@@ -34,27 +35,29 @@ namespace CashaMobile.Models
 
         private void InitializeItems(IEnumerable<ProductCard> items)
         {
-            if (Count(items) < MaxNumberOfDisplayedItems)
+            for (int i = 0; i < MaxNumberOfDisplayedItems; ++i)
             {
-                throw new Exception("Product cars less then 3");
+                if (items.Count() >= i + 1)
+                    InitializeItem(items.ElementAt(i), i);
+                else
+                    InitializeItem(ProductCard.Empty(), i);
             }
-
-            List<ProductCard> productCards = new List<ProductCard>();
-            productCards.AddRange(items);
-
-            FirstProductView = productCards[0];
-            SecondProductView = productCards[1];
-            ThirdProductView = productCards[2];
         }
 
-        private int Count(IEnumerable<ProductCard> items)
+        private void InitializeItem(ProductCard item, int index)
         {
-            int count = 0;
-            foreach (var item in items)
+            switch(index)
             {
-                count++;
+                case 0:
+                    FirstProductView = item;
+                    break;
+                case 1:
+                    SecondProductView = item;
+                    break;
+                case 2:
+                    ThirdProductView = item;
+                    break;
             }
-            return count;
         }
     }
 }

@@ -85,21 +85,21 @@ namespace CashaMobile.Services
         {
             string userId = App.Current.Properties["userId"].ToString();
 
-            return await ParseRecipeResponse(await _httpClient.GetAsync($"user/{userId}/product/expired"));
+            return await ParseRecipeResponse(await _httpClient.GetAsync($"Recipe/user/{userId}/product/expired"));
         }
 
         private async Task<ICollection<Recipe>> GetRecipesWithAnyFridgeProduct()
         {
             string userId = App.Current.Properties["userId"].ToString();
             
-            return await ParseRecipeResponse(await _httpClient.GetAsync($"user/{userId}/anyInFridge"));
+            return await ParseRecipeResponse(await _httpClient.GetAsync($"Recipe/user/{userId}/anyInFridge"));
         }
 
         private async Task<ICollection<Recipe>> GetRecipesWithAllFridgeProduct()
         {
             string userId = App.Current.Properties["userId"].ToString();
 
-            return await ParseRecipeResponse(await _httpClient.GetAsync($"user/{userId}/allInFridge"));
+            return await ParseRecipeResponse(await _httpClient.GetAsync($"Recipe/user/{userId}/allInFridge"));
         }
 
         private async Task<ICollection<Recipe>> ParseRecipeResponse(HttpResponseMessage response)
