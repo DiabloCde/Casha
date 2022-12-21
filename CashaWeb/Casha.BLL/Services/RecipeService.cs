@@ -2,14 +2,7 @@
 using Casha.Core.DbModels;
 using Casha.Core.Dtos;
 using Casha.DAL.Interfaces;
-using Casha.DAL.Repositories;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Casha.BLL.Services
 {
@@ -53,6 +46,24 @@ namespace Casha.BLL.Services
 
             return recipes;
         }
+
+        public List<Recipe> GetRecipesWithAnyFridgeProduct(string userId)
+        {
+            List<Recipe> result = new List<Recipe>();
+
+            List<UserProduct> products = _userProductRepository
+                .GetUserProducts(u => u.UserId == userId)
+                .ToList();
+
+            foreach (var product in products)
+            {
+                result.AddRange(_recipeRepository
+                    .GetRecipes(r => r.RecipeProducts
+                        .Any(p => p.ProductId == product.ProductId)).Take(2));
+            }
+
+            return result;
+        } 
 
         public Recipe? GetRecipeByID(int recipeId)
         {
