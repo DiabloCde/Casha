@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CashaMobile.Views;
 
 namespace CashaMobile.Views
 {
@@ -33,8 +34,9 @@ namespace CashaMobile.Views
         {
             ViewCell viewCell = sender as ViewCell;
             RecipesCard card = (RecipesCard)viewCell.BindingContext;
-            // You can get RecipesCard to ViewModel by clicking on item in list of RecipesCards
-            // Console.WriteLine(card.RecipeName);
+
+            App.Current.MainPage.Navigation
+                .PushAsync(new DetailedRecipePage(card));
         }
 
         protected override void OnAppearing()

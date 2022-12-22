@@ -460,5 +460,58 @@ namespace CashaWeb.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("user/{userId}/product/expired/{productId}")]
+        public IActionResult GetRecipesByExpiredProduct(
+            [FromRoute]
+            string userId,
+            [FromRoute]
+            int productId)
+        {
+            try
+            {
+                List<Recipe> recipes = _recipeService.GetRecipesByExpiredProduct(userId, productId, 2);
+
+                List<RecipeViewModel> recipeViewModels = recipes.Select(recipe => new RecipeViewModel
+                {
+                    RecipeId = recipe.RecipeId,
+                    Name = recipe.Name,
+                    RecipeImageUrl = recipe.RecipeImageUrl,
+                    Difficulty = recipe.Difficulty,
+                    Instruction = recipe.Instruction,
+                    UserId = recipe.UserId,
+                    UserName = recipe.User.DisplayName,
+                    RecipeCategories = recipe.RecipeCategories.Select(r => new RecipeCategoryViewModel
+                    {
+                        CategoryId = r.CategoryId,
+                        CategoryName = r.Category.CategoryName,
+                        CategoryType = r.Category.CategoryType,
+                        RecipeId = r.RecipeId
+                    }).ToList(),
+                    RecipeProducts = recipe.RecipeProducts.Select(r => new RecipeProductViewModel
+                    {
+                        RecipeId = r.RecipeId,
+                        ProductId = r.ProductId,
+                        ProductName = r.Product.Name,
+                        Quantity = r.Quantity,
+                        Unit = r.Unit
+                    }).ToList()
+                }).ToList();
+
+                return Ok(recipeViewModels);
+            }
+            catch (ArgumentNullException ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return ValidationProblem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

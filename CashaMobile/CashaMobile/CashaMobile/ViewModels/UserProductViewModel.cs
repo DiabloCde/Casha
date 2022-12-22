@@ -41,7 +41,7 @@ namespace CashaMobile.ViewModels
 
         private void ToFridge()
         {
-            App.Current.MainPage = new FridgePage();
+            App.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

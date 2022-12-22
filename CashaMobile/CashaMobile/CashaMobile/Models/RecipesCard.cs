@@ -10,14 +10,17 @@ namespace CashaMobile.Models
         private const int MaxNumberOfDisplayedItems = 3;
 
         public string RecipeName { get; private set; }
+        public int RecipeId { get; private set; }
 
         public ProductCard FirstProductView { get; private set; }
         public ProductCard SecondProductView { get; private set; }
         public ProductCard ThirdProductView { get; private set; }
 
-        public RecipesCard(string recipeName, IEnumerable<ProductCard> items)
+        public RecipesCard(string recipeName, 
+            IEnumerable<ProductCard> items, int id)
         {
             RecipeName = recipeName;
+            RecipeId = id;
             InitializeItems(items);
         }
 
@@ -29,7 +32,8 @@ namespace CashaMobile.Models
                     new ProductCard("empty", ProductBackgroundColor.Disabled),
                     new ProductCard("empty", ProductBackgroundColor.Disabled),
                     new ProductCard("empty", ProductBackgroundColor.Disabled),
-                }
+                },
+                0
             );
         }
 

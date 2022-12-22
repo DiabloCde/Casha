@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CashaMobile.Models;
 
 namespace CashaMobile.Views
 {
@@ -15,12 +16,18 @@ namespace CashaMobile.Views
     { 
         public DetailedRecipeViewModel ViewModel { get; set; }
     
-        public DetailedRecipePage()
+        public DetailedRecipePage(RecipesCard card)
         {
             InitializeComponent();
-            ViewModel = new DetailedRecipeViewModel();
+            ViewModel = new DetailedRecipeViewModel(card);
             BindingContext = ViewModel;
-            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ViewModel.LoadRecipe.Execute(null);
         }
 
     }

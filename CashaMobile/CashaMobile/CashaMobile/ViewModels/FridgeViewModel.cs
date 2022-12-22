@@ -61,6 +61,7 @@ namespace CashaMobile.ViewModels
             string userId = App.Current.Properties["userId"].ToString();
             List<UserProduct> userProducts =
                 await _userProductService.GetUserProductsByUserId(userId);
+
             UserProducts.Clear();
 
             foreach (UserProduct item in userProducts)
@@ -79,9 +80,17 @@ namespace CashaMobile.ViewModels
             await OnLoadUserProducts();
         }
 
-        public void OnAddUserProduct()
+        public async void OnAddUserProduct()
         {
-            //App.Current.MainPage = new UserProductPage();
+            try
+            {
+                throw new NotImplementedException("Functional not added yet.");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "An error occured" +
+                    " while trying to perform ths operation " + ex.Message, "OK");
+            }
         }
         
         public async Task OnShowRecipes(object productObj)

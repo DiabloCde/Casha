@@ -98,7 +98,7 @@ namespace CashaMobile.ViewModels
                         var recipeCards = recipe.RecipeProducts
                             .Select(p => GetCard(p));
 
-                        RecipesCards.Add(new RecipesCard(recipe.Name, recipeCards));
+                        RecipesCards.Add(new RecipesCard(recipe.Name, recipeCards, recipe.RecipeId));
                     }
                 }
             }

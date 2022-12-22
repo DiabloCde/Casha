@@ -66,7 +66,7 @@ namespace CashaMobile.ViewModels
                     productCards.Add(new ProductCard(recipeProduct.ProductName, color));   
                 }
 
-                RecipesCards.Add(new RecipesCard(recipe.Name, productCards.AsEnumerable()));
+                RecipesCards.Add(new RecipesCard(recipe.Name, productCards.AsEnumerable(), recipe.RecipeId));
             }
         }
 
